@@ -1,0 +1,34 @@
+.hero-banner-img{
+    mask-image: linear-gradient(to right, transparent, black 75%);
+        -weblit-mask-image: linear-gradient(to right, transparent, black 75%);
+}
+
+.hero-title{
+    position: absolute;
+    width: 100%;
+    padding-left: 6%;
+    bottom: 0;
+}
+
+.hero-title-img{
+    width: 90%;
+    max-width: 420px;
+    margin-bottom:30px ;
+}
+
+.btn-play{
+    color: black;
+
+}
+
+.btn-inf{
+    color: white;
+}
+
+.btn-play:hover{
+    background: #ffffffbf;
+}
+
+.btn-inf:hover{
+    background: #6d6d6e66;
+}
