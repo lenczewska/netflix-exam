@@ -6,8 +6,8 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faFaceLaughWink } from "@fortawesome/free-solid-svg-icons";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
-
 import profile_icon from "../../assets/img/profile_icon.jpg";
+import Login from "../../pages/Login/Login";
 
 const Navbar = () => {
   return (
@@ -103,7 +103,7 @@ const Navbar = () => {
                 Help center
               </p>
               <p className="mt-[20px] p-[15px] text-[13px] hover:underline border-t">
-                Sign Out of Netflix
+                <a href= "/Login"> Sign Out of Netflix</a>
               </p>
             </div>
 
