@@ -6,7 +6,7 @@ import hero_title from "../../assets/img/hero_title.png";
 import play_icon from "../../assets/img/play_icon.png";
 import info_icon from "../../assets/img/info_icon.png";
 import TitleCards from "../../components/TitleCards/TitleCards";
-import Footer from "../../components/Footer/Footer"
+import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
   return (
@@ -47,13 +47,13 @@ const Home = () => {
       </div>
 
       <div className="category-cards">
-        <TitleCards title={"Romantic TV Shows"}/>
-        <TitleCards title={"Only On Netflix"}/>
-        <TitleCards title={"Hollywood Movies"}/>
-        <TitleCards title={"New On Netflix"}/>
+        <TitleCards title="Romantic TV Shows" category="top_rated" />
+        <TitleCards title="Hollywood Movies" category="popular" />
+        <TitleCards title="New On Netflix" category="upcoming" />
+        <TitleCards title="Only On Netflix" category="now_playing" />
       </div>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 };
