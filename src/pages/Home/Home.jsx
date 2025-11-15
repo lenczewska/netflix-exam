@@ -6,15 +6,19 @@ import hero_title from "../../assets/img/hero_title.png";
 import play_icon from "../../assets/img/play_icon.png";
 import info_icon from "../../assets/img/info_icon.png";
 import TitleCards from "../../components/TitleCards/TitleCards";
+import Footer from "../../components/Footer/Footer"
 
 const Home = () => {
   return (
     <div className="home">
-
       <Navbar />
 
       <div className="hero-banner  relative ">
-        <img src={hero_banner} alt="" className="hero-banner-img w-full mb-[50px]" />
+        <img
+          src={hero_banner}
+          alt=""
+          className="hero-banner-img w-full mb-[50px]"
+        />
       </div>
 
       <div className="hero-title w-full absolute pl-[6%] bottom-0 ">
@@ -39,8 +43,17 @@ const Home = () => {
           </button>
         </div>
 
-        <TitleCards/>
+        <TitleCards />
       </div>
+
+      <div className="category-cards">
+        <TitleCards title={"Romantic TV Shows"}/>
+        <TitleCards title={"Only On Netflix"}/>
+        <TitleCards title={"Hollywood Movies"}/>
+        <TitleCards title={"New On Netflix"}/>
+      </div>
+
+      <Footer/>
     </div>
   );
 };

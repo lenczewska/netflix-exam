@@ -2,10 +2,10 @@ import React from 'react'
 import './TitleCards.css'
 import cards_data from '../../assets/cards/Cards_data'
 
-function TitleCards() {
+const TitleCards = ({title, category}) => {
   return (
     <div className='title-cards pr-[50px] mt-[50px] '>
-      <h2 className='mb-[8px]'>Popular on Netflix</h2>
+      <h2 className='mb-[8px]'>{title?title:"Popular on Netflix"}</h2>
       <div className='card-list overflow-x-scroll flex gap-[8px]'>
         {cards_data.map((card, index) =>{
           return <div className='card relative ' key={index}>

@@ -1,11 +1,11 @@
 import "./Navbar.css";
 import logo_header from "../../assets/img/logo_header.png";
-import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faFaceLaughWink } from "@fortawesome/free-solid-svg-icons";
-import {faCircleQuestion} from "@fortawesome/free-solid-svg-icons"
+import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 
 import profile_icon from "../../assets/img/profile_icon.jpg";
 
@@ -71,23 +71,48 @@ const Navbar = () => {
             clip-rule="evenodd"
           ></path>
         </svg>
-      <div className="acc-box relative flex items-center cursor-pointer">
-  <img src={profile_icon} alt="" className="profile w-[30px]  rounded-[5px]" />
-  <FontAwesomeIcon icon={faCaretDown} className=" down text-white text-[15px] ml-[5px]" />
+        <div className="acc-box relative flex items-center cursor-pointer">
+          <img
+            src={profile_icon}
+            alt=""
+            className="profile w-[30px]  rounded-[5px]"
+          />
+          <FontAwesomeIcon
+            icon={faCaretDown}
+            className=" down text-white text-[15px] ml-[5px]"
+          />
 
-  <div className="relative">
-    <div className="dropdownMenu border flex flex-col gap-[25px] z-10 rounded-[2px] pb-[18px] pl-[22px] pt-[18px] mt-[30px] pr-[22px] bg-[#191919]">
-      <p className="hover:underline"><FontAwesomeIcon className="mr-[10px]" icon={faPen}/> Manage Profiles</p>
-      <p className="hover:underline"><FontAwesomeIcon className="mr-[10px]" icon={faFaceLaughWink}/> Transfer Profile</p>
-      <p className="hover:underline"><FontAwesomeIcon className="mr-[10px]" icon={faUser}/> Account</p>
-      <p className="hover:underline"><FontAwesomeIcon className="mr-[10px]" icon={faCircleQuestion}/> Help center</p>
-      <p className="mt-[20px] p-[15px] text-[13px] hover:underline border-t">Sign Out of Netflix</p>
-    </div>
+          <div className="relative">
+            <div className="dropdownMenu border flex flex-col gap-[25px] z-10 rounded-[2px] pb-[18px] pl-[22px] pt-[18px] mt-[30px] pr-[22px] bg-[#191919]">
+              <p className="hover:underline">
+                <FontAwesomeIcon className="mr-[10px]" icon={faPen} /> Manage
+                Profiles
+              </p>
+              <p className="hover:underline">
+                <FontAwesomeIcon className="mr-[10px]" icon={faFaceLaughWink} />{" "}
+                Transfer Profile
+              </p>
+              <p className="hover:underline">
+                <FontAwesomeIcon className="mr-[10px]" icon={faUser} /> Account
+              </p>
+              <p className="hover:underline">
+                <FontAwesomeIcon
+                  className="mr-[10px]"
+                  icon={faCircleQuestion}
+                />{" "}
+                Help center
+              </p>
+              <p className="mt-[20px] p-[15px] text-[13px] hover:underline border-t">
+                Sign Out of Netflix
+              </p>
+            </div>
 
-    <FontAwesomeIcon icon={faCaretUp} className="up absolute text-white text-[20px] -left-[32px] -translate-x-[18px] top-[18px]" />
-  </div>
-</div>
-
+            <FontAwesomeIcon
+              icon={faCaretUp}
+              className="up absolute text-white text-[20px] -left-[32px] -translate-x-[18px] top-[18px]"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
