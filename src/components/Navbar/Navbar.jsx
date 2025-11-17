@@ -8,8 +8,22 @@ import { faFaceLaughWink } from "@fortawesome/free-solid-svg-icons";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import profile_icon from "../../assets/img/profile_icon.jpg";
 import Login from "../../pages/Login/Login";
+import { useEffect, useRef } from "react";
 
 const Navbar = () => {
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= 80) {
+        navRef.current.classList.add("nav-dark");
+      } else {
+        navRef.current.classList.remove("nav-dark");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="navbar w-full pt-[20px] flex items-center justify-between pl-[40px] text-[13px] pr-[40px]  text-[#e5e5e5] z-30 absolute ">
       <div className="navbar-left  flex gap-[5px]  items-center justify-center ">
@@ -38,16 +52,16 @@ const Navbar = () => {
             data-icon="MagnifyingGlassMedium"
             data-icon-id=":rc:"
             aria-hidden="true"
-            class="search-icon"
+            className="search-icon"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             role="img"
           >
             <path
               fill="white"
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0m-1.38 7.03a9 9 0 1 1 1.41-1.41l5.68 5.67-1.42 1.42z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             ></path>
           </svg>
         </button>
@@ -103,7 +117,7 @@ const Navbar = () => {
                 Help center
               </p>
               <p className="mt-[20px] p-[15px] text-[13px] hover:underline border-t">
-                <a href= "/Login"> Sign Out of Netflix</a>
+                <a href="/Login"> Sign Out of Netflix</a>
               </p>
             </div>
 

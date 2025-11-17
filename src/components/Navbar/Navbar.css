@@ -32,11 +32,17 @@
 }
 
 .down {
-  transition: transform 0.3s ease; /* плавность */
+  transition: transform 0.3s ease; 
 }
 
 .acc-box:hover .down {
   transform: rotate(180deg);
+}
+
+
+
+.nav-dark{
+  background: #141414;
 }
 
 
