@@ -11,21 +11,29 @@ import Login from "../../pages/Login/Login";
 import { useEffect, useRef } from "react";
 
 const Navbar = () => {
+  const navRef = useRef();
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {
-        navRef.current.classList.add("nav-dark");
+        navRef.current?.classList.add("nav-dark");
       } else {
-        navRef.current.classList.remove("nav-dark");
+        navRef.current?.classList.remove("nav-dark");
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
-    <div className="navbar w-full pt-[20px] flex items-center justify-between pl-[40px] text-[13px] pr-[40px]  text-[#e5e5e5] z-30 absolute ">
+    <div
+      ref={navRef}
+      className="  w-full pt-[20px] pb-[10px] fixed flex items-center justify-between pl-[40px] text-[13px] pr-[40px]  text-[#e5e5e5] z-30  "
+    >
       <div className="navbar-left  flex gap-[5px]  items-center justify-center ">
         <img
           src={logo_header}
