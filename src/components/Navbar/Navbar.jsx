@@ -7,7 +7,6 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faFaceLaughWink } from "@fortawesome/free-solid-svg-icons";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import profile_icon from "../../assets/img/profile_icon.jpg";
-import Login from "../../pages/Login/Login";
 import { useEffect, useRef } from "react";
 import { logout } from "../../fireBase";
 
