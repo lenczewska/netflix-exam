@@ -9,9 +9,11 @@ import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import profile_icon from "../../assets/img/profile_icon.jpg";
 import { useEffect, useRef } from "react";
 import { logout } from "../../fireBase";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navRef = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,13 +43,15 @@ const Navbar = () => {
           className="w-[100px] mr-[30px] cursor-pointer "
         />
         <ul className=" flex gap-[20px] ">
-          <li>Home</li>
-          <li>Shows</li>
-          <li>Movies</li>
-          <li>Games</li>
-          <li>Latest</li>
-          <li className="">My List</li>
-          <li>Browse by Languages</li>
+          <li onClick={() => navigate("/browse")}>Home</li>
+          <li onClick={() => navigate("/shows")}>Shows</li>
+          <li onClick={() => navigate("/movies")}>Movies</li>
+          <li onClick={() => navigate("/games")}>Games</li>
+          <li onClick={() => navigate("/latest")}>Latest</li>
+          <li onClick={() => navigate("/my-list")}>My List</li>
+          <li onClick={() => navigate("/original-audio")}>
+            Browse by Languages
+          </li>
         </ul>
       </div>
 
@@ -124,10 +128,13 @@ const Navbar = () => {
                 />{" "}
                 Help center
               </p>
-              <p onClick={()=>{
-                logout()
-              }} className="mt-[20px] p-[15px] text-[13px] hover:underline border-t">
-                 Sign Out of Netflix
+              <p
+                onClick={() => {
+                  logout();
+                }}
+                className="mt-[20px] p-[15px] text-[13px] hover:underline border-t"
+              >
+                Sign Out of Netflix
               </p>
             </div>
 
