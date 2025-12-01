@@ -1,0 +1,52 @@
+.navbar {
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.7) 10%,
+    transparent
+  );
+}
+
+.acc-box {
+  position: relative;
+}
+
+.dropdownMenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #191919;
+  width: max-content;
+}
+
+.up{
+  display: none;
+}
+
+.acc-box:hover .dropdownMenu  {
+  display: flex; 
+}
+
+.acc-box:hover .up{
+  display: block;
+}
+
+.down {
+  transition: transform 0.3s ease; 
+}
+
+.acc-box:hover .down {
+  transform: rotate(180deg);
+}
+
+
+
+.nav-dark{
+  background: #141414e9;
+}
+
+
+
+
+
+

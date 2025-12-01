@@ -5,10 +5,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+     /* user-select: none; */
 }
 
 body{
-    background: #000;
+    background: #141414;
     color: white;
     font-family: 'Poppins';
 }

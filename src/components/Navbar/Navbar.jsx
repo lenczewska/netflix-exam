@@ -7,13 +7,17 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faFaceLaughWink } from "@fortawesome/free-solid-svg-icons";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import profile_icon from "../../assets/img/profile_icon.jpg";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { logout } from "../../fireBase";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const navRef = useRef();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchOpen, setSearchOpen] = useState(false);
+const [query, setQuery] = useState("");
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,14 +46,63 @@ const Navbar = () => {
           alt="logo-header"
           className="w-[100px] mr-[30px] cursor-pointer "
         />
-        <ul className=" flex gap-[20px] ">
-          <li onClick={() => navigate("/browse")}>Home</li>
-          <li onClick={() => navigate("/shows")}>Shows</li>
-          <li onClick={() => navigate("/movies")}>Movies</li>
-          <li onClick={() => navigate("/games")}>Games</li>
-          <li onClick={() => navigate("/latest")}>Latest</li>
-          <li onClick={() => navigate("/my-list")}>My List</li>
-          <li onClick={() => navigate("/original-audio")}>
+        <ul className="flex gap-[20px]">
+          <li
+            onClick={() => navigate("/browse")}
+            className={
+              location.pathname === "/browse" ? "font-[650]" : "text-[13px]"
+            }
+          >
+            Home
+          </li>
+          <li
+            onClick={() => navigate("/shows")}
+            className={
+              location.pathname === "/shows" ? "font-[650]" : "text-[13px]"
+            }
+          >
+            Shows
+          </li>
+          <li
+            onClick={() => navigate("/movies")}
+            className={
+              location.pathname === "/movies" ? "font-[650]" : "text-[13px]"
+            }
+          >
+            Movies
+          </li>
+          <li
+            onClick={() => navigate("/games")}
+            className={
+              location.pathname === "/games" ? "font-[650]" : "text-[13px]"
+            }
+          >
+            Games
+          </li>
+          <li
+            onClick={() => navigate("/latest")}
+            className={
+              location.pathname === "/latest" ? "font-[650]" : "text-[13px]"
+            }
+          >
+            Latest
+          </li>
+          <li
+            onClick={() => navigate("/my-list")}
+            className={
+              location.pathname === "/my-list" ? "font-[650]" : "text-[13px]"
+            }
+          >
+            My List
+          </li>
+          <li
+            onClick={() => navigate("/original-audio")}
+            className={
+              location.pathname === "/original-audio"
+                ? "font-[650]"
+                : "text-[13px]"
+            }
+          >
             Browse by Languages
           </li>
         </ul>
@@ -108,7 +161,7 @@ const Navbar = () => {
             className=" down text-white text-[15px] ml-[5px]"
           />
 
-          <div className="relative">
+          <div className=" acc-box relative">
             <div className="dropdownMenu border flex flex-col gap-[25px] z-10 rounded-[2px] pb-[18px] pl-[22px] pt-[18px] mt-[30px] pr-[22px] bg-[#191919]">
               <p className="hover:underline">
                 <FontAwesomeIcon className="mr-[10px]" icon={faPen} /> Manage

@@ -39,7 +39,7 @@ function App() {
         <Route path="/games" element={<Games />} />
         <Route path="/latest" element={<Latest />} />
         <Route path="/my-list" element={<MyList />} />
-        <Route path="/original-audio" element={<OriginalAudio/>} />
+        {/* <Route path="/original-audio" element={<OriginalAudio/>} /> */}
       </Routes>
     </div>
   );
