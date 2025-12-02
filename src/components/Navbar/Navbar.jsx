@@ -41,7 +41,7 @@ const [query, setQuery] = useState("");
       className="  w-full pt-[20px] pb-[10px] fixed flex items-center justify-between pl-[40px] text-[13px] pr-[40px]  text-[#e5e5e5] z-30  "
     >
       <div className="navbar-left  flex gap-[5px]  items-center justify-center ">
-        <img
+        <img onClick={()=> navigate("/browse")}
           src={logo_header}
           alt="logo-header"
           className="w-[100px] mr-[30px] cursor-pointer "
@@ -145,9 +145,9 @@ const [query, setQuery] = useState("");
           <path
             className=""
             fill="currentColor"
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="M13 4.07A7 7 0 0 1 19 11v4.25q1.58.12 3.1.28l-.2 2a93 93 0 0 0-19.8 0l-.2-2q1.52-.15 3.1-.28V11a7 7 0 0 1 6-6.93V2h2zm4 11.06V11a5 5 0 0 0-10 0v4.13a97 97 0 0 1 10 0m-8.37 4.24C8.66 20.52 10.15 22 12 22s3.34-1.48 3.37-2.63c.01-.22-.2-.37-.42-.37h-5.9c-.23 0-.43.15-.42.37"
-            clip-rule="evenodd"
+            clipRule="evenodd"
           ></path>
         </svg>
         <div className="acc-box relative flex items-center cursor-pointer">

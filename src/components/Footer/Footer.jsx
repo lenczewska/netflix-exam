@@ -13,7 +13,7 @@ function Footer() {
         <img className="cursor-pointer w-[25px]" src={youtube_icon} alt="" />
       </div>
 
-      <ul className="grid grid-cols-[auto_auto_auto_auto]  text-[14px] gap-[15px] text-[#787878] mb-[30px]">
+      <ul className="grid grid-cols-[auto_auto_auto_auto] mt-[20px]  text-[14px] gap-[15px] text-[#787878] mb-[30px]">
         <li>Audio Description</li>
         <li>Help Centre</li>
         <li>Gift Cards</li>
