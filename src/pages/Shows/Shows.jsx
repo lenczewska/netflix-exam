@@ -22,9 +22,14 @@ const Shows = () => {
     <div>
       <Navbar />
 
+      
+      
+
       <div className="pt-[50px] w-screen h-screen ">
         <div className="flex items-baseline gap-[40px] ">
           <p className="pl-[45px] text-[35px] font-black pt-[50px]">TV Shows</p>
+
+          
 
           <div className="relative inline-block mt-4">
             <button
@@ -54,6 +59,9 @@ const Shows = () => {
           </div>
         </div>
       </div>
+
+  <div className="w-screen h-screen flex justify-center items-center" > Burda kinolar random cixacaq, gozlemede qalin :)</div>
+    
 
       <div className="category-cards">
         <TitleCards title="Romantic TV Shows" category="top_rated" />
