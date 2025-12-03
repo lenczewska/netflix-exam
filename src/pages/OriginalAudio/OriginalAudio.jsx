@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import TitleCards from "../../components/TitleCards/TitleCards";
 
 const OriginalAudio = () => {
   const [englishOptions, setEnglishOptions] = useState([]);
@@ -90,12 +91,12 @@ const OriginalAudio = () => {
               <ul className="p-[8px]">
                 {originalLanguages.map((genre, index) => (
                   <li key={index}>
-                    <a
-                      href={genre.link}
+                    <p
+                      href=""
                       className="block pt-[5px] hover:underline"
                     >
                       {genre.name}
-                    </a>
+                    </p>
                   </li>
                 ))}
               </ul>
@@ -117,12 +118,12 @@ const OriginalAudio = () => {
               <ul className="p-[8px] max-h-[400px] overflow-y-auto">
                 {englishOptions.map((opt, index) => (
                   <li key={index}>
-                    <a
-                      href={opt.link}
-                      className="block px-4 py-2 hover:bg-gray-700 hover:text-white"
+                    <p
+                      href=""
+                      className="block px-4 py-2 hover:bg-gray-700 hover:underline"
                     >
                       {opt.name}
-                    </a>
+                    </p>
                   </li>
                 ))}
               </ul>
@@ -146,12 +147,12 @@ const OriginalAudio = () => {
               <ul className="p-[8px]">
                 {sortOptions.map((opt, index) => (
                   <li key={index}>
-                    <a
-                      href={opt.link}
-                      className="block px-4 py-2 hover:bg-gray-100"
+                    <p
+                      href=""
+                      className="block px-4 py-2 hover:underline"
                     >
                       {opt.name}
-                    </a>
+                    </p>
                   </li>
                 ))}
               </ul>
@@ -159,6 +160,8 @@ const OriginalAudio = () => {
           )}
         </div>
       </div>
+
+      <TitleCards/>
 
       <Footer />
     </div>

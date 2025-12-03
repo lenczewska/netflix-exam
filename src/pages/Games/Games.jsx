@@ -14,8 +14,8 @@ const Games = () => {
 
 
       <div className="category-cards pl-[3%]">
-        <GameCards title="Hollywood Movies" genres="Unknown" />
-        <GameCards title="Only On Netflix" genres="Puzzle" />
+        <GameCards title="Popular Mobile Games for You" genres="Unknown" />
+        <GameCards title="Pick Up and Play Mobile Games" genres="Puzzle" />
       </div>
 
       <div className="w-screen h-[320px] mt-[30px] bg-[#000] flex justify-between   ">
