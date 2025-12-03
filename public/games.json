@@ -314,14 +314,7 @@
       },
       "platform": "Mobile (Android/iOS)"
     },
-    {
-      "id": "81615015",
-      "title": "Valiant Hearts: Coming Home",
-      "images": {
-        "cover": "https://occ-0-3916-1556.1.nflxso.net/dnm/api/v6/OZJggtSD_YDhN6m75VpSfcXfBD4/AAAABRJkAcbWvmuTVghIsuUOBLCU-tcaq5bjbnhRJdcO5jCC0uyLVDnX2OiSWR0gKNiENlq5mUZVsSRMGEnp8hp4v60NKgK_4f0n_0Gs.png?r=5c7"
-      },
-      "platform": "Mobile (Android/iOS)"
-    },
+   
     {
       "id": "81665070",
       "title": "Minesweeper",

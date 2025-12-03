@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import GameCards from "../../components/GameCards/GameCards";
+
 import games_page from "../../assets/img/games_page.webp";
 
 const Games = () => {
@@ -13,10 +14,8 @@ const Games = () => {
 
 
       <div className="category-cards pl-[3%]">
-        <GameCards title="Popular Mobile Games for You" genre="Adventure" />
-        <GameCards title="Hollywood Movies" genre="Unknown" />
-        <GameCards title="New On Netflix" genre="Racing" />
-        <GameCards title="Only On Netflix" genre="Puzzle" />
+        <GameCards title="Hollywood Movies" genres="Unknown" />
+        <GameCards title="Only On Netflix" genres="Puzzle" />
       </div>
 
       <div className="w-screen h-[320px] mt-[30px] bg-[#000] flex justify-between   ">
