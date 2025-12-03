@@ -1,50 +1,98 @@
-import React, { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const OriginalAudio = () => {
-  const [open, setOpen] = useState(null); 
+  const [englishOptions, setEnglishOptions] = useState([]);
 
-  const genres = [
-    { name: "Action", link: "/genres/comedy" },
-    { name: "Anime", link: "/genres/drama" },
-    { name: "British", link: "/genres/action" },
-    { name: "Comedies", link: "/genres/sci-fi" },
+  useEffect(() => {
+    fetch(
+      "https://api.themoviedb.org/3/configuration/languages?api_key=5a2adbd4ccd50daf3380b9ff63d55291"
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) {
+          const langs = data
+            .map((lang) => ({
+              name: lang.english_name,
+              link: `/language/${lang.iso_639_1}`,
+            }))
+            .sort((a, b) => a.name.localeCompare(b.name, "en"));
+          setEnglishOptions(langs);
+        } else {
+          console.error("TMDB error:", data);
+        }
+      })
+      .catch((err) => console.error("Fetch failed:", err));
+  }, []);
+
+  const [openOriginal, setOpenOriginal] = useState(false);
+  const [openEnglish, setOpenEnglish] = useState(false);
+  const [openSort, setOpenSort] = useState(false);
+
+  const originalRef = useRef(null);
+  const englishRef = useRef(null);
+  const sortRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (originalRef.current && !originalRef.current.contains(event.target)) {
+        setOpenOriginal(false);
+      }
+      if (englishRef.current && !englishRef.current.contains(event.target)) {
+        setOpenEnglish(false);
+      }
+      if (sortRef.current && !sortRef.current.contains(event.target)) {
+        setOpenSort(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const originalLanguages = [
+    { name: "Original Language", link: "/genres/action" },
+    { name: "Dubbing", link: "/genres/anime" },
+    { name: "Subtitles", link: "/genres/anime" },
   ];
 
-  const sortedGenres = [...genres].sort((a, b) =>
-    a.name.localeCompare(b.name, "en")
-  );
+  const sortOptions = [
+    { name: "Suggestions for you", link: "/sort/newest" },
+    { name: "Year Released", link: "/sort/year" },
+    { name: "A-Z", link: "/sort/az" },
+    { name: "Z-A", link: "/sort/za" },
+  ];
 
   return (
     <div>
       <Navbar />
 
-      <p className="pl-[45px]  text-[27px] pt-[80px]">Browse by Languages</p>
+      <p className="pl-[45px] text-[27px] pt-[80px]">Browse by Languages</p>
 
-      <div className="sorting-box flex items-center  gap-[15px] pl-[45px] pt-[10px]">
+      <div className="sorting-box flex items-center gap-[15px] pl-[45px] pt-[10px]">
         <p className="text-[14px]">Select Your Preferences</p>
 
-        <div className="relative inline-block">
+        <div ref={originalRef} className="relative inline-block">
           <button
-            onClick={() => setOpen(open === "original" ? null : "original")}
-            className="bg-[#000] w-[190px] pt-[5px] pb-[2px] justify-between  items-center flex border px-[10px] text-[13px] font-[500] text-white rounded"
+            onClick={() => setOpenOriginal(!openOriginal)}
+            className="bg-[#000] cursor-pointer w-[190px] pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px] font-[500] text-white rounded"
           >
-            Original Language{" "}
-            <FontAwesomeIcon icon={faCaretDown} className="text-white 
-              " />
+            Original Language
+            <FontAwesomeIcon icon={faCaretDown} className="text-white" />
           </button>
 
-          {open === "original" && (
-            <div className="absolute left-0 mt-2 w-48 bg-[#000] text-[#fff] shadow-lg rounded z-10">
-              <ul className="py-2">
-                {sortedGenres.map((genre, index) => (
+          {openOriginal && (
+            <div className="absolute left-0 mt-2 w-[190px] bg-[#000] text-[#fff] shadow-lg rounded z-10">
+              <ul className="p-[8px]">
+                {originalLanguages.map((genre, index) => (
                   <li key={index}>
                     <a
                       href={genre.link}
-                      className="block px-4 py-2 hover:bg-gray-100"
+                      className="block pt-[5px] hover:underline"
                     >
                       {genre.name}
                     </a>
@@ -55,25 +103,25 @@ const OriginalAudio = () => {
           )}
         </div>
 
-        <div className="relative  ">
+        <div ref={englishRef} className="relative inline-block">
           <button
-            onClick={() => setOpen(open === "english" ? null : "english")}
-            className="bg-[#000] w-[250px] pt-[5px] justify-between  items-center flex pb-[2px] border px-[10px] text-[13px] font-[500] text-white rounded"
+            onClick={() => setOpenEnglish(!openEnglish)}
+            className="bg-[#000] w-[250px] cursor-pointer pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px] font-[500] text-white rounded"
           >
-            English{" "}
-            <FontAwesomeIcon icon={faCaretDown} className="text-white  " />
+            English
+            <FontAwesomeIcon icon={faCaretDown} className="text-white" />
           </button>
 
-          {open === "english" && (
-            <div className="absolute left-0 mt-2 w-48 bg-[#000] text-[#fff] shadow-lg rounded z-10">
-              <ul className="py-2">
-                {sortedGenres.map((genre, index) => (
+          {openEnglish && (
+            <div className="absolute left-0 mt-2 bg-[#000] w-[250px] text-[#fff] shadow-lg rounded z-50">
+              <ul className="p-[8px] max-h-[400px] overflow-y-auto">
+                {englishOptions.map((opt, index) => (
                   <li key={index}>
                     <a
-                      href={genre.link}
-                      className="block px-4 py-2 hover:bg-gray-100"
+                      href={opt.link}
+                      className="block px-4 py-2 hover:bg-gray-700 hover:text-white"
                     >
-                      {genre.name}
+                      {opt.name}
                     </a>
                   </li>
                 ))}
@@ -82,26 +130,27 @@ const OriginalAudio = () => {
           )}
         </div>
 
-                <p className="text-[14px]">Sort by</p>
-                 <div className="relative  ">
+        <p className="text-[14px]">Sort by</p>
+
+        <div ref={sortRef} className="relative inline-block">
           <button
-            onClick={() => setOpen(open === "english" ? null : "english")}
-            className="bg-[#000] w-[230px] pt-[5px] justify-between  items-center flex pb-[2px] border px-[10px] text-[13px] font-[500] text-white rounded"
+            onClick={() => setOpenSort(!openSort)}
+            className="bg-[#000] w-[230px] pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px] font-[500] text-white rounded cursor-pointer"
           >
             A-Z
-            <FontAwesomeIcon icon={faCaretDown} className="text-white  " />
+            <FontAwesomeIcon icon={faCaretDown} className="text-white" />
           </button>
 
-          {open === "english" && (
-            <div className="absolute left-0 mt-2 w-48 bg-[#000] text-[#fff] shadow-lg rounded z-10">
-              <ul className="py-2">
-                {sortedGenres.map((genre, index) => (
+          {openSort && (
+            <div className="absolute left-0 mt-2 w-[230px] bg-[#000] text-[#fff] shadow-lg rounded z-10">
+              <ul className="p-[8px]">
+                {sortOptions.map((opt, index) => (
                   <li key={index}>
                     <a
-                      href={genre.link}
+                      href={opt.link}
                       className="block px-4 py-2 hover:bg-gray-100"
                     >
-                      {genre.name}
+                      {opt.name}
                     </a>
                   </li>
                 ))}
@@ -109,9 +158,7 @@ const OriginalAudio = () => {
             </div>
           )}
         </div>
-
       </div>
-
 
       <Footer />
     </div>
