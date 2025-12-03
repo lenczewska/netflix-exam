@@ -22,18 +22,19 @@ const OriginalAudio = () => {
     <div>
       <Navbar />
 
-      <p className="pl-[45px] text-[27px] pt-[80px]">Browse by Languages</p>
+      <p className="pl-[45px]  text-[27px] pt-[80px]">Browse by Languages</p>
 
-      <div className="sorting-box flex gap-[15px] pl-[45px] pt-[10px]">
+      <div className="sorting-box flex items-center  gap-[15px] pl-[45px] pt-[10px]">
         <p className="text-[14px]">Select Your Preferences</p>
 
         <div className="relative inline-block">
           <button
             onClick={() => setOpen(open === "original" ? null : "original")}
-            className="bg-[#000] border px-[10px] text-[13px] font-[500] text-white rounded"
+            className="bg-[#000] w-[190px] pt-[5px] pb-[2px] justify-between  items-center flex border px-[10px] text-[13px] font-[500] text-white rounded"
           >
             Original Language{" "}
-            <FontAwesomeIcon icon={faCaretDown} className="text-white" />
+            <FontAwesomeIcon icon={faCaretDown} className="text-white 
+              " />
           </button>
 
           {open === "original" && (
@@ -54,13 +55,13 @@ const OriginalAudio = () => {
           )}
         </div>
 
-        <div className="relative inline-block">
+        <div className="relative  ">
           <button
             onClick={() => setOpen(open === "english" ? null : "english")}
-            className="bg-[#000] border px-[10px] text-[13px] font-[500] text-white rounded"
+            className="bg-[#000] w-[250px] pt-[5px] justify-between  items-center flex pb-[2px] border px-[10px] text-[13px] font-[500] text-white rounded"
           >
             English{" "}
-            <FontAwesomeIcon icon={faCaretDown} className="text-white" />
+            <FontAwesomeIcon icon={faCaretDown} className="text-white  " />
           </button>
 
           {open === "english" && (
@@ -80,7 +81,37 @@ const OriginalAudio = () => {
             </div>
           )}
         </div>
+
+                <p className="text-[14px]">Sort by</p>
+                 <div className="relative  ">
+          <button
+            onClick={() => setOpen(open === "english" ? null : "english")}
+            className="bg-[#000] w-[230px] pt-[5px] justify-between  items-center flex pb-[2px] border px-[10px] text-[13px] font-[500] text-white rounded"
+          >
+            A-Z
+            <FontAwesomeIcon icon={faCaretDown} className="text-white  " />
+          </button>
+
+          {open === "english" && (
+            <div className="absolute left-0 mt-2 w-48 bg-[#000] text-[#fff] shadow-lg rounded z-10">
+              <ul className="py-2">
+                {sortedGenres.map((genre, index) => (
+                  <li key={index}>
+                    <a
+                      href={genre.link}
+                      className="block px-4 py-2 hover:bg-gray-100"
+                    >
+                      {genre.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
       </div>
+
 
       <Footer />
     </div>
