@@ -1,0 +1,9 @@
+.download-box {
+  background: #4c2185;
+  background: linear-gradient(
+    90deg,
+    rgba(76, 33, 133, 0.96) 0%,
+    rgba(153, 43, 65, 1) 40%,
+    rgba(0, 0, 0, 1) 81%
+  );
+}
