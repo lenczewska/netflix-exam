@@ -4,12 +4,13 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import TitleCards from "../../components/TitleCards/TitleCards";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 
 const Movies = () => {
   const [open, setOpen] = useState(false);
   const [randomMovie, setRandomMovie] = useState(null);
-  const headerRef = useRef(null); // ref для блока Movies + селект
+  const headerRef = useRef(null);
 
   const genres = [
     { name: "Action", link: "/genres/comedy" },
@@ -24,19 +25,41 @@ const Movies = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
+      // 1. список популярных фильмов
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/popular?api_key=5a2adbd4ccd50daf3380b9ff63d55291&language=en-US&page=1`
       );
       const data = await res.json();
       const movies = data.results;
       const randomIndex = Math.floor(Math.random() * movies.length);
-      setRandomMovie(movies[randomIndex]);
+      const movie = movies[randomIndex];
+
+      // 2. детали фильма (runtime, overview и т.д.)
+      const detailsRes = await fetch(
+        `https://api.themoviedb.org/3/movie/${movie.id}?api_key=5a2adbd4ccd50daf3380b9ff63d55291&language=en-US`
+      );
+      const details = await detailsRes.json();
+
+      // 3. возрастной рейтинг
+      const releaseRes = await fetch(
+        `https://api.themoviedb.org/3/movie/${movie.id}/release_dates?api_key=5a2adbd4ccd50daf3380b9ff63d55291`
+      );
+      const releaseData = await releaseRes.json();
+      const usRating = releaseData.results.find((r) => r.iso_3166_1 === "US");
+      const certification = usRating?.release_dates[0]?.certification || "";
+      const creditsRes = await fetch(
+        `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=5a2adbd4ccd50daf3380b9ff63d55291&language=en-US`
+      );
+      const credits = await creditsRes.json();
+
+      // объединяем данные
+      setRandomMovie({ ...details, certification, cast: credits.cast });
     };
 
     fetchMovies();
   }, []);
 
-  // эффект для затемнения при скролле
+  // затемнение при скролле
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {
@@ -55,7 +78,7 @@ const Movies = () => {
       <Navbar />
 
       {/* Заголовок + селект */}
-      <div className="pt-[60px] w-full ">
+      <div className="pt-[60px] w-full">
         <div
           ref={headerRef}
           className="flex fixed nav-dark pb-[10px] items-baseline gap-[40px] w-full bg-transparent transition-colors duration-300 z-50"
@@ -65,7 +88,7 @@ const Movies = () => {
           <div className="relative inline-block mt-4">
             <button
               onClick={() => setOpen(!open)}
-              className=" bg-[#000] border px-[10px] text-white rounded"
+              className="bg-[#000] border px-[10px] text-white rounded"
             >
               Genres{" "}
               <FontAwesomeIcon icon={faCaretDown} className="text-white" />
@@ -93,18 +116,78 @@ const Movies = () => {
         {/* Рандомный фильм */}
         <div className="flex w-full pl-[40px] h-auto text-[25px] font-bold top-[70px] z-10">
           {randomMovie ? (
-            <img
-              src={`https://image.tmdb.org/t/p/w500${randomMovie.poster_path}`}
-              alt={randomMovie.title}
-              className="rounded shadow-lg w-[600px]  h-[600px] object-center mt-4"
-            />
+            <>
+              <img
+                src={`https://image.tmdb.org/t/p/w500${randomMovie.poster_path}`}
+                alt={randomMovie.title}
+                className="rounded shadow-lg w-[600px] h-[600px] object-cover mt-4"
+              />
+
+              <div className="about pt-[90px] pl-[30px] bg-[#000000] text-[#fff] w-[600px] h-[600px]">
+                <div className="pb-[10px]">
+                  Watch{" "}
+                  <span className="text-[25px] font-[500]">
+                    {randomMovie.title}
+                  </span>{" "}
+                  Now
+                </div>
+                <div className="text-[15px] w-[500px]">
+                  {randomMovie.overview}
+                </div>
+
+                <div className="inf flex gap-[10px] pt-[20px] items-center">
+                  <div className="  text-[#aaa]  text-[15px]">
+                    {randomMovie.release_date}
+                  </div>
+                  <span className=" text-[#fff] hd text-[15px] px-[5px]">
+                    HD
+                  </span>
+                  <span className=" text-[#aaa] text-[15px]">
+                    {randomMovie.runtime} min
+                  </span>
+                  <span className=" text-[#aaa] text-[16px]">
+                    {randomMovie?.original_language}
+                  </span>
+                </div>
+
+                <div className="text-[15px] text-[#aaa] ">
+                  {" "}
+                  Genres:
+                  <span className="text-[#fff] pl-[5px] ">
+                    {randomMovie?.genres?.map((g) => g.name).join(", ")}
+                  </span>
+                </div>
+
+                <div className="text-[15px] text-[#aaa]  w-[400px] flex ">
+                  <p>Cast:</p>
+                  <span className="text-[#fff] pl-[5px] ">
+                    {randomMovie?.cast
+                      ?.slice(0, 5)
+                      .map((actor) => actor.name)
+                      .join(", ")}
+                  </span>
+                </div>
+
+                <div className="like-btns pt-[20px] pb-[20px] flex gap-[10px]">
+                  <button className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
+                    <FontAwesomeIcon
+                      icon={faPlus}
+                      className="text-[20px] text-[#fff]"
+                    />
+                  </button>
+
+                  <button className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
+                    <FontAwesomeIcon
+                      icon={faThumbsUp}
+                      className="text-[20px] text-[#fff]"
+                    />
+                  </button>
+                </div>
+              </div>
+            </>
           ) : (
             "Загрузка..."
           )}
-
-          <div className="movie-inf bg-[#ae2626] text-[#fff] w-[600px] h-[600px]  ">
-            
-          </div>
         </div>
       </div>
 
