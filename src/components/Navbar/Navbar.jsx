@@ -40,13 +40,13 @@ const [query, setQuery] = useState("");
       ref={navRef}
       className="  w-screen pt-[20px] pb-[10px] fixed flex items-center justify-between pl-[40px] text-[13px] pr-[40px]  text-[#e5e5e5] z-30  "
     >
-      <div className="navbar-left  flex gap-[5px]  items-center justify-center ">
+      <div className="navbar-left   flex gap-[5px]  items-center justify-center ">
         <img onClick={()=> navigate("/browse")}
           src={logo_header}
           alt="logo-header"
           className="w-[100px] mr-[30px] cursor-pointer "
         />
-        <ul className="flex gap-[20px]">
+        <ul className="flex  gap-[20px]">
           <li
             onClick={() => navigate("/browse")}
             className={

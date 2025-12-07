@@ -18,7 +18,6 @@ const TitleCards = ({ title, category }) => {
     let url;
 
     if (category?.startsWith("trending")) {
-      // category = "trending/movie/day" или "trending/movie/week"
       url = `https://api.themoviedb.org/3/${category}?api_key=5a2adbd4ccd50daf3380b9ff63d55291`;
     } else {
       url = `https://api.themoviedb.org/3/movie/${
@@ -37,9 +36,9 @@ const TitleCards = ({ title, category }) => {
   }, [category]);
 
   return (
-    <div className="title-cards pr-[50px] mt-[50px]">
+    <div className="title-cards pr-[50px] mt-[50px] ">
       <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
-      <div className="card-list overflow-x-scroll flex gap-[8px]">
+      <div className="card-list overflow-x-scroll flex  gap-[8px]">
         {apiData.map((card) => (
           <Link
             to={`/player/${card.id}`}
