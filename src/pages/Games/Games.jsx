@@ -16,7 +16,7 @@ const Games = () => {
       </div>
 
       <div className="category-cards">
-        <GameCards title="Popular Mobile Games for You" genres="Unknown" />
+        <GameCards title="Popular Mobile Games for You" genres="Action" />
         <GameCards title="Pick Up and Play Mobile Games" genres="Puzzle" />
       </div>
 
