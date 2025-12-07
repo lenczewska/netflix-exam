@@ -18,6 +18,8 @@ const Shows = () => {
     a.name.localeCompare(b.name, "en")
   );
 
+  
+
   return (
     <div>
       <Navbar />

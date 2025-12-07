@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 
-const Movies = () => {
+const Movies = ({ favorites, setFavorites }) => {
   const [open, setOpen] = useState(false);
   const [randomMovie, setRandomMovie] = useState(null);
   const headerRef = useRef(null);
@@ -19,13 +19,30 @@ const Movies = () => {
     { name: "Comedies", link: "/genres/sci-fi" },
   ];
 
+  const limitOverview = (text, maxSentences = 3) => {
+    if (!text) return "";
+    const sentences = text.split(/(?<=[.!?])\s+/);
+    if (sentences.length <= maxSentences) {
+      return text;
+    }
+    return sentences.slice(0, maxSentences).join(" ") + " ...";
+  };
+
   const sortedGenres = [...genres].sort((a, b) =>
     a.name.localeCompare(b.name, "en")
   );
 
+  const handleAddFavorite = () => {
+    if (!randomMovie) return;
+    setFavorites((prev) => {
+      const exists = prev.some((item) => item.id === randomMovie.id);
+      if (exists) return prev;
+      return [...prev, randomMovie];
+    });
+  };
+
   useEffect(() => {
     const fetchMovies = async () => {
-      // 1. список популярных фильмов
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/popular?api_key=5a2adbd4ccd50daf3380b9ff63d55291&language=en-US&page=1`
       );
@@ -34,13 +51,11 @@ const Movies = () => {
       const randomIndex = Math.floor(Math.random() * movies.length);
       const movie = movies[randomIndex];
 
-      // 2. детали фильма (runtime, overview и т.д.)
       const detailsRes = await fetch(
         `https://api.themoviedb.org/3/movie/${movie.id}?api_key=5a2adbd4ccd50daf3380b9ff63d55291&language=en-US`
       );
       const details = await detailsRes.json();
 
-      // 3. возрастной рейтинг
       const releaseRes = await fetch(
         `https://api.themoviedb.org/3/movie/${movie.id}/release_dates?api_key=5a2adbd4ccd50daf3380b9ff63d55291`
       );
@@ -52,14 +67,12 @@ const Movies = () => {
       );
       const credits = await creditsRes.json();
 
-      // объединяем данные
       setRandomMovie({ ...details, certification, cast: credits.cast });
     };
 
     fetchMovies();
   }, []);
 
-  // затемнение при скролле
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {
@@ -77,7 +90,6 @@ const Movies = () => {
     <div>
       <Navbar />
 
-      {/* Заголовок + селект */}
       <div className="pt-[60px] w-full">
         <div
           ref={headerRef}
@@ -113,17 +125,16 @@ const Movies = () => {
           </div>
         </div>
 
-        {/* Рандомный фильм */}
-        <div className="flex w-full pl-[40px] h-auto text-[25px] font-bold top-[70px] z-10">
+        <div className="flex w-full pl-[0px] h-auto text-[25px] font-bold top-[70px] z-10">
           {randomMovie ? (
             <>
               <img
                 src={`https://image.tmdb.org/t/p/w500${randomMovie.poster_path}`}
                 alt={randomMovie.title}
-                className="rounded shadow-lg w-[600px] h-[600px] object-cover mt-4"
+                className="rounded shadow-lg w-[500px] h-[700px] object-cover mt-4"
               />
 
-              <div className="about pt-[90px] pl-[30px] bg-[#000000] text-[#fff] w-[600px] h-[600px]">
+              <div className="about pt-[70px] pl-[50px] bg-[#000000] text-[#fff] w-[800px] h-[700px]">
                 <div className="pb-[10px]">
                   Watch{" "}
                   <span className="text-[25px] font-[500]">
@@ -132,7 +143,7 @@ const Movies = () => {
                   Now
                 </div>
                 <div className="text-[15px] w-[500px]">
-                  {randomMovie.overview}
+                  {limitOverview(randomMovie?.overview)}
                 </div>
 
                 <div className="inf flex gap-[10px] pt-[20px] items-center">
@@ -169,7 +180,10 @@ const Movies = () => {
                 </div>
 
                 <div className="like-btns pt-[20px] pb-[20px] flex gap-[10px]">
-                  <button className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
+                  <button
+                    onClick={handleAddFavorite}
+                    className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
+                  >
                     <FontAwesomeIcon
                       icon={faPlus}
                       className="text-[20px] text-[#fff]"
@@ -191,7 +205,6 @@ const Movies = () => {
         </div>
       </div>
 
-      {/* Карточки категорий */}
       <div className="category-cards mt-10">
         <TitleCards title="Today's Top Pick for You" category="top_rated" />
         <TitleCards title="Action Movies" category="popular" />

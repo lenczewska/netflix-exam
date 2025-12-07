@@ -1,5 +1,11 @@
-import React, { useEffect } from "react";
-import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Player from "./pages/Player/Player";
@@ -15,40 +21,43 @@ import OriginalAudio from "./pages/OriginalAudio/OriginalAudio";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [favorites, setFavorites] = useState([]); // общее состояние
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("Logged in");
         if (location.pathname === "/login" || location.pathname === "/") {
           navigate("/browse");
         }
       } else {
-        console.log("Logged out");
         if (location.pathname !== "/login") {
           navigate("/login");
         }
       }
     });
 
-    return () => unsubscribe(); 
+    return () => unsubscribe();
   }, [location.pathname, navigate]);
 
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<Navigate to="/browse" />} />
-        <Route path="/browse" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/player/:id" element={<Player />} />
-        <Route path="/shows" element={<Shows />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/games" element={<Games />} />
-        <Route path="/latest" element={<Latest />} />
-        <Route path="/my-list" element={<MyList />} />
-        <Route path="/original-audio" element={<OriginalAudio />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigate to="/browse" />} />
+      <Route path="/browse" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/player/:id" element={<Player />} />
+      <Route path="/shows" element={<Shows />} />
+      <Route
+        path="/movies"
+        element={<Movies favorites={favorites} setFavorites={setFavorites} />}
+      />
+      <Route path="/games" element={<Games />} />
+      <Route path="/latest" element={<Latest />} />
+      <Route
+        path="/my-list"
+        element={<MyList favorites={favorites} setFavorites={setFavorites} />}
+      />
+      <Route path="/original-audio" element={<OriginalAudio />} />
+    </Routes>
   );
 }
 
