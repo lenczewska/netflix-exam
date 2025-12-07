@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div className="home">
-      <Navbar  />
+      <Navbar />
 
       <div className="hero-banner  relative ">
         <img
@@ -49,11 +49,13 @@ const Home = () => {
         <TitleCards />
       </div>
 
-      <div className="category-cards">
-        <TitleCards title="Romantic TV Shows" category="top_rated" />
-        <TitleCards title="Hollywood Movies" category="popular" />
-        <TitleCards title="New On Netflix" category="upcoming" />
-        <TitleCards title="Only On Netflix" category="now_playing" />
+      <div className="category-cards mt-10">
+        <TitleCards title="Top Rated" category="top_rated" />
+        <TitleCards title="Trending This Week" category="trending/movie/week" />
+        <TitleCards title="Upcoming" category="upcoming" />
+        <TitleCards title="Popular" category="popular" />
+        <TitleCards title="Now Playing" category="now_playing" />
+        <TitleCards title="Trending Today" category="trending/movie/day" />
       </div>
 
       <Footer />

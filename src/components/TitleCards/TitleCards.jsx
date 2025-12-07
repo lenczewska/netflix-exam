@@ -10,17 +10,29 @@ const TitleCards = ({ title, category }) => {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YTJhZGJkNGNjZDUwZGFmMzM4MGI5ZmY2M2Q1NTI5MSIsIm5iZiI6MTc2MzA1Mjk1Mi44NDksInN1YiI6IjY5MTYwZDk4ZGZhMGQ3ODA3Njg3NjRhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EdeYcHJbxDyv54BQNPh9zJmnUu79Fmte9zqBTOTXU1A",
+      Authorization: "Bearer 5a2adbd4ccd50daf3380b9ff63d55291", // замени на свой
     },
   };
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${category || "now_playing"}?language=en-US&page=1`,
-      options
-    )
+    let url;
+
+    if (category?.startsWith("trending")) {
+      // category = "trending/movie/day" или "trending/movie/week"
+      url = `https://api.themoviedb.org/3/${category}?api_key=5a2adbd4ccd50daf3380b9ff63d55291`;
+    } else {
+      url = `https://api.themoviedb.org/3/movie/${
+        category || "now_playing"
+      }?api_key=5a2adbd4ccd50daf3380b9ff63d55291&language=en-US&page=1`;
+    }
+
+    fetch(url, options)
       .then((res) => res.json())
       .then((res) => setApiData(res.results || []))
+      .then((res) => {
+        console.log("Trending response:", res);
+        setApiData(res.results || []);
+      })
       .catch((err) => console.error(err));
   }, [category]);
 
@@ -29,16 +41,20 @@ const TitleCards = ({ title, category }) => {
       <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
       <div className="card-list overflow-x-scroll flex gap-[8px]">
         {apiData.map((card) => (
-          <Link to={`/player/${card.id}`} className="card relative" key={card.id}>
+          <Link
+            to={`/player/${card.id}`}
+            className="card relative"
+            key={card.id}
+          >
             {card.backdrop_path && (
               <img
                 src={`https://image.tmdb.org/t/p/w500${card.backdrop_path}`}
                 className="card-img max-w-[250px] rounded-[5px]"
-                alt={card.original_title}
+                alt={card.original_title || card.name}
               />
             )}
             <p className="absolute right-[10px] bottom-[10px]">
-              {card.original_title}
+              {card.original_title || card.name}
             </p>
           </Link>
         ))}

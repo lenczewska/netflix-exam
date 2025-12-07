@@ -21,7 +21,7 @@ import OriginalAudio from "./pages/OriginalAudio/OriginalAudio";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [favorites, setFavorites] = useState([]); // общее состояние
+  const [favorites, setFavorites] = useState([]); 
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {

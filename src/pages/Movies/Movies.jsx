@@ -25,7 +25,7 @@ const Movies = ({ favorites, setFavorites }) => {
     if (sentences.length <= maxSentences) {
       return text;
     }
-    return sentences.slice(0, maxSentences).join(" ") + " ...";
+    return sentences.slice(0, maxSentences).join(" ") + "...";
   };
 
   const sortedGenres = [...genres].sort((a, b) =>
@@ -206,10 +206,12 @@ const Movies = ({ favorites, setFavorites }) => {
       </div>
 
       <div className="category-cards mt-10">
-        <TitleCards title="Today's Top Pick for You" category="top_rated" />
-        <TitleCards title="Action Movies" category="popular" />
-        <TitleCards title="" category="upcoming" />
-        <TitleCards title="We Think You'll Love These" category="now_playing" />
+        <TitleCards title="Top Rated" category="top_rated" />
+        <TitleCards title="Trending This Week" category="trending/movie/week" />
+        <TitleCards title="Upcoming" category="upcoming" />
+        <TitleCards title="Popular" category="popular" />
+        <TitleCards title="Now Playing" category="now_playing" />
+        <TitleCards title="Trending Today" category="trending/movie/day" />
       </div>
 
       <Footer />
