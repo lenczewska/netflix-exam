@@ -55,13 +55,13 @@ const Movies = () => {
       <Navbar />
 
       {/* Заголовок + селект */}
-      <div className="pt-[60px] w-screen ">
+      <div className="pt-[60px] w-full ">
         <div
           ref={headerRef}
           className="flex fixed nav-dark pb-[10px] items-baseline gap-[40px] w-full bg-transparent transition-colors duration-300 z-50"
         >
           <p className="pl-[45px] text-[35px] font-black pt-[20px]">Movies</p>
- 
+
           <div className="relative inline-block mt-4">
             <button
               onClick={() => setOpen(!open)}
@@ -91,20 +91,19 @@ const Movies = () => {
         </div>
 
         {/* Рандомный фильм */}
-        <div className="flex  pl-[40px] h-auto text-[25px] font-bold top-[70px] z-10">
+        <div className="flex w-full pl-[40px] h-auto text-[25px] font-bold top-[70px] z-10">
           {randomMovie ? (
             <img
               src={`https://image.tmdb.org/t/p/w500${randomMovie.poster_path}`}
               alt={randomMovie.title}
-              className="rounded shadow-lg w-[650px] h-[600px] object-center mt-4"
+              className="rounded shadow-lg w-[600px]  h-[600px] object-center mt-4"
             />
           ) : (
             "Загрузка..."
           )}
 
-          <div className="movie-inf bg-[#000] text-[#fff]  ">
-
-
+          <div className="movie-inf bg-[#ae2626] text-[#fff] w-[600px] h-[600px]  ">
+            
           </div>
         </div>
       </div>

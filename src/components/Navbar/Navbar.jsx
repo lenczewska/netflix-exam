@@ -38,7 +38,7 @@ const [query, setQuery] = useState("");
   return (
     <div
       ref={navRef}
-      className="  w-full pt-[20px] pb-[10px] fixed flex items-center justify-between pl-[40px] text-[13px] pr-[40px]  text-[#e5e5e5] z-30  "
+      className="  w-screen pt-[20px] pb-[10px] fixed flex items-center justify-between pl-[40px] text-[13px] pr-[40px]  text-[#e5e5e5] z-30  "
     >
       <div className="navbar-left  flex gap-[5px]  items-center justify-center ">
         <img onClick={()=> navigate("/browse")}
