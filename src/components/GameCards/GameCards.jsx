@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import "./GameCards.css";
-import Modal from "./Modal";
 
-
-function GameCards({ title, genres }) {
+function GameCards({ title, genres, onGameClick }) {
   const [games, setGames] = useState([]);
-  const [selectedGame, setSelectedGame] = useState(null);
 
   useEffect(() => {
     fetch("/games.json")
@@ -27,15 +24,13 @@ function GameCards({ title, genres }) {
     <>
       <h2 className="mb-[10px] text-[24px] font-[500]">{title}</h2>
 
-      <div className="flex flex-wrap gap-[15px]">
+      <div className="flex flex-wrap gap-[15px]  ">
         <div className="card-list overflow-x-scroll flex gap-[10px]">
           {games.map((game) => (
             <div key={game.id} className="flex flex-col items-center">
               <div
                 className="w-[160px] h-[160px] bg-white rounded-[20px] shadow-md overflow-hidden border border-gray-200 cursor-pointer"
-                onClick={() => {
-                  setSelectedGame(game);
-                }}
+                onClick={() => onGameClick(game)} // <<< здесь
               >
                 <img
                   src={game.images.cover}
@@ -43,6 +38,7 @@ function GameCards({ title, genres }) {
                   className="w-full h-full object-cover"
                 />
               </div>
+
               <h3 className="w-[100px] break-words whitespace-normal mt-[2px] font-semibold text-gray-800 text-center">
                 {game.title}
               </h3>
@@ -50,13 +46,6 @@ function GameCards({ title, genres }) {
           ))}
         </div>
       </div>
-
-      {selectedGame && (
-       <Modal
-          game={selectedGame}
-          onClose={() => setSelectedGame(null)}
-        />
-      )}
     </>
   );
 }

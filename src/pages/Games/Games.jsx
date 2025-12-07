@@ -1,35 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import GameCards from "../../components/GameCards/GameCards";
-import "./Game.css"
+import Modal from "../../components/GameCards/Modal";
+import "./Game.css";
 
 import games_page from "../../assets/img/games_page.webp";
 
 const Games = () => {
+  const [selectedGame, setSelectedGame] = useState(null); // <<< добавили
+
   return (
     <div>
       <Navbar />
 
-      <div className=" h-[200px] pt-[50px] flex justify-center items-center z-0">
+      <div className="h-[200px] pt-[50px] flex justify-center items-center z-0">
         Burda oyunlar random cixacaq, gozlemede qalin :)
       </div>
 
-      <div className="category-cards">
-        <GameCards title="Popular Mobile Games for You" genres="Action" />
-        <GameCards title="Pick Up and Play Mobile Games" genres="Puzzle" />
+      <div className="category-cards  ">
+        <GameCards
+          title="Popular Mobile Games for You"
+          genres="Action"
+          onGameClick={setSelectedGame} // <<< передаём
+        />
+
+        <GameCards
+          title="Pick Up and Play Mobile Games"
+          genres="Puzzle"
+          onGameClick={setSelectedGame} // <<< передаём
+        />
       </div>
 
-      <div className=" h-[320px] mt-[30px] bg-[#000] flex justify-between">
-        <div className="txt-box flex flex-col  justify-center">
+      {/* Единственная модалка */}
+      {selectedGame && (
+        <Modal game={selectedGame} onClose={() => setSelectedGame(null)} />
+      )}
+
+      <div className="h-[320px] mt-[30px] bg-[#000]  flex justify-between">
+        <div className="txt-box flex flex-col justify-center">
           <h2 className="font-[600] text-[32px] font-unset">
             Find more games in the mobile app
           </h2>
           <h6 className="font-[400] text-[16px] font-unset">
-            From tamiliar favorites to Netflix exclusives, get unlimited mobile
-            games in the Netflix app - all included with your membership.
+            From familiar favorites to Netflix exclusives, get unlimited mobile
+            games in the Netflix app — all included with your membership.
           </h6>
         </div>
+
         <img
           src={games_page}
           className="w-[55%] flex object-cover pt-[20px]"

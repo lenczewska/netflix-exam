@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
+import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Player from "./pages/Player/Player";
 import { onAuthStateChanged } from "firebase/auth";
@@ -14,18 +14,25 @@ import OriginalAudio from "./pages/OriginalAudio/OriginalAudio";
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log("Logged in");
-        navigate("/browse");
+        if (location.pathname === "/login" || location.pathname === "/") {
+          navigate("/browse");
+        }
       } else {
         console.log("Logged out");
-        navigate("/login");
+        if (location.pathname !== "/login") {
+          navigate("/login");
+        }
       }
     });
-  }, []);
+
+    return () => unsubscribe(); 
+  }, [location.pathname, navigate]);
 
   return (
     <div>
@@ -39,7 +46,7 @@ function App() {
         <Route path="/games" element={<Games />} />
         <Route path="/latest" element={<Latest />} />
         <Route path="/my-list" element={<MyList />} />
-        <Route path="/original-audio" element={<OriginalAudio/>} />
+        <Route path="/original-audio" element={<OriginalAudio />} />
       </Routes>
     </div>
   );

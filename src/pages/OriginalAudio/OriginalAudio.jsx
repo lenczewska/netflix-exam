@@ -7,6 +7,9 @@ import TitleCards from "../../components/TitleCards/TitleCards";
 
 const OriginalAudio = () => {
   const [englishOptions, setEnglishOptions] = useState([]);
+  const [selectedOriginal, setSelectedOriginal] = useState(null);
+  const [selectedEnglish, setSelectedEnglish] = useState(null);
+  const [selectedSort, setSelectedSort] = useState("A-Z");
 
   useEffect(() => {
     fetch(
@@ -18,15 +21,12 @@ const OriginalAudio = () => {
           const langs = data
             .map((lang) => ({
               name: lang.english_name,
-              link: `/language/${lang.iso_639_1}`,
+              code: lang.iso_639_1,
             }))
             .sort((a, b) => a.name.localeCompare(b.name, "en"));
           setEnglishOptions(langs);
-        } else {
-          console.error("TMDB error:", data);
         }
-      })
-      .catch((err) => console.error("Fetch failed:", err));
+      });
   }, []);
 
   const [openOriginal, setOpenOriginal] = useState(false);
@@ -50,22 +50,20 @@ const OriginalAudio = () => {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const originalLanguages = [
-    { name: "Original Language", link: "/genres/action" },
-    { name: "Dubbing", link: "/genres/anime" },
-    { name: "Subtitles", link: "/genres/anime" },
+    { name: "Original Language", value: "original" },
+    { name: "Dubbing", value: "dubbing" },
+    { name: "Subtitles", value: "subtitles" },
   ];
 
   const sortOptions = [
-    { name: "Suggestions for you", link: "/sort/newest" },
-    { name: "Year Released", link: "/sort/year" },
-    { name: "A-Z", link: "/sort/az" },
-    { name: "Z-A", link: "/sort/za" },
+    { name: "Suggestions for you", value: "suggestions" },
+    { name: "Year Released", value: "year" },
+    { name: "A-Z", value: "az" },
+    { name: "Z-A", value: "za" },
   ];
 
   return (
@@ -77,25 +75,29 @@ const OriginalAudio = () => {
       <div className="sorting-box flex items-center gap-[15px] pl-[45px] pt-[10px]">
         <p className="text-[14px]">Select Your Preferences</p>
 
+        {/* Original Language */}
         <div ref={originalRef} className="relative inline-block">
           <button
             onClick={() => setOpenOriginal(!openOriginal)}
             className="bg-[#000] cursor-pointer w-[190px] pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px] font-[500] text-white rounded"
           >
-            Original Language
+            {selectedOriginal ? selectedOriginal : "Original Language"}
             <FontAwesomeIcon icon={faCaretDown} className="text-white" />
           </button>
 
           {openOriginal && (
             <div className="absolute left-0 mt-2 w-[190px] bg-[#000] text-[#fff] shadow-lg rounded z-10">
               <ul className="p-[8px]">
-                {originalLanguages.map((genre, index) => (
+                {originalLanguages.map((lang, index) => (
                   <li key={index}>
                     <p
-                      href=""
-                      className="block pt-[5px] hover:underline"
+                      onClick={() => {
+                        setSelectedOriginal(lang.value);
+                        setOpenOriginal(false);
+                      }}
+                      className="block pt-[5px] hover:underline cursor-pointer"
                     >
-                      {genre.name}
+                      {lang.name}
                     </p>
                   </li>
                 ))}
@@ -104,12 +106,13 @@ const OriginalAudio = () => {
           )}
         </div>
 
+        {/* English */}
         <div ref={englishRef} className="relative inline-block">
           <button
             onClick={() => setOpenEnglish(!openEnglish)}
             className="bg-[#000] w-[250px] cursor-pointer pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px] font-[500] text-white rounded"
           >
-            English
+            {selectedEnglish ? selectedEnglish : "English"}
             <FontAwesomeIcon icon={faCaretDown} className="text-white" />
           </button>
 
@@ -119,8 +122,11 @@ const OriginalAudio = () => {
                 {englishOptions.map((opt, index) => (
                   <li key={index}>
                     <p
-                      href=""
-                      className="block px-4 py-2 hover:bg-gray-700 hover:underline"
+                      onClick={() => {
+                        setSelectedEnglish(opt.code);
+                        setOpenEnglish(false);
+                      }}
+                      className="block px-4 py-2 hover:bg-gray-700 hover:underline cursor-pointer"
                     >
                       {opt.name}
                     </p>
@@ -131,14 +137,14 @@ const OriginalAudio = () => {
           )}
         </div>
 
+        {/* Sort */}
         <p className="text-[14px]">Sort by</p>
-
         <div ref={sortRef} className="relative inline-block">
           <button
             onClick={() => setOpenSort(!openSort)}
             className="bg-[#000] w-[230px] pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px] font-[500] text-white rounded cursor-pointer"
           >
-            A-Z
+            {selectedSort}
             <FontAwesomeIcon icon={faCaretDown} className="text-white" />
           </button>
 
@@ -148,8 +154,11 @@ const OriginalAudio = () => {
                 {sortOptions.map((opt, index) => (
                   <li key={index}>
                     <p
-                      href=""
-                      className="block px-4 py-2 hover:underline"
+                      onClick={() => {
+                        setSelectedSort(opt.value);
+                        setOpenSort(false);
+                      }}
+                      className="block px-4 py-2 hover:underline cursor-pointer"
                     >
                       {opt.name}
                     </p>
@@ -161,7 +170,12 @@ const OriginalAudio = () => {
         </div>
       </div>
 
-      <TitleCards/>
+      {/* Передаём выбранные фильтры в TitleCards */}
+      <TitleCards
+        original={selectedOriginal}
+        english={selectedEnglish}
+        sort={selectedSort}
+      />
 
       <Footer />
     </div>
