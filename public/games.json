@@ -28,7 +28,8 @@
       ],
       "developer": "Netflix Games",
       "releaseYear": 2022,
-      "maturityRating": "3+"
+      "maturityRating": "3+",
+      "background": "/assets/backgrounds/lego_party!_bg.jpg"
     },
     {
       "id": 2,
@@ -53,7 +54,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2025,
       "maturityRating": "Teen",
-      "description": "Tetris Time Warp challenges your mind with clever puzzles and logic-based gameplay."
+      "description": "Tetris Time Warp challenges your mind with clever puzzles and logic-based gameplay.",
+      "background": "/assets/backgrounds/tetris_time_warp_bg.jpg"
     },
     {
       "id": 3,
@@ -78,7 +80,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2022,
       "maturityRating": "Teen",
-      "description": "Pictionary: Game Night is a fun party game full of mini-games and laughter with friends."
+      "description": "Pictionary: Game Night is a fun party game full of mini-games and laughter with friends.",
+      "background": "/assets/backgrounds/pictionary:_game_night_bg.jpg"
     },
     {
       "id": 4,
@@ -102,7 +105,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2024,
       "maturityRating": "3+",
-      "description": "Boggle Party challenges your mind with clever puzzles and logic-based gameplay."
+      "description": "Boggle Party challenges your mind with clever puzzles and logic-based gameplay.",
+      "background": "/assets/backgrounds/boggle_party_bg.jpg"
     },
     {
       "id": 5,
@@ -128,7 +132,8 @@
       "developer": "Netflix Games",
       "releaseYear": 2025,
       "maturityRating": "10+",
-      "description": "Party Crashers is a fun party game full of mini-games and laughter with friends."
+      "description": "Party Crashers is a fun party game full of mini-games and laughter with friends.",
+      "background": "/assets/backgrounds/party_crashers_bg.jpg"
     },
     {
       "id": 6,
@@ -153,7 +158,8 @@
       "developer": "PixelWorks",
       "releaseYear": 2022,
       "maturityRating": "18+",
-      "description": "Centipede: Recharged is a unique game in the Arcade genre."
+      "description": "Centipede: Recharged is a unique game in the Arcade genre.",
+      "background": "/assets/backgrounds/centipede:_recharged_bg.jpg"
     },
     {
       "id": 7,
@@ -178,7 +184,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2024,
       "maturityRating": "18+",
-      "description": "Link Twin challenges your mind with clever puzzles and logic-based gameplay."
+      "description": "Link Twin challenges your mind with clever puzzles and logic-based gameplay.",
+      "background": "/assets/backgrounds/link_twin_bg.jpg"
     },
     {
       "id": 8,
@@ -204,7 +211,8 @@
       "developer": "GameLab",
       "releaseYear": 2024,
       "maturityRating": "6+",
-      "description": "Cozy Grove: Camp Spirit challenges your mind with clever puzzles and logic-based gameplay."
+      "description": "Cozy Grove: Camp Spirit challenges your mind with clever puzzles and logic-based gameplay.",
+      "background": "/assets/backgrounds/cozy_grove:_camp_spirit_bg.jpg"
     },
     {
       "id": 9,
@@ -230,7 +238,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2025,
       "maturityRating": "10+",
-      "description": "OXENFREE is a unique game in the Adventure genre."
+      "description": "OXENFREE is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/oxenfree_bg.jpg"
     },
     {
       "id": 10,
@@ -254,7 +263,8 @@
       "developer": "DreamForge",
       "releaseYear": 2024,
       "maturityRating": "3+",
-      "description": "Missile Command: Recharged is a unique game in the Strategy genre."
+      "description": "Missile Command: Recharged is a unique game in the Strategy genre.",
+      "background": "/assets/backgrounds/missile_command:_recharged_bg.jpg"
     },
     {
       "id": 11,
@@ -279,7 +289,8 @@
       "developer": "GameLab",
       "releaseYear": 2022,
       "maturityRating": "3+",
-      "description": "Underwatermelon: Fruit Merge is a unique game in the Arcade genre."
+      "description": "Underwatermelon: Fruit Merge is a unique game in the Arcade genre.",
+      "background": "/assets/backgrounds/underwatermelon:_fruit_merge_bg.jpg"
     },
     {
       "id": 12,
@@ -304,7 +315,8 @@
       "developer": "DreamForge",
       "releaseYear": 2023,
       "maturityRating": "Teen",
-      "description": "Rocket is a unique game in the Racing genre."
+      "description": "Rocket is a unique game in the Racing genre.",
+      "background": "/assets/backgrounds/rocket_bg.jpg"
     },
     {
       "id": 13,
@@ -330,7 +342,8 @@
       "developer": "Netflix Games",
       "releaseYear": 2025,
       "maturityRating": "Mature",
-      "description": "Caverns of Mars: Recharged is a unique game in the Arcade genre."
+      "description": "Caverns of Mars: Recharged is a unique game in the Arcade genre.",
+      "background": "/assets/backgrounds/caverns_of_mars:_recharged_bg.jpg"
     },
     {
       "id": 14,
@@ -356,7 +369,8 @@
       "developer": "DreamForge",
       "releaseYear": 2024,
       "maturityRating": "18+",
-      "description": "Netflix Puzzled challenges your mind with clever puzzles and logic-based gameplay."
+      "description": "Netflix Puzzled challenges your mind with clever puzzles and logic-based gameplay.",
+      "background": "/assets/backgrounds/netflix_puzzled_bg.jpg"
     },
     {
       "id": 15,
@@ -381,7 +395,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2024,
       "maturityRating": "Mature",
-      "description": "Football Manager 26 Mobile is a unique game in the Sports genre."
+      "description": "Football Manager 26 Mobile is a unique game in the Sports genre.",
+      "background": "/assets/backgrounds/football_manager_26_mobile_bg.jpg"
     },
     {
       "id": 16,
@@ -407,7 +422,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2024,
       "maturityRating": "Teen",
-      "description": "Bloons TD 6 is a unique game in the Strategy genre."
+      "description": "Bloons TD 6 is a unique game in the Strategy genre.",
+      "background": "/assets/backgrounds/bloons_td_6_bg.jpg"
     },
     {
       "id": 17,
@@ -433,7 +449,8 @@
       "developer": "GameLab",
       "releaseYear": 2023,
       "maturityRating": "Teen",
-      "description": "World of Peppa Pig is a unique game in the Kids genre."
+      "description": "World of Peppa Pig is a unique game in the Kids genre.",
+      "background": "/assets/backgrounds/world_of_peppa_pig_bg.jpg"
     },
     {
       "id": 18,
@@ -457,7 +474,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2022,
       "maturityRating": "Teen",
-      "description": "Twelve Minutes is a unique game in the Arcade genre."
+      "description": "Twelve Minutes is a unique game in the Arcade genre.",
+      "background": "/assets/backgrounds/twelve_minutes_bg.jpg"
     },
     {
       "id": 19,
@@ -483,7 +501,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2024,
       "maturityRating": "3+",
-      "description": "SpongeBob: Get Cooking is a unique game in the Kids genre."
+      "description": "SpongeBob: Get Cooking is a unique game in the Kids genre.",
+      "background": "/assets/backgrounds/spongebob:_get_cooking_bg.jpg"
     },
     {
       "id": 20,
@@ -509,7 +528,8 @@
       "developer": "GameLab",
       "releaseYear": 2022,
       "maturityRating": "Mature",
-      "description": "Farming Simulator 23 is a unique game in the Simulation genre."
+      "description": "Farming Simulator 23 is a unique game in the Simulation genre.",
+      "background": "/assets/backgrounds/farming_simulator_23_bg.jpg"
     },
     {
       "id": 21,
@@ -535,7 +555,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2023,
       "maturityRating": "3+",
-      "description": "Snake.io is a unique game in the Adventure genre."
+      "description": "Snake.io is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/snake.io_bg.jpg"
     },
     {
       "id": 22,
@@ -560,7 +581,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2022,
       "maturityRating": "Mature",
-      "description": "Cut the Rope Daily is a unique game in the Platformer genre."
+      "description": "Cut the Rope Daily is a unique game in the Platformer genre.",
+      "background": "/assets/backgrounds/cut_the_rope_daily_bg.jpg"
     },
     {
       "id": 23,
@@ -586,7 +608,8 @@
       "developer": "PixelWorks",
       "releaseYear": 2024,
       "maturityRating": "Teen",
-      "description": "Storyteller is a unique game in the Adventure genre."
+      "description": "Storyteller is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/storyteller_bg.jpg"
     },
     {
       "id": 24,
@@ -612,7 +635,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2025,
       "maturityRating": "Teen",
-      "description": "PAW Patrol Academy is a unique game in the Kids genre."
+      "description": "PAW Patrol Academy is a unique game in the Kids genre.",
+      "background": "/assets/backgrounds/paw_patrol_academy_bg.jpg"
     },
     {
       "id": 25,
@@ -637,7 +661,8 @@
       "developer": "Netflix Games",
       "releaseYear": 2025,
       "maturityRating": "3+",
-      "description": "Game Dev Tycoon is a unique game in the Simulation genre."
+      "description": "Game Dev Tycoon is a unique game in the Simulation genre.",
+      "background": "/assets/backgrounds/game_dev_tycoon_bg.jpg"
     },
     {
       "id": 26,
@@ -663,7 +688,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2023,
       "maturityRating": "18+",
-      "description": "Black Mirror: Thronglets is a unique game in the Horror genre."
+      "description": "Black Mirror: Thronglets is a unique game in the Horror genre.",
+      "background": "/assets/backgrounds/black_mirror:_thronglets_bg.jpg"
     },
     {
       "id": 27,
@@ -689,7 +715,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2025,
       "maturityRating": "3+",
-      "description": "Toca Boca Hair Salon 4 is a unique game in the Kids genre."
+      "description": "Toca Boca Hair Salon 4 is a unique game in the Kids genre.",
+      "background": "/assets/backgrounds/toca_boca_hair_salon_4_bg.jpg"
     },
     {
       "id": 28,
@@ -714,7 +741,8 @@
       "developer": "GameLab",
       "releaseYear": 2025,
       "maturityRating": "Teen",
-      "description": "Terra Nil is a unique game in the Adventure genre."
+      "description": "Terra Nil is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/terra_nil_bg.jpg"
     },
     {
       "id": 29,
@@ -739,7 +767,8 @@
       "developer": "DreamForge",
       "releaseYear": 2022,
       "maturityRating": "Teen",
-      "description": "Solitaire is a unique game in the Adventure genre."
+      "description": "Solitaire is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/solitaire_bg.jpg"
     },
     {
       "id": 30,
@@ -765,7 +794,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2025,
       "maturityRating": "18+",
-      "description": "Krispee Street is a unique game in the Racing genre."
+      "description": "Krispee Street is a unique game in the Racing genre.",
+      "background": "/assets/backgrounds/krispee_street_bg.jpg"
     },
     {
       "id": 31,
@@ -789,7 +819,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2022,
       "maturityRating": "18+",
-      "description": "World of Goo Remastered is a unique game in the Adventure genre."
+      "description": "World of Goo Remastered is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/world_of_goo_remastered_bg.jpg"
     },
     {
       "id": 32,
@@ -814,7 +845,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2022,
       "maturityRating": "3+",
-      "description": "Stranger Things: 1984 is a unique game in the Adventure genre."
+      "description": "Stranger Things: 1984 is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/stranger_things:_1984_bg.jpg"
     },
     {
       "id": 33,
@@ -839,7 +871,8 @@
       "developer": "DreamForge",
       "releaseYear": 2025,
       "maturityRating": "Mature",
-      "description": "RollerCoaster Tycoon Touch is a unique game in the Simulation genre."
+      "description": "RollerCoaster Tycoon Touch is a unique game in the Simulation genre.",
+      "background": "/assets/backgrounds/rollercoaster_tycoon_touch_bg.jpg"
     },
     {
       "id": 34,
@@ -864,7 +897,8 @@
       "developer": "DreamForge",
       "releaseYear": 2025,
       "maturityRating": "18+",
-      "description": "WWE 2K25: Netflix Edition is a unique game in the Sports genre."
+      "description": "WWE 2K25: Netflix Edition is a unique game in the Sports genre.",
+      "background": "/assets/backgrounds/wwe_2k25:_netflix_edition_bg.jpg"
     },
     {
       "id": 35,
@@ -889,7 +923,8 @@
       "developer": "PixelWorks",
       "releaseYear": 2023,
       "maturityRating": "Mature",
-      "description": "Sonic Prime Dash is a unique game in the Platformer genre."
+      "description": "Sonic Prime Dash is a unique game in the Platformer genre.",
+      "background": "/assets/backgrounds/sonic_prime_dash_bg.jpg"
     },
     {
       "id": 36,
@@ -913,7 +948,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2022,
       "maturityRating": "18+",
-      "description": "Before Your Eyes is a unique game in the Adventure genre."
+      "description": "Before Your Eyes is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/before_your_eyes_bg.jpg"
     },
     {
       "id": 37,
@@ -938,7 +974,8 @@
       "developer": "Netflix Games",
       "releaseYear": 2024,
       "maturityRating": "Teen",
-      "description": "Word Trails challenges your mind with clever puzzles and logic-based gameplay."
+      "description": "Word Trails challenges your mind with clever puzzles and logic-based gameplay.",
+      "background": "/assets/backgrounds/word_trails_bg.jpg"
     },
     {
       "id": 38,
@@ -962,7 +999,8 @@
       "developer": "GameLab",
       "releaseYear": 2025,
       "maturityRating": "Teen",
-      "description": "Sonic Mania Plus is a unique game in the Platformer genre."
+      "description": "Sonic Mania Plus is a unique game in the Platformer genre.",
+      "background": "/assets/backgrounds/sonic_mania_plus_bg.jpg"
     },
     {
       "id": 39,
@@ -987,7 +1025,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2025,
       "maturityRating": "3+",
-      "description": "Minesweeper challenges your mind with clever puzzles and logic-based gameplay."
+      "description": "Minesweeper challenges your mind with clever puzzles and logic-based gameplay.",
+      "background": "/assets/backgrounds/minesweeper_bg.jpg"
     },
     {
       "id": 40,
@@ -1013,7 +1052,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2023,
       "maturityRating": "Teen",
-      "description": "LEGO DUPLO World is a unique game in the Kids genre."
+      "description": "LEGO DUPLO World is a unique game in the Kids genre.",
+      "background": "/assets/backgrounds/lego_duplo_world_bg.jpg"
     },
     {
       "id": 41,
@@ -1038,7 +1078,8 @@
       "developer": "DreamForge",
       "releaseYear": 2023,
       "maturityRating": "18+",
-      "description": "Kentucky Route Zero is a unique game in the Adventure genre."
+      "description": "Kentucky Route Zero is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/kentucky_route_zero_bg.jpg"
     },
     {
       "id": 42,
@@ -1063,7 +1104,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2024,
       "maturityRating": "Teen",
-      "description": "Exploding Kittens Game is a unique game in the Arcade genre."
+      "description": "Exploding Kittens Game is a unique game in the Arcade genre.",
+      "background": "/assets/backgrounds/exploding_kittens_game_bg.jpg"
     },
     {
       "id": 43,
@@ -1087,7 +1129,8 @@
       "developer": "DreamForge",
       "releaseYear": 2023,
       "maturityRating": "Teen",
-      "description": "Spiritfarer is a unique game in the Adventure genre."
+      "description": "Spiritfarer is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/spiritfarer_bg.jpg"
     },
     {
       "id": 44,
@@ -1113,7 +1156,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2024,
       "maturityRating": "Mature",
-      "description": "Sports Sports is a unique game in the Sports genre."
+      "description": "Sports Sports is a unique game in the Sports genre.",
+      "background": "/assets/backgrounds/sports_sports_bg.jpg"
     },
     {
       "id": 45,
@@ -1139,7 +1183,8 @@
       "developer": "DreamForge",
       "releaseYear": 2022,
       "maturityRating": "Teen",
-      "description": "Pinball Masters is a unique game in the Arcade genre."
+      "description": "Pinball Masters is a unique game in the Arcade genre.",
+      "background": "/assets/backgrounds/pinball_masters_bg.jpg"
     },
     {
       "id": 46,
@@ -1164,7 +1209,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2025,
       "maturityRating": "Mature",
-      "description": "Nailed It! Baking Bash is a unique game in the Arcade genre."
+      "description": "Nailed It! Baking Bash is a unique game in the Arcade genre.",
+      "background": "/assets/backgrounds/nailed_it!_baking_bash_bg.jpg"
     },
     {
       "id": 47,
@@ -1190,7 +1236,8 @@
       "developer": "Netflix Games",
       "releaseYear": 2022,
       "maturityRating": "18+",
-      "description": "Townsmen - A Kingdom Rebuilt is a unique game in the Strategy genre."
+      "description": "Townsmen - A Kingdom Rebuilt is a unique game in the Strategy genre.",
+      "background": "/assets/backgrounds/townsmen_-_a_kingdom_rebuilt_bg.jpg"
     },
     {
       "id": 48,
@@ -1214,7 +1261,8 @@
       "developer": "DreamForge",
       "releaseYear": 2022,
       "maturityRating": "3+",
-      "description": "Too Hot To Handle 2 is a unique game in the Arcade genre."
+      "description": "Too Hot To Handle 2 is a unique game in the Arcade genre.",
+      "background": "/assets/backgrounds/too_hot_to_handle_2_bg.jpg"
     },
     {
       "id": 49,
@@ -1238,7 +1286,8 @@
       "developer": "GameLab",
       "releaseYear": 2025,
       "maturityRating": "3+",
-      "description": "Country Friends is a unique game in the Arcade genre."
+      "description": "Country Friends is a unique game in the Arcade genre.",
+      "background": "/assets/backgrounds/country_friends_bg.jpg"
     },
     {
       "id": 50,
@@ -1262,7 +1311,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2022,
       "maturityRating": "3+",
-      "description": "Dead Cells: Netflix Edition is a unique game in the Action genre."
+      "description": "Dead Cells: Netflix Edition is a unique game in the Action genre.",
+      "background": "/assets/backgrounds/dead_cells:_netflix_edition_bg.jpg"
     },
     {
       "id": 51,
@@ -1287,7 +1337,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2022,
       "maturityRating": "Mature",
-      "description": "Stranger Things 3: The Game is a unique game in the Action genre."
+      "description": "Stranger Things 3: The Game is a unique game in the Action genre.",
+      "background": "/assets/backgrounds/stranger_things_3:_the_game_bg.jpg"
     },
     {
       "id": 52,
@@ -1312,7 +1363,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2023,
       "maturityRating": "3+",
-      "description": "Cats & Soup is a unique game in the Action genre."
+      "description": "Cats & Soup is a unique game in the Action genre.",
+      "background": "/assets/backgrounds/cats_&_soup_bg.jpg"
     },
     {
       "id": 53,
@@ -1337,7 +1389,8 @@
       "developer": "PixelWorks",
       "releaseYear": 2023,
       "maturityRating": "Mature",
-      "description": "Wonderputt Forever is a unique game in the Action genre."
+      "description": "Wonderputt Forever is a unique game in the Action genre.",
+      "background": "/assets/backgrounds/wonderputt_forever_bg.jpg"
     },
     {
       "id": 54,
@@ -1362,7 +1415,8 @@
       "developer": "Netflix Games",
       "releaseYear": 2025,
       "maturityRating": "Teen",
-      "description": "Street Fighter IV CE is a unique game in the Fighting genre."
+      "description": "Street Fighter IV CE is a unique game in the Fighting genre.",
+      "background": "/assets/backgrounds/street_fighter_iv_ce_bg.jpg"
     },
     {
       "id": 55,
@@ -1386,7 +1440,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2024,
       "maturityRating": "18+",
-      "description": "The Queen's Gambit Chess is a unique game in the Action genre."
+      "description": "The Queen's Gambit Chess is a unique game in the Action genre.",
+      "background": "/assets/backgrounds/the_queen's_gambit_chess_bg.jpg"
     },
     {
       "id": 56,
@@ -1411,7 +1466,8 @@
       "developer": "GameLab",
       "releaseYear": 2022,
       "maturityRating": "18+",
-      "description": "Bowling Ballers is a unique game in the Sports genre."
+      "description": "Bowling Ballers is a unique game in the Sports genre.",
+      "background": "/assets/backgrounds/bowling_ballers_bg.jpg"
     },
     {
       "id": 57,
@@ -1435,7 +1491,8 @@
       "developer": "DreamForge",
       "releaseYear": 2023,
       "maturityRating": "18+",
-      "description": "Asphalt Xtreme is a unique game in the Racing genre."
+      "description": "Asphalt Xtreme is a unique game in the Racing genre.",
+      "background": "/assets/backgrounds/asphalt_xtreme_bg.jpg"
     },
     {
       "id": 58,
@@ -1460,7 +1517,8 @@
       "developer": "PixelWorks",
       "releaseYear": 2024,
       "maturityRating": "Teen",
-      "description": "Heads Up! is a fun party game full of mini-games and laughter with friends."
+      "description": "Heads Up! is a fun party game full of mini-games and laughter with friends.",
+      "background": "/assets/backgrounds/heads_up!_bg.jpg"
     },
     {
       "id": 59,
@@ -1485,7 +1543,8 @@
       "developer": "Netflix Games",
       "releaseYear": 2023,
       "maturityRating": "Mature",
-      "description": "Into the Breach is a unique game in the Strategy genre."
+      "description": "Into the Breach is a unique game in the Strategy genre.",
+      "background": "/assets/backgrounds/into_the_breach_bg.jpg"
     },
     {
       "id": 60,
@@ -1510,7 +1569,8 @@
       "developer": "DreamForge",
       "releaseYear": 2023,
       "maturityRating": "Teen",
-      "description": "Paper Trail is a unique game in the Action genre."
+      "description": "Paper Trail is a unique game in the Action genre.",
+      "background": "/assets/backgrounds/paper_trail_bg.jpg"
     },
     {
       "id": 61,
@@ -1534,7 +1594,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2023,
       "maturityRating": "3+",
-      "description": "Teeter Up: Remastered is a unique game in the Action genre."
+      "description": "Teeter Up: Remastered is a unique game in the Action genre.",
+      "background": "/assets/backgrounds/teeter_up:_remastered_bg.jpg"
     },
     {
       "id": 62,
@@ -1560,7 +1621,8 @@
       "developer": "PixelWorks",
       "releaseYear": 2024,
       "maturityRating": "Mature",
-      "description": "IMMORTALITY is a unique game in the Action genre."
+      "description": "IMMORTALITY is a unique game in the Action genre.",
+      "background": "/assets/backgrounds/immortality_bg.jpg"
     },
     {
       "id": 63,
@@ -1586,7 +1648,8 @@
       "developer": "DreamForge",
       "releaseYear": 2024,
       "maturityRating": "Mature",
-      "description": "Mahjong Solitaire challenges your mind with clever puzzles and logic-based gameplay."
+      "description": "Mahjong Solitaire challenges your mind with clever puzzles and logic-based gameplay.",
+      "background": "/assets/backgrounds/mahjong_solitaire_bg.jpg"
     },
     {
       "id": 64,
@@ -1611,7 +1674,8 @@
       "developer": "DreamForge",
       "releaseYear": 2022,
       "maturityRating": "Mature",
-      "description": "TMNT: Shredder's Revenge is a unique game in the Fighting genre."
+      "description": "TMNT: Shredder's Revenge is a unique game in the Fighting genre.",
+      "background": "/assets/backgrounds/tmnt:_shredder's_revenge_bg.jpg"
     },
     {
       "id": 65,
@@ -1636,7 +1700,8 @@
       "developer": "GameLab",
       "releaseYear": 2025,
       "maturityRating": "Mature",
-      "description": "Highwater is a unique game in the Action genre."
+      "description": "Highwater is a unique game in the Action genre.",
+      "background": "/assets/backgrounds/highwater_bg.jpg"
     },
     {
       "id": 66,
@@ -1661,7 +1726,8 @@
       "developer": "Indie Studio",
       "releaseYear": 2023,
       "maturityRating": "Mature",
-      "description": "Moonlighter is a unique game in the Adventure genre."
+      "description": "Moonlighter is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/moonlighter_bg.jpg"
     },
     {
       "id": 67,
@@ -1687,7 +1753,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2024,
       "maturityRating": "Mature",
-      "description": "Love Is Blind is a unique game in the Action genre."
+      "description": "Love Is Blind is a unique game in the Action genre.",
+      "background": "/assets/backgrounds/love_is_blind_bg.jpg"
     },
     {
       "id": 68,
@@ -1711,7 +1778,8 @@
       "developer": "DreamForge",
       "releaseYear": 2022,
       "maturityRating": "18+",
-      "description": "Shooting Hoops is a unique game in the Sports genre."
+      "description": "Shooting Hoops is a unique game in the Sports genre.",
+      "background": "/assets/backgrounds/shooting_hoops_bg.jpg"
     },
     {
       "id": 69,
@@ -1735,7 +1803,8 @@
       "developer": "GameLab",
       "releaseYear": 2022,
       "maturityRating": "Mature",
-      "description": "Barbie Color Creations is a unique game in the Kids genre."
+      "description": "Barbie Color Creations is a unique game in the Kids genre.",
+      "background": "/assets/backgrounds/barbie_color_creations_bg.jpg"
     },
     {
       "id": 70,
@@ -1759,7 +1828,8 @@
       "developer": "Netflix Games",
       "releaseYear": 2024,
       "maturityRating": "Teen",
-      "description": "Hearts is a unique game in the Adventure genre."
+      "description": "Hearts is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/hearts_bg.jpg"
     },
     {
       "id": 71,
@@ -1783,7 +1853,8 @@
       "developer": "DreamForge",
       "releaseYear": 2022,
       "maturityRating": "3+",
-      "description": "Lucky Luna is a unique game in the Platformer genre."
+      "description": "Lucky Luna is a unique game in the Platformer genre.",
+      "background": "/assets/backgrounds/lucky_luna_bg.jpg"
     },
     {
       "id": 72,
@@ -1808,7 +1879,8 @@
       "developer": "GameLab",
       "releaseYear": 2022,
       "maturityRating": "18+",
-      "description": "Squid Game: Unleashed is a unique game in the Action genre."
+      "description": "Squid Game: Unleashed is a unique game in the Action genre.",
+      "background": "/assets/backgrounds/squid_game:_unleashed_bg.jpg"
     },
     {
       "id": 73,
@@ -1833,7 +1905,8 @@
       "developer": "PixelWorks",
       "releaseYear": 2025,
       "maturityRating": "18+",
-      "description": "Laya's Horizon is a unique game in the Adventure genre."
+      "description": "Laya's Horizon is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/laya's_horizon_bg.jpg"
     },
     {
       "id": 74,
@@ -1858,7 +1931,8 @@
       "developer": "DreamForge",
       "releaseYear": 2025,
       "maturityRating": "Teen",
-      "description": "TRANSFORMERS Forged to Fight is a unique game in the Adventure genre."
+      "description": "TRANSFORMERS Forged to Fight is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/transformers_forged_to_fight_bg.jpg"
     },
     {
       "id": 75,
@@ -1883,7 +1957,8 @@
       "developer": "DreamForge",
       "releaseYear": 2023,
       "maturityRating": "Teen",
-      "description": "HELLO KITTY AND FRIENDS: HAPPINESS PARADE is a unique game in the Kids genre."
+      "description": "HELLO KITTY AND FRIENDS: HAPPINESS PARADE is a unique game in the Kids genre.",
+      "background": "/assets/backgrounds/hello_kitty_and_friends:_happiness_parade_bg.jpg"
     },
     {
       "id": 76,
@@ -1909,7 +1984,8 @@
       "developer": "GameLab",
       "releaseYear": 2025,
       "maturityRating": "Mature",
-      "description": "Into the Dead 2: Unleashed is a unique game in the Horror genre."
+      "description": "Into the Dead 2: Unleashed is a unique game in the Horror genre.",
+      "background": "/assets/backgrounds/into_the_dead_2:_unleashed_bg.jpg"
     },
     {
       "id": 77,
@@ -1934,7 +2010,8 @@
       "developer": "PixelWorks",
       "releaseYear": 2024,
       "maturityRating": "Mature",
-      "description": "Ghost Detective is a unique game in the Horror genre."
+      "description": "Ghost Detective is a unique game in the Horror genre.",
+      "background": "/assets/backgrounds/ghost_detective_bg.jpg"
     },
     {
       "id": 78,
@@ -1960,7 +2037,8 @@
       "developer": "DreamForge",
       "releaseYear": 2023,
       "maturityRating": "18+",
-      "description": "OXENFREE II: Lost Signals is a unique game in the Adventure genre."
+      "description": "OXENFREE II: Lost Signals is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/oxenfree_ii:_lost_signals_bg.jpg"
     },
     {
       "id": 79,
@@ -1986,7 +2064,8 @@
       "developer": "PixelWorks",
       "releaseYear": 2023,
       "maturityRating": "Teen",
-      "description": "Knittens: Cats & Dogs is a unique game in the Adventure genre."
+      "description": "Knittens: Cats & Dogs is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/knittens:_cats_&_dogs_bg.jpg"
     },
     {
       "id": 80,
@@ -2011,7 +2090,8 @@
       "developer": "Netflix Games",
       "releaseYear": 2023,
       "maturityRating": "Mature",
-      "description": "Skies of Chaos is a unique game in the Adventure genre."
+      "description": "Skies of Chaos is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/skies_of_chaos_bg.jpg"
     },
     {
       "id": 81,
@@ -2035,7 +2115,8 @@
       "developer": "Arcade Devs",
       "releaseYear": 2023,
       "maturityRating": "Teen",
-      "description": "Wild Things: Animal Adventures is a unique game in the Adventure genre."
+      "description": "Wild Things: Animal Adventures is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/wild_things:_animal_adventures_bg.jpg"
     },
     {
       "id": 82,
@@ -2061,7 +2142,8 @@
       "developer": "Netflix Games",
       "releaseYear": 2022,
       "maturityRating": "3+",
-      "description": "Money Heist: Ultimate Choice is a unique game in the Strategy genre."
+      "description": "Money Heist: Ultimate Choice is a unique game in the Strategy genre.",
+      "background": "/assets/backgrounds/money_heist:_ultimate_choice_bg.jpg"
     },
     {
       "id": 83,
@@ -2087,7 +2169,8 @@
       "developer": "Netflix Games",
       "releaseYear": 2023,
       "maturityRating": "18+",
-      "description": "Puzzle Gods challenges your mind with clever puzzles and logic-based gameplay."
+      "description": "Puzzle Gods challenges your mind with clever puzzles and logic-based gameplay.",
+      "background": "/assets/backgrounds/puzzle_gods_bg.jpg"
     },
     {
       "id": 84,
@@ -2111,7 +2194,8 @@
       "developer": "PixelWorks",
       "releaseYear": 2022,
       "maturityRating": "Mature",
-      "description": "Card Blast is a unique game in the Adventure genre."
+      "description": "Card Blast is a unique game in the Adventure genre.",
+      "background": "/assets/backgrounds/card_blast_bg.jpg"
     }
   ]
 }

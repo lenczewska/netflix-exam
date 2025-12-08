@@ -8,31 +8,39 @@ import "./Game.css";
 import games_page from "../../assets/img/games_page.webp";
 
 const Games = () => {
-  const [selectedGame, setSelectedGame] = useState(null); // <<< добавили
+  const [selectedGame, setSelectedGame] = useState(null);
+  
+  const [randomGame, setRandomGame] = useState(null); 
 
   return (
     <div>
       <Navbar />
 
-      <div className="h-[200px] pt-[50px] flex justify-center items-center z-0">
-        Burda oyunlar random cixacaq, gozlemede qalin :)
+      <div
+        className="h-[200px] pt-[50px] flex justify-center items-center z-0 bg-cover bg-center rounded-[10px]"
+        style={{
+          backgroundImage: randomGame
+            ? `url(${randomGame.background})`
+            : "none",
+        }}
+      >
+        {!randomGame && <p>:)</p>}
       </div>
 
-      <div className="category-cards  ">
+      <div className="category-cards relative  ">
         <GameCards
           title="Popular Mobile Games for You"
           genres="Action"
-          onGameClick={setSelectedGame} // <<< передаём
+          onGameClick={setSelectedGame}
         />
 
         <GameCards
           title="Pick Up and Play Mobile Games"
           genres="Puzzle"
-          onGameClick={setSelectedGame} // <<< передаём
+          onGameClick={setSelectedGame}
         />
       </div>
 
-      {/* Единственная модалка */}
       {selectedGame && (
         <Modal game={selectedGame} onClose={() => setSelectedGame(null)} />
       )}
