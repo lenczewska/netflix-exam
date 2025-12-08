@@ -1,23 +1,22 @@
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { logout } from "../../fireBase";
 import "./Navbar.css";
-import logo_header from "../../assets/img/logo_header.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faFaceLaughWink } from "@fortawesome/free-solid-svg-icons";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
+import logo_header from "../../assets/img/logo_header.png";
 import profile_icon from "../../assets/img/profile_icon.jpg";
-import { useEffect, useRef, useState } from "react";
-import { logout } from "../../fireBase";
-import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const navRef = useRef();
   const navigate = useNavigate();
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
-const [query, setQuery] = useState("");
-
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,7 +40,8 @@ const [query, setQuery] = useState("");
       className="  w-screen pt-[20px] pb-[10px] fixed flex items-center justify-between pl-[40px] text-[13px] pr-[40px]  text-[#e5e5e5] z-30  "
     >
       <div className="navbar-left   flex gap-[5px]  items-center justify-center ">
-        <img onClick={()=> navigate("/browse")}
+        <img
+          onClick={() => navigate("/browse")}
           src={logo_header}
           alt="logo-header"
           className="w-[100px] mr-[30px] cursor-pointer "
@@ -109,13 +109,14 @@ const [query, setQuery] = useState("");
       </div>
 
       <div className="navbar-right flex gap-[20px] items-center ">
-        <button className="bg-black text-[#aaa] cursor-pointer ">
+        <button
+          className="bg-black search-btn text-[#aaa] cursor-pointer "
+          onClick={() => setSearchOpen(!searchOpen)}
+        >
           <svg
             viewBox="0 0 24 24"
             width="24"
             height="24"
-            data-icon="MagnifyingGlassMedium"
-            data-icon-id=":rc:"
             aria-hidden="true"
             className="search-icon"
             xmlns="http://www.w3.org/2000/svg"
@@ -130,6 +131,27 @@ const [query, setQuery] = useState("");
             ></path>
           </svg>
         </button>
+
+        {searchOpen && (
+          <div className="absolute top-[25px] right-[200px] bg-white p-2 rounded shadow-lg flex items-center">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Titles,people,genres"
+              className="border border-gray-300 relative rounded w-[230px] pl-[15px] h-[30px] bg-[#000] text-[#fff]"
+            />
+            {query.length > 0 && (
+              <button
+                onClick={() => setQuery("")}
+                className="ml-[2px] text-black absolute cursor-pointer right-[10px] font-bold "
+              >
+                ✕
+              </button>
+            )}
+          </div>
+        )}
+
         <svg
           className="cursor-pointer"
           viewBox="0 0 24 24"

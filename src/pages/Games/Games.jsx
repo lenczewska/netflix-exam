@@ -46,11 +46,11 @@ const Games = () => {
       )}
 
       <div className="h-[320px] mt-[30px] bg-[#000]  flex justify-between">
-        <div className="txt-box flex flex-col justify-center">
+        <div className="txt-box ml-[30px] flex flex-col justify-center">
           <h2 className="font-[600] text-[32px] font-unset">
             Find more games in the mobile app
           </h2>
-          <h6 className="font-[400] text-[16px] font-unset">
+          <h6 className="font-[400] text-[16px]  font-unset">
             From familiar favorites to Netflix exclusives, get unlimited mobile
             games in the Netflix app — all included with your membership.
           </h6>
