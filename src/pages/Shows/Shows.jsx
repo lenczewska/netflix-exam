@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+
 const Shows = ({ favorites, setFavorites }) => {
   const [open, setOpen] = useState(false);
   const [randomMovie, setRandomMovie] = useState(null);
@@ -43,7 +45,7 @@ const Shows = ({ favorites, setFavorites }) => {
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=5a2adbd4ccd50daf3380b9ff63d55291&language=en-US&page=1`
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
       );
       const data = await res.json();
       const movies = data.results;
@@ -51,18 +53,18 @@ const Shows = ({ favorites, setFavorites }) => {
       const movie = movies[randomIndex];
 
       const detailsRes = await fetch(
-        `https://api.themoviedb.org/3/movie/${movie.id}?api_key=5a2adbd4ccd50daf3380b9ff63d55291&language=en-US`
+        `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&language=en-US`
       );
       const details = await detailsRes.json();
 
       const releaseRes = await fetch(
-        `https://api.themoviedb.org/3/movie/${movie.id}/release_dates?api_key=5a2adbd4ccd50daf3380b9ff63d55291`
+        `https://api.themoviedb.org/3/movie/${movie.id}/release_dates?api_key=${API_KEY}`
       );
       const releaseData = await releaseRes.json();
       const usRating = releaseData.results.find((r) => r.iso_3166_1 === "US");
       const certification = usRating?.release_dates[0]?.certification || "";
       const creditsRes = await fetch(
-        `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=5a2adbd4ccd50daf3380b9ff63d55291&language=en-US`
+        `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${API_KEY}&language=en-US`
       );
       const credits = await creditsRes.json();
 
@@ -217,6 +219,5 @@ const Shows = ({ favorites, setFavorites }) => {
     </div>
   );
 };
-
 
 export default Shows;

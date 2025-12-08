@@ -1,4 +1,4 @@
-const API_KEY = "5a2adbd4ccd50daf3380b9ff63d55291"
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 
 fetch('https://api.themoviedb.org/3/movie/550?api_key=${API_KEY}')

@@ -2,6 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import "./TitleCards.css";
 import { Link } from "react-router-dom";
 
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
+
+
 const TitleCards = ({ title, category }) => {
   const [apiData, setApiData] = useState([]);
   const cardsRef = useRef();
@@ -10,7 +14,7 @@ const TitleCards = ({ title, category }) => {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: "Bearer 5a2adbd4ccd50daf3380b9ff63d55291", // замени на свой
+      Authorization: `Bearer ${BEARER_TOKEN}`,
     },
   };
 
@@ -18,11 +22,11 @@ const TitleCards = ({ title, category }) => {
     let url;
 
     if (category?.startsWith("trending")) {
-      url = `https://api.themoviedb.org/3/${category}?api_key=5a2adbd4ccd50daf3380b9ff63d55291`;
+      url = `https://api.themoviedb.org/3/${category}?api_key=${API_KEY}`;
     } else {
       url = `https://api.themoviedb.org/3/movie/${
         category || "now_playing"
-      }?api_key=5a2adbd4ccd50daf3380b9ff63d55291&language=en-US&page=1`;
+      }?api_key=${API_KEY}&language=en-US&page=1`;
     }
 
     fetch(url, options)
