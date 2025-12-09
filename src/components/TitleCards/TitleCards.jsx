@@ -72,12 +72,10 @@ const TitleCards = ({ title, category }) => {
   };
 
   return (
-    <div className="title-cards pr-[50px] mt-[50px]">
+    <div className="title-cards  pr-[50px] mt-[50px]">
       <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
 
-      {/* внешний контейнер нужен для горизонтального скролла */}
       <div className="wrapper ">
-        {/* этот уже должен быть overflow-visible */}
         <div className="card-list flex gap-[8px]  ">
           {apiData.map((card) => (
             <div
@@ -103,7 +101,6 @@ const TitleCards = ({ title, category }) => {
                 </p>
               </Link>
 
-              {/* Hover Card рендерится вне Link */}
               {hoveredCardId === card.id && hoverCardDetail.id === card.id && (
                 <HoverCard data={hoverCardDetail} />
               )}

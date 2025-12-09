@@ -1,52 +1,56 @@
 import React from "react";
 import "./Home.css";
 import Navbar from "../../components/Navbar/Navbar";
-import hero_banner2 from "../../assets/img/hero_banner2.webp";
+import Footer from "../../components/Footer/Footer";
+import TitleCards from "../../components/TitleCards/TitleCards";
+
+import hero_banner2 from "../../assets/img/hero_banner2.jpg";
 import hero_title from "../../assets/img/hero_title.png";
 import play_icon from "../../assets/img/play_icon.png";
 import info_icon from "../../assets/img/info_icon.png";
-import TitleCards from "../../components/TitleCards/TitleCards";
-import Footer from "../../components/Footer/Footer";
 import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="home">
+    <div className="home w-full min-h-screen bg-black text-white overflow-x-hidden">
       <Navbar />
 
-      <div className="hero-banner relative">
+      <div className="relative w-full h-auto">
         <img
           src={hero_banner2}
           alt=""
-          className="hero-banner-img w-full mb-[50px] 
-          sm:mb-[20px] sm:h-[260px] object-cover
-          md:h-[380px]"
-        />
-      </div>
-
-      <div
-        className="hero-title w-full absolute pl-[6%] top-3/12 
-        sm:top-[22%] sm:pl-[4%]
-        md:top-[26%]"
-      >
-        <img
-          src={hero_title}
-          className="w-[90%] max-w-[420px] mt-[30px]
-          sm:max-w-[250px] sm:mt-[10px]
-          md:max-w-[330px]"
-          alt=""
+          className="hero-banner-img w-full object-cover
+          sm:h-[260px]
+          md:h-[380px]
+          h-[500px]"
         />
 
-        <p
-          className="max-w-[700px] text-[17px] mt-[30px] mb-[20px]
-          sm:text-[13px] sm:max-w-[90%] sm:mt-[10px]
-          md:text-[15px]"
-        >
-          Discovering his ties to an ancient order and embarks on a treacherous
-          quest that soon takes him back to Ottoman Istanbul.
-        </p>
-
+        {/* Hero Content */}
         <div
+          className="hero-content absolute top-[20%] left-[6%] 
+          sm:top-[18%] sm:left-[4%]
+          md:top-[22%]
+          z-20 max-w-[600px]"
+        >
+          <img
+            src={hero_title}
+            className="w-[90%] max-w-[420px] 
+            sm:max-w-[260px]
+            md:max-w-[330px]"
+            alt=""
+          />
+
+          <p
+            className="mt-[30px] mb-5 text-[17px] max-w-[700px]
+            sm:text-[13px] sm:max-w-[90%] sm:mt-2
+            md:text-[15px]"
+          >
+            Discovering his ties to an ancient order, he embarks on a treacherous
+            quest that takes him back to Ottoman Istanbul.
+          </p>
+
+          {/* Buttons */}
+            <div
           className="btns flex gap-[10px] mt-[30px]
           sm:mt-[15px] sm:gap-[6px]"
         >
@@ -68,7 +72,7 @@ const Home = () => {
             </button>
           </Link>
 
-          <button
+          <button 
             className="btn-inf pt-[8px] pb-[8px] px-[20px] inline-flex 
             items-center gap-[10px] text-[15px] font-semibold 
             bg-[#79797986] text-[#0000] cursor-pointer rounded-[5px]
@@ -84,20 +88,26 @@ const Home = () => {
             More Info
           </button>
         </div>
-
-        <div className="sm:mt-[10px] md:mt-[15px]">
-          <TitleCards />
         </div>
+
+        {/* DARK GRADIENT OVERLAY */}
+        <div className="absolute inset-0  from-black via-transparent to-black opacity-60"></div>
       </div>
 
-      <div className="category-cards mt-10 sm:mt-6 md:mt-8">
-        <TitleCards title="Top Rated" category="top_rated" />
-        <TitleCards title="Trending This Week" category="trending/movie/week" />
-        <TitleCards title="Upcoming" category="upcoming" />
-        <TitleCards title="Popular" category="popular" />
+      {/* FIRST ROW OF TITLE CARDS */}
+      <div className="mt-[-80px] relative z-30 px-[6%]
+      sm:mt-[-40px] sm:px-[4%]">
+        <TitleCards title="Popular on Netflix" category="popular" />
+      </div>
 
-        <TitleCards title="Now Playing" category="now_playing" />
-        <TitleCards title="Trending Today" category="trending/movie/day" />
+      {/* OTHER CATEGORIES */}
+      <div className="mt-10 px-[6%]
+      sm:mt-6 sm:px-[4%]  ">
+        <TitleCards  title="Top Rated" category="top_rated" />
+        <TitleCards  title="Trending This Week" category="trending/movie/week" />
+        <TitleCards  title="Upcoming" category="upcoming" />
+        <TitleCards  title="Now Playing" category="now_playing" />
+        <TitleCards  title="Trending Today" category="trending/movie/day" />
       </div>
 
       <Footer />

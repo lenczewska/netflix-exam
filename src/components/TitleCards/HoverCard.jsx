@@ -34,7 +34,7 @@ const HoverCard = ({ data }) => {
       bg-[#000] 
       text-[#fff] 
       w-[330px] 
-      h-[420px] 
+      h-[380px] 
       p-[9px]
       top-[-130px] 
       left-1/2 
@@ -56,9 +56,6 @@ const HoverCard = ({ data }) => {
       <p className="text-sm  mb-2">
         {releaseYear} |{" "}
         {data.vote_average ? data.vote_average.toFixed(1) : "N/A"}
-      </p>
-      <p className="text-xs text-gray-400 mb-2 line-clamp-2">
-        Genres: {genres}
       </p>
 
       <Link
@@ -101,15 +98,13 @@ const HoverCard = ({ data }) => {
       </Link>
 
       <div className="inf flex gap-[10px] pt-[20px] items-center">
-        
         <span className=" text-[#fff] hd text-[15px] px-[5px]">HD</span>
 
         <span className=" text-[#aaa] text-[16px]">
           {data?.original_language}
         </span>
         <div className="text-[15px] text-[#aaa] ">
-          {" "}
-          <span className="text-[#aaa] text-[13px] flex gap-[5px] items-center pl-[5px]">
+          <span className="text-[#aaa] flex gap-[5px] items-center pl-[5px]">
             {data?.genres?.slice(0, 3).map((g, index, array) => (
               <React.Fragment key={g.id || index}>
                 {g.name}

@@ -1,13 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 
-import qr_code from "../../assets/img/qr_code.jpg";
-import app_store from "../../assets/img/app_store.svg";
-import google_play from "../../assets/img/google_play.svg";
-import game_banner from "../../assets/img/game_banner.svg";
-import logo_header from "../../assets/img/logo_header.png";
 
-function Modal({ game, onClose }) {
+
+function InfoModal({ game, onClose }) {
   if (!game) return null;
 
   return (
@@ -170,4 +166,4 @@ function Modal({ game, onClose }) {
   );
 }
 
-export default Modal;
+export default InfoModal;
