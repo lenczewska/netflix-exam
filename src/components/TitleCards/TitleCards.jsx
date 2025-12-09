@@ -1,15 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./TitleCards.css";
 import { Link } from "react-router-dom";
-
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
-
-
 const TitleCards = ({ title, category }) => {
   const [apiData, setApiData] = useState([]);
   const cardsRef = useRef();
-
   const options = {
     method: "GET",
     headers: {
@@ -17,10 +13,8 @@ const TitleCards = ({ title, category }) => {
       Authorization: `Bearer ${BEARER_TOKEN}`,
     },
   };
-
   useEffect(() => {
     let url;
-
     if (category?.startsWith("trending")) {
       url = `https://api.themoviedb.org/3/${category}?api_key=${API_KEY}`;
     } else {
@@ -28,7 +22,6 @@ const TitleCards = ({ title, category }) => {
         category || "now_playing"
       }?api_key=${API_KEY}&language=en-US&page=1`;
     }
-
     fetch(url, options)
       .then((res) => res.json())
       .then((res) => setApiData(res.results || []))
@@ -38,32 +31,34 @@ const TitleCards = ({ title, category }) => {
       })
       .catch((err) => console.error(err));
   }, [category]);
-
   return (
     <div className="title-cards pr-[50px] mt-[50px] ">
-      <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
-      <div className="card-list overflow-x-scroll flex  gap-[8px]">
+      {" "}
+      <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>{" "}
+      <div className="card-list overflow-x-scroll flex gap-[8px]">
+        {" "}
         {apiData.map((card) => (
           <Link
             to={`/player/${card.id}`}
             className="card relative"
             key={card.id}
           >
+            {" "}
             {card.backdrop_path && (
               <img
                 src={`https://image.tmdb.org/t/p/w500${card.backdrop_path}`}
                 className="card-img max-w-[250px] rounded-[5px]"
                 alt={card.original_title || card.name}
               />
-            )}
+            )}{" "}
             <p className="absolute right-[10px] bottom-[10px]">
-              {card.original_title || card.name}
-            </p>
+              {" "}
+              {card.original_title || card.name}{" "}
+            </p>{" "}
           </Link>
-        ))}
-      </div>
+        ))}{" "}
+      </div>{" "}
     </div>
   );
 };
-
 export default TitleCards;

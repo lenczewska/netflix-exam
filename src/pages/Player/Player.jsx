@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Player.css";
 import back_arrow_icon from "../../assets/img/back_arrow_icon.png";
 import { useNavigate, useParams } from "react-router-dom";
+const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
 
 const Player = () => {
   const { id } = useParams();
@@ -19,8 +20,7 @@ const Player = () => {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YTJhZGJkNGNjZDUwZGFmMzM4MGI5ZmY2M2Q1NTI5MSIsIm5iZiI6MTc2MzA1Mjk1Mi44NDksInN1YiI6IjY5MTYwZDk4ZGZhMGQ3ODA3Njg3NjRhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.EdeYcHJbxDyv54BQNPh9zJmnUu79Fmte9zqBTOTXU1A",
+      Authorization: `Bearer ${BEARER_TOKEN}`,
     },
   };
   useEffect(() => {
