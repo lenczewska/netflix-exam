@@ -1,7 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 
-
+import qr_code from "../../assets/img/qr_code.jpg";
+import app_store from "../../assets/img/app_store.svg";
+import google_play from "../../assets/img/google_play.svg";
+import game_banner from "../../assets/img/game_banner.svg";
+import logo_header from "../../assets/img/logo_header.png";
 
 function InfoModal({ game, onClose }) {
   if (!game) return null;
@@ -12,6 +16,7 @@ function InfoModal({ game, onClose }) {
         className="fixed inset-0 bg-[#17141462] bg-opacity-100 z-100"
         onClick={onClose}
       ></div>
+      <div>Debug: show = {String(show)}</div>
 
       <div className="bg-[#1b1919ad] w-full h-screen absolute top-[0px]   ">
         <div className=" w-max inset-0  absolute top-[20px] right-[180px] flex justify-center items-center z-150">
@@ -87,14 +92,20 @@ function InfoModal({ game, onClose }) {
                     </p>
 
                     <div className="a-img flex gap-[10px]">
-                      <a href="https://apps.apple.com/us/app/netflix/id363590051" target="_blank" >
+                      <a
+                        href="https://apps.apple.com/us/app/netflix/id363590051"
+                        target="_blank"
+                      >
                         <img
                           src={app_store}
                           alt="app-store"
                           className="w-[117px]"
                         />
                       </a>
-                      <a href="https://play.google.com/store/apps/details?id=com.netflix.mediaclient" target="_blank" >
+                      <a
+                        href="https://play.google.com/store/apps/details?id=com.netflix.mediaclient"
+                        target="_blank"
+                      >
                         <img
                           src={google_play}
                           alt="google-play"

@@ -6,20 +6,16 @@ import TitleCards from "../../components/TitleCards/TitleCards";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
+
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const Movies = ({ favorites, setFavorites }) => {
   const [open, setOpen] = useState(false);
   const [randomMovie, setRandomMovie] = useState(null);
+  const [genres, setGenres] = useState([]); // ✅ жанры из API
   const headerRef = useRef(null);
 
-  const genres = [
-    { name: "Action", link: "/genres/comedy" },
-    { name: "Anime", link: "/genres/drama" },
-    { name: "British", link: "/genres/action" },
-    { name: "Comedies", link: "/genres/sci-fi" },
-  ];
-
+  // Ограничение описания до 3 предложений
   const limitOverview = (text, maxSentences = 3) => {
     if (!text) return "";
     const sentences = text.split(/(?<=[.!?])\s+/);
@@ -29,10 +25,12 @@ const Movies = ({ favorites, setFavorites }) => {
     return sentences.slice(0, maxSentences).join(" ") + "...";
   };
 
+  // Сортировка жанров по алфавиту
   const sortedGenres = [...genres].sort((a, b) =>
     a.name.localeCompare(b.name, "en")
   );
 
+  // Добавление фильма в избранное
   const handleAddFavorite = () => {
     if (!randomMovie) return;
     setFavorites((prev) => {
@@ -42,6 +40,25 @@ const Movies = ({ favorites, setFavorites }) => {
     });
   };
 
+  // ✅ Запрос жанров из TMDB
+  useEffect(() => {
+    const fetchGenres = async () => {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+      );
+      const data = await res.json();
+      const mapped = data.genres.map((g) => ({
+        id: g.id,
+        name: g.name,
+        link: `/genres/${g.id}`, // можно использовать id для роутинга
+      }));
+      setGenres(mapped);
+    };
+
+    fetchGenres();
+  }, []);
+
+  // ✅ Запрос случайного фильма
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(
@@ -63,6 +80,7 @@ const Movies = ({ favorites, setFavorites }) => {
       const releaseData = await releaseRes.json();
       const usRating = releaseData.results.find((r) => r.iso_3166_1 === "US");
       const certification = usRating?.release_dates[0]?.certification || "";
+
       const creditsRes = await fetch(
         `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${API_KEY}&language=en-US`
       );
@@ -74,6 +92,7 @@ const Movies = ({ favorites, setFavorites }) => {
     fetchMovies();
   }, []);
 
+  // ✅ затемнение навбара при скролле
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {
@@ -98,20 +117,21 @@ const Movies = ({ favorites, setFavorites }) => {
         >
           <p className="pl-[45px] text-[35px] font-black pt-[20px]">Movies</p>
 
-          <div className="relative inline-block mt-4">
+          {/* Выпадающее меню жанров */}
+          <div className="relative inline-block mt-4  ">
             <button
               onClick={() => setOpen(!open)}
-              className="bg-[#000] border px-[10px] text-white rounded"
+              className="bg-[#000] border px-[10px] cursor-pointer text-white rounded"
             >
               Genres{" "}
               <FontAwesomeIcon icon={faCaretDown} className="text-white" />
             </button>
 
             {open && (
-              <div className="absolute bg-[#000] text-[#fff] mt-2 w-48 shadow-lg rounded z-10">
-                <ul className="py-2">
-                  {sortedGenres.map((genre, index) => (
-                    <li key={index}>
+              <div className="absolute bg-[#000] text-[#fff] mt-2 w-[150px] pl-[10px]  z-10">
+                <ul className="py-[4px]">
+                  {sortedGenres.map((genre) => (
+                    <li key={genre.id}>
                       <a
                         href={genre.link}
                         className="block px-4 py-2 hover:bg-gray-100"
@@ -148,31 +168,30 @@ const Movies = ({ favorites, setFavorites }) => {
                 </div>
 
                 <div className="inf flex gap-[10px] pt-[20px] items-center">
-                  <div className="  text-[#aaa]  text-[15px]">
+                  <div className="text-[#aaa] text-[15px]">
                     {randomMovie.release_date}
                   </div>
-                  <span className=" text-[#fff] hd text-[15px] px-[5px]">
+                  <span className="text-[#fff] hd text-[15px] px-[5px]">
                     HD
                   </span>
-                  <span className=" text-[#aaa] text-[15px]">
+                  <span className="text-[#aaa] text-[15px]">
                     {randomMovie.runtime} min
                   </span>
-                  <span className=" text-[#aaa] text-[16px]">
+                  <span className="text-[#aaa] text-[16px]">
                     {randomMovie?.original_language}
                   </span>
                 </div>
 
-                <div className="text-[15px] text-[#aaa] ">
-                  {" "}
+                <div className="text-[15px] text-[#aaa]">
                   Genres:
-                  <span className="text-[#fff] pl-[5px] ">
+                  <span className="text-[#fff] pl-[5px]">
                     {randomMovie?.genres?.map((g) => g.name).join(", ")}
                   </span>
                 </div>
 
-                <div className="text-[15px] text-[#aaa]  w-[400px] flex ">
+                <div className="text-[15px] text-[#aaa] w-[400px] flex">
                   <p>Cast:</p>
-                  <span className="text-[#fff] pl-[5px] ">
+                  <span className="text-[#fff] pl-[5px]">
                     {randomMovie?.cast
                       ?.slice(0, 5)
                       .map((actor) => actor.name)
@@ -206,6 +225,7 @@ const Movies = ({ favorites, setFavorites }) => {
         </div>
       </div>
 
+      {/* Категории */}
       <div className="category-cards mt-10">
         <TitleCards title="Top Rated" category="top_rated" />
         <TitleCards title="Trending This Week" category="trending/movie/week" />
