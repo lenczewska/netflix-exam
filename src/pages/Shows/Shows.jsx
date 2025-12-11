@@ -195,9 +195,7 @@ const Shows = ({ favorites, setFavorites }) => {
       <div className="category-cards mt-10">
         <TitleCards title="Top Rated" category="top_rated" type="tv" />
         <TitleCards title="Trending This Week" category="trending/tv/week" />
-        <TitleCards title="On The Air" category="on_the_air" />
         <TitleCards title="Popular" category="popular" type="tv" />
-        <TitleCards title="Airing Today" category="airing_today" />
         <TitleCards title="Trending Today" category="trending/tv/day" />
       </div>
 

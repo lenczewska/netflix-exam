@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 
-
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const Movies = ({ favorites, setFavorites }) => {

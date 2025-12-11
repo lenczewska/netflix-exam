@@ -8,6 +8,7 @@ import {
   faChevronDown,
   faCircle,
 } from "@fortawesome/free-solid-svg-icons";
+import "./HoverCard.css"
 
 const HoverCard = ({ data }) => {
   if (!data || Object.keys(data).length === 0) return null;

@@ -2,12 +2,12 @@ import React, { useEffect, useState, useCallback } from "react";
 import "./TitleCards.css";
 import { Link } from "react-router-dom";
 import HoverCard from "./HoverCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/css';
 
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
-
-
 
 const TitleCards = ({ title, category }) => {
   const [apiData, setApiData] = useState([]);
@@ -72,7 +72,7 @@ const TitleCards = ({ title, category }) => {
   };
 
   return (
-    <div className="title-cards  pr-[50px] mt-[50px]">
+    <div className="title-cards   pr-[50px] mt-[50px]">
       <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
 
       <div className="wrapper ">
