@@ -78,7 +78,7 @@ const TitleCards = ({ title, category }) => {
       <div className="wrapper ">
         <div className="card-list flex gap-[8px]  ">
           {apiData.map((card) => (
-            <div
+            <div 
               key={card.id}
               className="card-wrapper relative"
               onMouseEnter={() => handleMouseEnter(card.id)}
