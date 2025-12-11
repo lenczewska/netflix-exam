@@ -12,6 +12,7 @@ import Player from "./pages/Player/Player";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./fireBase";
 import Shows from "./pages/Shows/Shows";
+import GenrePage from "./pages/Shows/GenresPage";
 import Movies from "./pages/Movies/Movies";
 import Games from "./pages/Games/Games";
 import Latest from "./pages/Latest/Latest";
@@ -21,7 +22,7 @@ import OriginalAudio from "./pages/OriginalAudio/OriginalAudio";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [favorites, setFavorites] = useState([]); 
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -46,6 +47,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/player/:id" element={<Player />} />
       <Route path="/shows" element={<Shows />} />
+      <Route path="/genres/:id" element={<GenrePage />} />
       <Route
         path="/movies"
         element={<Movies favorites={favorites} setFavorites={setFavorites} />}
