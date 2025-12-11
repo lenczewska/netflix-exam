@@ -7,7 +7,7 @@ import google_play from "../../assets/img/google_play.svg";
 import game_banner from "../../assets/img/game_banner.svg";
 import logo_header from "../../assets/img/logo_header.png";
 
-function Modal({ game, onClose }) {
+function GameModal({ game, onClose }) {
   if (!game) return null;
 
   return (
@@ -170,4 +170,4 @@ function Modal({ game, onClose }) {
   );
 }
 
-export default Modal;
+export default GameModal;

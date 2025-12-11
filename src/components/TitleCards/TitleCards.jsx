@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import "./TitleCards.css";
 import { Link } from "react-router-dom";
-import HoverCard from "./HoverCard";
+import HoverCardT from "./HoverCardT";
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 
@@ -102,7 +102,7 @@ const TitleCards = ({ title, category }) => {
               </Link>
 
               {hoveredCardId === card.id && hoverCardDetail.id === card.id && (
-                <HoverCard data={hoverCardDetail} />
+                <HoverCardT data={hoverCardDetail} />
               )}
             </div>
           ))}

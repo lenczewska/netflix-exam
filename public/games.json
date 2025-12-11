@@ -57,32 +57,7 @@
       "description": "Tetris Time Warp challenges your mind with clever puzzles and logic-based gameplay.",
       "background": "/assets/backgrounds/tetris_time_warp_bg.jpg"
     },
-    {
-      "id": 3,
-      "title": "Pictionary: Game Night",
-      "images": {
-        "cover": "https://occ-0-3916-1556.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABRyHD9Xd8ddvmfryDJ9JW2FWi4bY5wvCTY-GN7F5KqEa6s_cRgJE-D7Ptws7CZCahoL4sVn583uuhXaU0zcfpQNAJMODWc-OuwA.webp?r=338"
-      },
-      "platform": "Cloud Gaming",
-      "genres": [
-        "Party"
-      ],
-      "category": "Party",
-      "modes": "Multiplayer",
-      "player": "2–8",
-      "availableOn": "Cloud Gaming",
-      "playOffline": "Yes",
-      "supportsControllers": "Yes",
-      "languages": [
-        "English",
-        "Spanish"
-      ],
-      "developer": "Indie Studio",
-      "releaseYear": 2022,
-      "maturityRating": "Teen",
-      "description": "Pictionary: Game Night is a fun party game full of mini-games and laughter with friends.",
-      "background": "/assets/backgrounds/pictionary:_game_night_bg.jpg"
-    },
+ 
     {
       "id": 4,
       "title": "Boggle Party",

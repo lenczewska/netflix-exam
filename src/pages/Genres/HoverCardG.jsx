@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./HoverCard.css"
 
+
 const HoverCard = ({ data }) => {
   if (!data || Object.keys(data).length === 0) return null;
 
@@ -64,7 +65,7 @@ const HoverCard = ({ data }) => {
         className="mt-3 flex justify-between  text-center  bg-red-600  text-[#fff] py-2 rounded"
       >
         <div className="flex gap-[6px] ">
-          <button className="rounded-[50%]   w-[40px] h-[40px] bg-[#fff] flex justify-center items-center ">
+          <button className="rounded-[50%]   w-[40px] h-[40px] bg-[#fff] flex justify-center items-center "> 
             <FontAwesomeIcon
               icon={faPlay}
               className="text-[#000] text-[25px] "
@@ -88,12 +89,12 @@ const HoverCard = ({ data }) => {
           </button>
         </div>
         <button
-          onClick={handleAddFavorite}
           className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
-        >
+        > 
           <FontAwesomeIcon
             icon={faChevronDown}
             className="text-[20px] text-[#fff]"
+          
           />
         </button>
       </Link>
