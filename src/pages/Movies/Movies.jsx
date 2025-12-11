@@ -3,19 +3,20 @@ import "./Movies.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import TitleCards from "../../components/TitleCards/TitleCards";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
+
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const Movies = ({ favorites, setFavorites }) => {
   const [open, setOpen] = useState(false);
   const [randomMovie, setRandomMovie] = useState(null);
-  const [genres, setGenres] = useState([]); // ✅ жанры из API
+  const [genres, setGenres] = useState([]); 
   const headerRef = useRef(null);
 
-  // Ограничение описания до 3 предложений
   const limitOverview = (text, maxSentences = 3) => {
     if (!text) return "";
     const sentences = text.split(/(?<=[.!?])\s+/);
@@ -25,12 +26,10 @@ const Movies = ({ favorites, setFavorites }) => {
     return sentences.slice(0, maxSentences).join(" ") + "...";
   };
 
-  // Сортировка жанров по алфавиту
   const sortedGenres = [...genres].sort((a, b) =>
     a.name.localeCompare(b.name, "en")
   );
 
-  // Добавление фильма в избранное
   const handleAddFavorite = () => {
     if (!randomMovie) return;
     setFavorites((prev) => {
@@ -40,7 +39,6 @@ const Movies = ({ favorites, setFavorites }) => {
     });
   };
 
-  // ✅ Запрос жанров из TMDB
   useEffect(() => {
     const fetchGenres = async () => {
       const res = await fetch(
@@ -50,7 +48,7 @@ const Movies = ({ favorites, setFavorites }) => {
       const mapped = data.genres.map((g) => ({
         id: g.id,
         name: g.name,
-        link: `/genres/${g.id}`, // можно использовать id для роутинга
+        link: `/genres/${g.id}`, 
       }));
       setGenres(mapped);
     };
@@ -58,7 +56,6 @@ const Movies = ({ favorites, setFavorites }) => {
     fetchGenres();
   }, []);
 
-  // ✅ Запрос случайного фильма
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(
@@ -92,7 +89,6 @@ const Movies = ({ favorites, setFavorites }) => {
     fetchMovies();
   }, []);
 
-  // ✅ затемнение навбара при скролле
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {
@@ -117,8 +113,7 @@ const Movies = ({ favorites, setFavorites }) => {
         >
           <p className="pl-[45px] text-[35px] font-black pt-[20px]">Movies</p>
 
-          {/* Выпадающее меню жанров */}
-          <div className="relative inline-block mt-4  ">
+          <div className=" genre-block relative inline-block mt-4  ">
             <button
               onClick={() => setOpen(!open)}
               className="bg-[#000] border px-[10px] cursor-pointer text-white rounded"
@@ -132,12 +127,9 @@ const Movies = ({ favorites, setFavorites }) => {
                 <ul className="py-[4px]">
                   {sortedGenres.map((genre) => (
                     <li key={genre.id}>
-                      <a
-                        href={genre.link}
-                        className="block px-4 py-2 hover:bg-gray-100"
-                      >
+                      <Link to={`/movies/genres/${genre.id}`}>
                         {genre.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -225,7 +217,6 @@ const Movies = ({ favorites, setFavorites }) => {
         </div>
       </div>
 
-      {/* Категории */}
       <div className="category-cards mt-10">
         <TitleCards title="Top Rated" category="top_rated" />
         <TitleCards title="Trending This Week" category="trending/movie/week" />

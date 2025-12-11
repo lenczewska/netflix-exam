@@ -11,17 +11,17 @@ const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const Shows = ({ favorites, setFavorites }) => {
   const [open, setOpen] = useState(false);
-  const [randomMovie, setRandomMovie] = useState(null);
-  const [genres, setGenres] = useState([]); 
+  const [randomShow, setRandomShow] = useState(null);
+  const [genres, setGenres] = useState([]);
   const headerRef = useRef(null);
 
+  // ограничение описания
   const limitOverview = (text, maxSentences = 3) => {
     if (!text) return "";
     const sentences = text.split(/(?<=[.!?])\s+/);
-    if (sentences.length <= maxSentences) {
-      return text;
-    }
-    return sentences.slice(0, maxSentences).join(" ") + "...";
+    return sentences.length <= maxSentences
+      ? text
+      : sentences.slice(0, maxSentences).join(" ") + "...";
   };
 
   const sortedGenres = [...genres].sort((a, b) =>
@@ -29,64 +29,58 @@ const Shows = ({ favorites, setFavorites }) => {
   );
 
   const handleAddFavorite = () => {
-    if (!randomMovie) return;
+    if (!randomShow) return;
     setFavorites((prev) => {
-      const exists = prev.some((item) => item.id === randomMovie.id);
+      const exists = prev.some((item) => item.id === randomShow.id);
       if (exists) return prev;
-      return [...prev, randomMovie];
+      return [...prev, randomShow];
     });
   };
 
+  // ✅ жанры для сериалов
   useEffect(() => {
     const fetchGenres = async () => {
       const res = await fetch(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
+        `https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}&language=en-US`
       );
       const data = await res.json();
       const mapped = data.genres.map((g) => ({
         id: g.id,
         name: g.name,
-        link: `/genres/${g.id}`, 
+        link: `/shows/genres/${g.id}`,
       }));
       setGenres(mapped);
     };
-
     fetchGenres();
   }, []);
 
+  // ✅ случайный сериал
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchShows = async () => {
       const res = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
+        `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=1`
       );
       const data = await res.json();
-      const movies = data.results;
-      const randomIndex = Math.floor(Math.random() * movies.length);
-      const movie = movies[randomIndex];
+      const shows = data.results;
+      const randomIndex = Math.floor(Math.random() * shows.length);
+      const show = shows[randomIndex];
 
       const detailsRes = await fetch(
-        `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&language=en-US`
+        `https://api.themoviedb.org/3/tv/${show.id}?api_key=${API_KEY}&language=en-US`
       );
       const details = await detailsRes.json();
 
-      const releaseRes = await fetch(
-        `https://api.themoviedb.org/3/movie/${movie.id}/release_dates?api_key=${API_KEY}`
-      );
-      const releaseData = await releaseRes.json();
-      const usRating = releaseData.results.find((r) => r.iso_3166_1 === "US");
-      const certification = usRating?.release_dates[0]?.certification || "";
-
       const creditsRes = await fetch(
-        `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${API_KEY}&language=en-US`
+        `https://api.themoviedb.org/3/tv/${show.id}/credits?api_key=${API_KEY}&language=en-US`
       );
       const credits = await creditsRes.json();
 
-      setRandomMovie({ ...details, certification, cast: credits.cast });
+      setRandomShow({ ...details, cast: credits.cast });
     };
-
-    fetchMovies();
+    fetchShows();
   }, []);
 
+  // затемнение навбара
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {
@@ -95,7 +89,6 @@ const Shows = ({ favorites, setFavorites }) => {
         headerRef.current?.classList.remove("nav-dark");
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -111,26 +104,20 @@ const Shows = ({ favorites, setFavorites }) => {
         >
           <p className="pl-[45px] text-[35px] font-black pt-[20px]">Shows</p>
 
-          <div className="relative inline-block mt-4  ">
+          <div className="relative inline-block mt-4">
             <button
               onClick={() => setOpen(!open)}
               className="bg-[#000] border px-[10px] cursor-pointer text-white rounded"
             >
-              Genres{" "}
-              <FontAwesomeIcon icon={faCaretDown} className="text-white" />
+              Genres <FontAwesomeIcon icon={faCaretDown} className="text-white" />
             </button>
 
             {open && (
-              <div className="absolute bg-[#000] text-[#fff] mt-2 w-[150px] pl-[10px]  z-10">
+              <div className="absolute bg-[#000] text-[#fff] mt-2 w-[150px] pl-[10px] z-10">
                 <ul className="py-[4px]">
                   {sortedGenres.map((genre) => (
                     <li key={genre.id}>
-                      <Link
-                        to={genre.link}
-                        className="block px-4 py-2 hover:bg-gray-100"
-                      >
-                        {genre.name}
-                      </Link>
+                      <Link to={`/shows/genres/${genre.id}`}>{genre.name}</Link>
                     </li>
                   ))}
                 </ul>
@@ -140,52 +127,45 @@ const Shows = ({ favorites, setFavorites }) => {
         </div>
 
         <div className="flex w-full pl-[0px] h-auto text-[25px] font-bold top-[70px] z-10">
-          {randomMovie ? (
+          {randomShow ? (
             <>
               <img
-                src={`https://image.tmdb.org/t/p/w500${randomMovie.poster_path}`}
-                alt={randomMovie.title}
+                src={`https://image.tmdb.org/t/p/w500${randomShow.poster_path}`}
+                alt={randomShow.name}
                 className="rounded shadow-lg w-[500px] h-[700px] object-cover mt-4"
               />
 
-              <div className="about pt-[70px] pl-[50px] bg-[#000000] text-[#fff] w-[800px] h-[700px]">
+              <div className="about pt-[70px] pl-[50px] bg-[#000] text-[#fff] w-[800px] h-[700px]">
                 <div className="pb-[10px]">
                   Watch{" "}
-                  <span className="text-[25px] font-[500]">
-                    {randomMovie.title}
-                  </span>{" "}
+                  <span className="text-[25px] font-[500]">{randomShow.name}</span>{" "}
                   Now
                 </div>
                 <div className="text-[15px] w-[500px]">
-                  {limitOverview(randomMovie?.overview)}
+                  {limitOverview(randomShow?.overview)}
                 </div>
 
                 <div className="inf flex gap-[10px] pt-[20px] items-center">
                   <div className="text-[#aaa] text-[15px]">
-                    {randomMovie.release_date}
+                    {randomShow.first_air_date}
                   </div>
-                  <span className="text-[#fff] hd text-[15px] px-[5px]">
-                    HD
-                  </span>
-                  <span className="text-[#aaa] text-[15px]">
-                    {randomMovie.runtime} min
-                  </span>
+                  <span className="text-[#fff] hd text-[15px] px-[5px]">HD</span>
                   <span className="text-[#aaa] text-[16px]">
-                    {randomMovie?.original_language}
+                    {randomShow?.original_language}
                   </span>
                 </div>
 
                 <div className="text-[15px] text-[#aaa]">
                   Genres:
                   <span className="text-[#fff] pl-[5px]">
-                    {randomMovie?.genres?.map((g) => g.name).join(", ")}
+                    {randomShow?.genres?.map((g) => g.name).join(", ")}
                   </span>
                 </div>
 
                 <div className="text-[15px] text-[#aaa] w-[400px] flex">
                   <p>Cast:</p>
                   <span className="text-[#fff] pl-[5px]">
-                    {randomMovie?.cast
+                    {randomShow?.cast
                       ?.slice(0, 5)
                       .map((actor) => actor.name)
                       .join(", ")}
@@ -197,17 +177,11 @@ const Shows = ({ favorites, setFavorites }) => {
                     onClick={handleAddFavorite}
                     className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
                   >
-                    <FontAwesomeIcon
-                      icon={faPlus}
-                      className="text-[20px] text-[#fff]"
-                    />
+                    <FontAwesomeIcon icon={faPlus} className="text-[20px] text-[#fff]" />
                   </button>
 
                   <button className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
-                    <FontAwesomeIcon
-                      icon={faThumbsUp}
-                      className="text-[20px] text-[#fff]"
-                    />
+                    <FontAwesomeIcon icon={faThumbsUp} className="text-[20px] text-[#fff]" />
                   </button>
                 </div>
               </div>
@@ -219,12 +193,12 @@ const Shows = ({ favorites, setFavorites }) => {
       </div>
 
       <div className="category-cards mt-10">
-        <TitleCards title="Top Rated" category="top_rated" />
-        <TitleCards title="Trending This Week" category="trending/movie/week" />
-        <TitleCards title="Upcoming" category="upcoming" />
-        <TitleCards title="Popular" category="popular" />
-        <TitleCards title="Now Playing" category="now_playing" />
-        <TitleCards title="Trending Today" category="trending/movie/day" />
+        <TitleCards title="Top Rated" category="top_rated" type="tv" />
+        <TitleCards title="Trending This Week" category="trending/tv/week" />
+        <TitleCards title="On The Air" category="on_the_air" />
+        <TitleCards title="Popular" category="popular" type="tv" />
+        <TitleCards title="Airing Today" category="airing_today" />
+        <TitleCards title="Trending Today" category="trending/tv/day" />
       </div>
 
       <Footer />

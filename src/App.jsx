@@ -12,7 +12,7 @@ import Player from "./pages/Player/Player";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./fireBase";
 import Shows from "./pages/Shows/Shows";
-import GenrePage from "./pages/Shows/GenresPage";
+import GenrePage from "./pages/Genres/GenresPage";
 import Movies from "./pages/Movies/Movies";
 import Games from "./pages/Games/Games";
 import Latest from "./pages/Latest/Latest";
@@ -47,7 +47,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/player/:id" element={<Player />} />
       <Route path="/shows" element={<Shows />} />
-      <Route path="/genres/:id" element={<GenrePage />} />
+      <Route path="/:type/genres/:id" element={<GenrePage />} />
       <Route
         path="/movies"
         element={<Movies favorites={favorites} setFavorites={setFavorites} />}
