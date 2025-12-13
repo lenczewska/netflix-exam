@@ -8,9 +8,9 @@ import {
   faChevronDown,
   faCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import "./HoverCard.css"
+import "./HoverCard.css";
 
-const HoverCard = ({ data }) => {
+const HoverCardT = ({ data }) => {
   if (!data || Object.keys(data).length === 0) return null;
 
   const genres = data.genres?.map((g) => g.name).join(", ") || "Нет информации";
@@ -125,4 +125,4 @@ const HoverCard = ({ data }) => {
   );
 };
 
-export default HoverCard;
+export default HoverCardT;

@@ -7,7 +7,7 @@ import google_play from "../../assets/img/google_play.svg";
 import game_banner from "../../assets/img/game_banner.svg";
 import logo_header from "../../assets/img/logo_header.png";
 
-function Modal({ game, onClose }) {
+function GameModal({ game, onClose }) {
   if (!game) return null;
 
   return (
@@ -91,14 +91,20 @@ function Modal({ game, onClose }) {
                     </p>
 
                     <div className="a-img flex gap-[10px]">
-                      <a href="https://apps.apple.com/us/app/netflix/id363590051" target="_blank" >
+                      <a
+                        href="https://apps.apple.com/us/app/netflix/id363590051"
+                        target="_blank"
+                      >
                         <img
                           src={app_store}
                           alt="app-store"
                           className="w-[117px]"
                         />
                       </a>
-                      <a href="https://play.google.com/store/apps/details?id=com.netflix.mediaclient" target="_blank" >
+                      <a
+                        href="https://play.google.com/store/apps/details?id=com.netflix.mediaclient"
+                        target="_blank"
+                      >
                         <img
                           src={google_play}
                           alt="google-play"
@@ -170,4 +176,4 @@ function Modal({ game, onClose }) {
   );
 }
 
-export default Modal;
+export default GameModal;
