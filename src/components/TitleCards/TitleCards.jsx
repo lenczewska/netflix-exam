@@ -2,8 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import "./TitleCards.css";
 import { Link } from "react-router-dom";
 import HoverCardT from "./HoverCardT";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import MovieInfoModal from "../../pages/Home/MovieInfoModal";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
@@ -13,6 +12,10 @@ const TitleCards = ({ title, category, onAdd }) => {
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const [hoverCardDetail, setHoverCardDetail] = useState({});
   const [isLoadingDetail, setIsLoadingDetail] = useState(false);
+
+  // состояние для модалки
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const BASE_URL = "https://api.themoviedb.org/3";
 
@@ -69,6 +72,11 @@ const TitleCards = ({ title, category, onAdd }) => {
     setHoverCardDetail({});
   };
 
+  const handleOpenModal = (movie) => {
+    setSelectedMovie(movie);
+    setShowModal(true);
+  };
+
   return (
     <div className="title-cards pr-[50px] mt-[50px]">
       <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
@@ -82,7 +90,6 @@ const TitleCards = ({ title, category, onAdd }) => {
               onMouseEnter={() => handleMouseEnter(card.id)}
               onMouseLeave={handleMouseLeave}
             >
-              {/* LINK для картинки */}
               <Link
                 to={`/player/${card.id}`}
                 className="card block min-w-[250px] transition-all duration-300 hover:scale-[1.05] relative z-10"
@@ -99,14 +106,23 @@ const TitleCards = ({ title, category, onAdd }) => {
                 </p>
               </Link>
 
-              {/* HoverCard */}
               {hoveredCardId === card.id && hoverCardDetail.id === card.id && (
-                <HoverCardT data={hoverCardDetail} onAdd={onAdd} />
+                <HoverCardT 
+                  data={hoverCardDetail}
+                  onAdd={onAdd}
+                  onOpenModal={handleOpenModal}
+                />
               )}
             </div>
           ))}
         </div>
       </div>
+
+      <MovieInfoModal
+        show={showModal}
+        movie={selectedMovie}
+        onClose={() => setShowModal(false)}
+      />
     </div>
   );
 };

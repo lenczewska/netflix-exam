@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -217,14 +218,7 @@ const Movies = ({ favorites, setFavorites }) => {
       </div>
 
       <div className="category-cards  mt-10 ">
-        <div className="" >
-          
-          <TitleCards
-            overflow-x-scroll
-            title="Top Rated"
-            category="top_rated"
-          />
-        </div>
+       
         <TitleCards
           overflow-x-scroll
           title="Trending This Week"
