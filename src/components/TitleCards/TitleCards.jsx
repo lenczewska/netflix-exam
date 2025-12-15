@@ -45,7 +45,6 @@ const TitleCards = ({ title, category, onAdd }) => {
       if (hoverCardDetail.id === id || isLoadingDetail) return;
 
       setIsLoadingDetail(true);
-
       try {
         const detailUrl = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`;
         const response = await fetch(detailUrl, options);
@@ -75,7 +74,7 @@ const TitleCards = ({ title, category, onAdd }) => {
       <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
 
       <div className="wrapper">
-        <div className="card-list flex gap-[8px]">
+        <div className="card-list overflow-x-hidden flex gap-[8px]">
           {apiData.map((card) => (
             <div
               key={card.id}
@@ -83,6 +82,7 @@ const TitleCards = ({ title, category, onAdd }) => {
               onMouseEnter={() => handleMouseEnter(card.id)}
               onMouseLeave={handleMouseLeave}
             >
+              {/* LINK для картинки */}
               <Link
                 to={`/player/${card.id}`}
                 className="card block min-w-[250px] transition-all duration-300 hover:scale-[1.05] relative z-10"
@@ -99,16 +99,9 @@ const TitleCards = ({ title, category, onAdd }) => {
                 </p>
               </Link>
 
-              {/* Кнопка добавления в My List */}
-              <button
-                className="absolute top-[10px] right-[10px] bg-black bg-opacity-50 rounded-full w-[35px] h-[35px] flex items-center justify-center"
-                onClick={() => onAdd(card)}
-              >
-                <FontAwesomeIcon icon={faPlus} className="text-white" />
-              </button>
-
+              {/* HoverCard */}
               {hoveredCardId === card.id && hoverCardDetail.id === card.id && (
-                <HoverCardT data={hoverCardDetail} />
+                <HoverCardT data={hoverCardDetail} onAdd={onAdd} />
               )}
             </div>
           ))}

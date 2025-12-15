@@ -16,7 +16,6 @@ function InfoModal({ game, onClose }) {
         className="fixed inset-0 bg-[#17141462] bg-opacity-100 z-100"
         onClick={onClose}
       ></div>
-      <div>Debug: show = {String(show)}</div>
 
       <div className="bg-[#1b1919ad] w-full h-screen absolute top-[0px]   ">
         <div className=" w-max inset-0  absolute top-[20px] right-[180px] flex justify-center items-center z-150">
@@ -28,7 +27,8 @@ function InfoModal({ game, onClose }) {
               <FontAwesomeIcon icon={faTimes} />
             </button>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col ">
+              
               <div className="about-box pb-[15px] pt-[10px]">
                 <div className="w-auto gap-[15px] flex items-center">
                   <img

@@ -23,11 +23,22 @@ import SearchPage from "./pages/Search/SearchPage";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [favorites, setFavorites] = useState([]);
-  const handleAddToFavorites = (item) => {
-    if (!favorites.find((fav) => fav.id === item.id)) {
-      setFavorites([...favorites, item]);
-    }
+  const [favorites, setFavorites] = useState(() => {
+    const saved = localStorage.getItem("favorites");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  const handleAddToFavorites = (movie) => {
+      console.log("ADD TO FAVORITES:", movie);
+
+    setFavorites((prev) => {
+      if (prev.some((m) => m.id === movie.id)) return prev;
+      return [...prev, movie];
+    });
   };
 
   useEffect(() => {
@@ -56,25 +67,17 @@ function App() {
       <Route path="/:type/genres/:id" element={<GenrePage />} />
       <Route
         path="/movies"
-        element={<Movies favorites={favorites} setFavorites={setFavorites} />}
-      />
-      <Route path="/games" element={<Games />} />
-      <Route path="/latest" element={<Latest />} />
-      <Route
-        path="/my-list"
-        element={<MyList favorites={favorites} setFavorites={setFavorites} />}
-      />
-      <Route path="/original-audio" element={<OriginalAudio />} />
-      <Route
-        path="/movies"
         element={
           <Movies
             favorites={favorites}
-            setFavorites={setFavorites}
             onAddToFavorites={handleAddToFavorites}
           />
         }
       />
+      <Route path="/games" element={<Games />} />
+      <Route path="/latest" element={<Latest />} />
+      <Route path="/my-list" element={<MyList favorites={favorites} />} />
+      <Route path="/original-audio" element={<OriginalAudio />} />
       <Route path="/search" element={<SearchPage />} />
     </Routes>
   );

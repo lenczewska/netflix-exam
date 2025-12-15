@@ -10,18 +10,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./HoverCard.css";
 
-const HoverCardT = ({ data }) => {
+const HoverCardT = ({ data, onAdd }) => {
   if (!data || Object.keys(data).length === 0) return null;
 
-  const genres = data.genres?.map((g) => g.name).join(", ") || "Нет информации";
-  const handleAddFavorite = () => {
-    if (!randomMovie) return;
-    setFavorites((prev) => {
-      const exists = prev.some((item) => item.id === randomMovie.id);
-      if (exists) return prev;
-      return [...prev, randomMovie];
-    });
-  };
   const releaseYear = data.release_date
     ? new Date(data.release_date).getFullYear()
     : "N/A";
@@ -31,7 +22,7 @@ const HoverCardT = ({ data }) => {
       className="
       hover-card 
       absolute 
-      z-9990 
+      z-50 
       bg-[#000] 
       text-[#fff] 
       w-[330px] 
@@ -49,30 +40,40 @@ const HoverCardT = ({ data }) => {
         <img
           src={`https://image.tmdb.org/t/p/w500${data.backdrop_path}`}
           className="rounded mb-2"
+          alt={data.title || data.name}
         />
       )}
       <h3 className="text-xl font-bold mb-1 line-clamp-1">
         {data.title || data.name}
       </h3>
-      <p className="text-sm  mb-2">
+      <p className="text-sm mb-2">
         {releaseYear} |{" "}
         {data.vote_average ? data.vote_average.toFixed(1) : "N/A"}
       </p>
 
-      <Link
-        to={`/player/${data.id}`}
-        className="mt-3 flex justify-between  text-center  bg-red-600  text-[#fff] py-2 rounded"
-      >
-        <div className="flex gap-[6px] ">
-          <button className="rounded-[50%]   w-[40px] h-[40px] bg-[#fff] flex justify-center items-center ">
+      <div className="mt-3 flex justify-between text-center bg-red-600 text-[#fff] py-2 rounded">
+        <div className="flex gap-[6px]">
+          {/* Play ведёт на плеер */}
+          <Link
+            to={`/player/${data.id}`}
+            className="rounded-[50%] w-[40px] h-[40px] bg-[#fff] flex justify-center items-center"
+          >
             <FontAwesomeIcon
               icon={faPlay}
-              className="text-[#000] text-[25px] "
+              className="text-[#000] text-[25px]"
             />
-          </button>
+          </Link>
+
+          {/* Добавить в My List */}
           <button
-            onClick={handleAddFavorite}
-            className="btn  border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log("HoverCard + clicked:", data); // Проверка что фильм приходит
+
+              onAdd?.(data); // правильно передаём объект фильма из props
+            }}
+            className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
           >
             <FontAwesomeIcon
               icon={faPlus}
@@ -80,6 +81,7 @@ const HoverCardT = ({ data }) => {
             />
           </button>
 
+          {/* Лайк */}
           <button className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
             <FontAwesomeIcon
               icon={faThumbsUp}
@@ -87,8 +89,14 @@ const HoverCardT = ({ data }) => {
             />
           </button>
         </div>
+
+        {/* Chevron Down — тоже добавляет в список */}
         <button
-          onClick={handleAddFavorite}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onAdd?.(data);
+          }}
           className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
         >
           <FontAwesomeIcon
@@ -96,20 +104,18 @@ const HoverCardT = ({ data }) => {
             className="text-[20px] text-[#fff]"
           />
         </button>
-      </Link>
+      </div>
 
       <div className="inf flex gap-[10px] pt-[20px] items-center">
-        <span className=" text-[#fff] hd text-[15px] px-[5px]">HD</span>
-
-        <span className=" text-[#aaa] text-[16px]">
+        <span className="text-[#fff] hd text-[15px] px-[5px]">HD</span>
+        <span className="text-[#aaa] text-[16px]">
           {data?.original_language}
         </span>
-        <div className="text-[15px] text-[#aaa] ">
+        <div className="text-[15px] text-[#aaa]">
           <span className="text-[#aaa] flex gap-[5px] items-center pl-[5px]">
             {data?.genres?.slice(0, 3).map((g, index, array) => (
               <React.Fragment key={g.id || index}>
                 {g.name}
-
                 {index < array.length - 1 && (
                   <FontAwesomeIcon
                     icon={faCircle}

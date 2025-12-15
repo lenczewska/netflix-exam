@@ -13,7 +13,7 @@ const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const Movies = ({ favorites, setFavorites }) => {
   const [open, setOpen] = useState(false);
   const [randomMovie, setRandomMovie] = useState(null);
-  const [genres, setGenres] = useState([]); 
+  const [genres, setGenres] = useState([]);
   const headerRef = useRef(null);
 
   const limitOverview = (text, maxSentences = 3) => {
@@ -47,7 +47,7 @@ const Movies = ({ favorites, setFavorites }) => {
       const mapped = data.genres.map((g) => ({
         id: g.id,
         name: g.name,
-        link: `/genres/${g.id}`, 
+        link: `/genres/${g.id}`,
       }));
       setGenres(mapped);
     };
@@ -216,13 +216,32 @@ const Movies = ({ favorites, setFavorites }) => {
         </div>
       </div>
 
-      <div className="category-cards mt-10">
-        <TitleCards title="Top Rated" category="top_rated" />
-        <TitleCards title="Trending This Week" category="trending/movie/week" />
-        <TitleCards title="Upcoming" category="upcoming" />
-        <TitleCards title="Popular" category="popular" />
-        <TitleCards title="Now Playing" category="now_playing" />
-        <TitleCards title="Trending Today" category="trending/movie/day" />
+      <div className="category-cards  mt-10 ">
+        <div className="" >
+          
+          <TitleCards
+            overflow-x-scroll
+            title="Top Rated"
+            category="top_rated"
+          />
+        </div>
+        <TitleCards
+          overflow-x-scroll
+          title="Trending This Week"
+          category="trending/movie/week"
+        />
+        <TitleCards overflow-x-scroll title="Upcoming" category="upcoming" />
+        <TitleCards overflow-x-scroll title="Popular" category="popular" />
+        <TitleCards
+          overflow-x-scroll
+          title="Now Playing"
+          category="now_playing"
+        />
+        <TitleCards
+          overflow-x-scroll
+          title="Trending Today"
+          category="trending/movie/day"
+        />
       </div>
 
       <Footer />

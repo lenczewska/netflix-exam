@@ -1,11 +1,9 @@
-// Home.jsx (диагностическая версия)
 import React, { useState } from "react";
 import "./Home.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import TitleCards from "../../components/TitleCards/TitleCards";
-import InfoModal from "./InfoModal";
-
+import MovieInfoModal from "./MovieInfoModal";
 import hero_banner2 from "../../assets/img/hero_banner2.jpg";
 import hero_title from "../../assets/img/hero_title.png";
 import play_icon from "../../assets/img/play_icon.png";
@@ -13,28 +11,51 @@ import info_icon from "../../assets/img/info_icon.png";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  
-  const [showInfoModal, setShowInfoModal] = useState(false);
-  console.log("Home render, showInfoModal =", showInfoModal);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
-
-  const handleMoreInfo = () => {
-    console.log("handleMoreInfo clicked — before set:", showInfoModal);
-    setShowInfoModal(true);
-    console.log(
-      "handleMoreInfo clicked — after set (note: state update async)"
-    );
+  const handleMoreInfo = (movie) => {
+    setSelectedMovie(movie); // сохраняем данные фильма
+    setShowModal(true); // открываем модалку
   };
 
   const closeModal = () => {
-    console.log("closeModal called");
-    setShowInfoModal(false);
+    setShowModal(false);
+    setSelectedMovie(null);
   };
 
+  // Пример фильмов
+  const movies = [
+    {
+      id: 1,
+      title: "The Ottoman Quest",
+      description:
+        "Discovering his ties to an ancient order, he embarks on a treacherous quest in Istanbul.",
+      genre: "Action/Adventure",
+      releaseYear: 2025,
+      cover: hero_banner2,
+      duration: "2h 15m",
+      maturityRating: "PG-13",
+      language: "English",
+    },
+    {
+      id: 2,
+      title: "Space Odyssey",
+      description: "A journey through the stars and beyond.",
+      genre: "Sci-Fi",
+      releaseYear: 2023,
+      cover: hero_banner2,
+      duration: "2h 40m",
+      maturityRating: "PG-13",
+      language: "English",
+    },
+  ];
+
   return (
-    <div className="home w-full min-h-screen bg-black text-white ">
+    <div className="home w-full min-h-screen bg-black text-white">
       <Navbar />
 
+      {/* Hero Banner */}
       <div className="relative w-full h-auto">
         <img
           src={hero_banner2}
@@ -42,7 +63,6 @@ const Home = () => {
           className="hero-banner-img w-full object-cover sm:h-[260px] md:h-[380px] h-[500px]"
         />
 
-        {/* Hero Content */}
         <div className="hero-content absolute top-[20%] left-[6%] sm:top-[18%] sm:left-[4%] md:top-[22%] z-20 max-w-[600px]">
           <img
             src={hero_title}
@@ -64,10 +84,7 @@ const Home = () => {
             </Link>
 
             <button
-              onClick={() => {
-                console.log("clicked");
-                handleMoreInfo();
-              }}
+              onClick={() => handleMoreInfo(movies[0])} // пример: открываем первый фильм
               className="btn-inf pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#79797986] text-[#000] cursor-pointer rounded-[5px] sm:text-[12px] sm:px-[14px] sm:pt-[6px] sm:pb-[6px] md:text-[14px]"
             >
               <img
@@ -80,12 +97,17 @@ const Home = () => {
           </div>
         </div>
 
-        {/* DARK GRADIENT OVERLAY */}
-        {/* Если overlay перекрывает кнопки — сделаем z-10 (ниже z-20 у hero-content). */}
         <div className="absolute inset-0 z-10 bg-black/60"></div>
       </div>
 
-      {/* Title cards */}
+      {/* Модалка */}
+      <MovieInfoModal
+        show={showModal}
+        movie={selectedMovie}
+        onClose={closeModal}
+      />
+
+      {/* Контент карточек */}
       <div className="mt-[-80px] relative z-30 px-[6%] sm:mt-[-40px] sm:px-[4%]">
         <TitleCards title="Popular on Netflix" category="popular" />
       </div>
@@ -97,8 +119,6 @@ const Home = () => {
         <TitleCards title="Now Playing" category="now_playing" />
         <TitleCards title="Trending Today" category="trending/movie/day" />
       </div>
-
-      <InfoModal show={showInfoModal} onClose={closeModal} />
 
       <Footer />
     </div>
