@@ -13,13 +13,12 @@ import profile_icon from "../../assets/img/profile_icon.jpg";
 
 const Navbar = () => {
   const navRef = useRef();
-  const searchRef = useRef(); // 🔹 реф для блока поиска
+  const searchRef = useRef();
   const navigate = useNavigate();
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
 
-  // эффект для изменения стиля при скролле
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {
@@ -33,7 +32,12 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 🔹 закрытие поиска при клике вне блока и по Escape
+  useEffect(() => {
+    if (query.trim().length > 0) {
+      navigate(`/search?query=${encodeURIComponent(query)}`);
+    }
+  }, [query, navigate]);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -61,7 +65,6 @@ const Navbar = () => {
       ref={navRef}
       className="w-screen pt-[20px] pb-[10px] fixed flex items-center justify-between pl-[40px] text-[13px] pr-[40px] text-[#e5e5e5] z-30"
     >
-      {/* ЛЕВАЯ ЧАСТЬ */}
       <div className="navbar-left flex gap-[5px] items-center justify-center">
         <img
           onClick={() => navigate("/browse")}
@@ -131,9 +134,7 @@ const Navbar = () => {
         </ul>
       </div>
 
-      {/* ПРАВАЯ ЧАСТЬ */}
       <div className="navbar-right flex gap-[15px] items-center">
-        {/* КНОПКА ПОИСКА */}
         <button
           className="bg-black search-btn text-[#aaa] cursor-pointer"
           onClick={() => setSearchOpen(!searchOpen)}
@@ -157,7 +158,6 @@ const Navbar = () => {
           </svg>
         </button>
 
-        {/* ПОЛЕ ПОИСКА */}
         {searchOpen && (
           <div
             ref={searchRef}

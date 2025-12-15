@@ -2,14 +2,13 @@ import React, { useEffect, useState, useCallback } from "react";
 import "./TitleCards.css";
 import { Link } from "react-router-dom";
 import HoverCardT from "./HoverCardT";
-import { Swiper, SwiperSlide } from "swiper/react";
-import 'swiper/css';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
 
-const TitleCards = ({ title, category }) => {
+const TitleCards = ({ title, category, onAdd }) => {
   const [apiData, setApiData] = useState([]);
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const [hoverCardDetail, setHoverCardDetail] = useState({});
@@ -72,13 +71,13 @@ const TitleCards = ({ title, category }) => {
   };
 
   return (
-    <div className="title-cards   pr-[50px] mt-[50px]">
+    <div className="title-cards pr-[50px] mt-[50px]">
       <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
 
-      <div className="wrapper ">
-        <div className="card-list flex gap-[8px]  ">
+      <div className="wrapper">
+        <div className="card-list flex gap-[8px]">
           {apiData.map((card) => (
-            <div 
+            <div
               key={card.id}
               className="card-wrapper relative"
               onMouseEnter={() => handleMouseEnter(card.id)}
@@ -95,11 +94,18 @@ const TitleCards = ({ title, category }) => {
                     alt={card.original_title || card.name}
                   />
                 )}
-
                 <p className="absolute right-[10px] bottom-[10px] text-white bg-black bg-opacity-50 px-2 py-1 rounded text-xs pointer-events-none">
                   {card.original_title || card.name}
                 </p>
               </Link>
+
+              {/* Кнопка добавления в My List */}
+              <button
+                className="absolute top-[10px] right-[10px] bg-black bg-opacity-50 rounded-full w-[35px] h-[35px] flex items-center justify-center"
+                onClick={() => onAdd(card)}
+              >
+                <FontAwesomeIcon icon={faPlus} className="text-white" />
+              </button>
 
               {hoveredCardId === card.id && hoverCardDetail.id === card.id && (
                 <HoverCardT data={hoverCardDetail} />

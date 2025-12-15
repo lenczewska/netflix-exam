@@ -27,7 +27,7 @@ const Games = () => {
       <Navbar />
 
       {randomGame && (
-        <div className="flex pt-[70px] gap-[30px] pl-[70px] pb-[50px] justify-center bg-[#141414]  overflow-hidden">
+        <div className="flex pt-[70px] w-100vh gap-[30px] pl-[70px] pb-[50px] justify-center bg-[#141414]  overflow-hidden">
           <img
             src={randomGame.images?.cover}
             alt={randomGame.title}

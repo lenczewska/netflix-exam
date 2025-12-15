@@ -18,11 +18,17 @@ import Games from "./pages/Games/Games";
 import Latest from "./pages/Latest/Latest";
 import MyList from "./pages/MyList/MyList";
 import OriginalAudio from "./pages/OriginalAudio/OriginalAudio";
+import SearchPage from "./pages/Search/SearchPage";
 
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
   const [favorites, setFavorites] = useState([]);
+  const handleAddToFavorites = (item) => {
+    if (!favorites.find((fav) => fav.id === item.id)) {
+      setFavorites([...favorites, item]);
+    }
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -59,6 +65,17 @@ function App() {
         element={<MyList favorites={favorites} setFavorites={setFavorites} />}
       />
       <Route path="/original-audio" element={<OriginalAudio />} />
+      <Route
+        path="/movies"
+        element={
+          <Movies
+            favorites={favorites}
+            setFavorites={setFavorites}
+            onAddToFavorites={handleAddToFavorites}
+          />
+        }
+      />
+      <Route path="/search" element={<SearchPage />} />
     </Routes>
   );
 }
