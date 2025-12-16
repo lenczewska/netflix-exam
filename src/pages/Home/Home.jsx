@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -14,9 +14,14 @@ const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
+  // Управляем скроллом при изменении состояния модалки
+  useEffect(() => {
+    document.body.style.overflow = showModal ? "hidden" : "auto";
+  }, [showModal]);
+
   const handleMoreInfo = (movie) => {
-    setSelectedMovie(movie); 
-    setShowModal(true); 
+    setSelectedMovie(movie);
+    setShowModal(true);
   };
 
   const closeModal = () => {
@@ -83,7 +88,7 @@ const Home = () => {
             </Link>
 
             <button
-              onClick={() => handleMoreInfo(movies[0])} // пример: открываем первый фильм
+              onClick={() => handleMoreInfo(movies[0])}
               className="btn-inf pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#79797986] text-[#000] cursor-pointer rounded-[5px] sm:text-[12px] sm:px-[14px] sm:pt-[6px] sm:pb-[6px] md:text-[14px]"
             >
               <img
@@ -106,12 +111,8 @@ const Home = () => {
         onClose={closeModal}
       />
 
-      {/* Контент карточек */}
-      <div className="mt-[-80px] relative z-30 px-[6%] sm:mt-[-40px] sm:px-[4%]">
+      <div className="mt-[-50px] relative px-[6%] sm:mt-[-40px] sm:px-[4%]">
         <TitleCards title="Popular on Netflix" category="popular" />
-      </div>
-
-      <div className="mt-10 px-[6%] sm:mt-6 sm:px-[4%]">
         <TitleCards title="Top Rated" category="top_rated" />
         <TitleCards title="Trending This Week" category="trending/movie/week" />
         <TitleCards title="Upcoming" category="upcoming" />

@@ -14,7 +14,7 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, []);
+  }, [show]);
 
   return (
     <>
