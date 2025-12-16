@@ -8,7 +8,8 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
-import Player from "./pages/Player/Player";
+import HeroPlayer from "./pages/Player/HeroPlayer";
+import Player from "./pages/Player/Player"
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./fireBase";
 import Shows from "./pages/Shows/Shows";
@@ -33,7 +34,7 @@ function App() {
   }, [favorites]);
 
   const handleAddToFavorites = (movie) => {
-      console.log("ADD TO FAVORITES:", movie);
+    console.log("ADD TO FAVORITES:", movie);
 
     setFavorites((prev) => {
       if (prev.some((m) => m.id === movie.id)) return prev;
@@ -63,6 +64,7 @@ function App() {
       <Route path="/browse" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/player/:id" element={<Player />} />
+      <Route path="/heroPlayer" element={<HeroPlayer />} />
       <Route path="/shows" element={<Shows />} />
       <Route path="/:type/genres/:id" element={<GenrePage />} />
       <Route

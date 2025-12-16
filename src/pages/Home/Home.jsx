@@ -3,6 +3,7 @@ import "./Home.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import TitleCards from "../../components/TitleCards/TitleCards";
+import HeroPlayer from "../Player/HeroPlayer";
 import MovieInfoModal from "./MovieInfoModal";
 import hero_banner2 from "../../assets/img/hero_banner2.jpg";
 import hero_title from "../../assets/img/hero_title.png";
@@ -14,7 +15,6 @@ const Home = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
-  // Управляем скроллом при изменении состояния модалки
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "auto";
   }, [showModal]);
@@ -59,7 +59,6 @@ const Home = () => {
     <div className="home w-full min-h-screen bg-black text-white">
       <Navbar />
 
-      {/* Hero Banner */}
       <div className="relative w-full h-auto">
         <img
           src={hero_banner2}
@@ -80,7 +79,7 @@ const Home = () => {
           </p>
 
           <div className="btns flex gap-[10px] mt-[30px] sm:mt-[15px] sm:gap-[6px]">
-            <Link to="/player">
+            <Link to="/HeroPlayer">
               <button className="btn-play pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#fff] text-[#000] cursor-pointer rounded-[5px] sm:text-[12px] sm:px-[14px] sm:pt-[6px] sm:pb-[6px] md:text-[14px]">
                 <img src={play_icon} className="w-[25px] sm:w-[18px]" alt="" />
                 Play
