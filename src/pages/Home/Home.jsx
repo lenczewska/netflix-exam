@@ -15,8 +15,8 @@ const Home = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const handleMoreInfo = (movie) => {
-    setSelectedMovie(movie); // сохраняем данные фильма
-    setShowModal(true); // открываем модалку
+    setSelectedMovie(movie); 
+    setShowModal(true); 
   };
 
   const closeModal = () => {
@@ -24,7 +24,6 @@ const Home = () => {
     setSelectedMovie(null);
   };
 
-  // Пример фильмов
   const movies = [
     {
       id: 1,
