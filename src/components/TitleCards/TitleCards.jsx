@@ -2,13 +2,11 @@ import React, { useEffect, useState, useCallback } from "react";
 import "./TitleCards.css";
 import { Link } from "react-router-dom";
 import HoverCardT from "./HoverCardT";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
 
-const TitleCards = ({ title, category, onAdd }) => {
+const TitleCards = ({ title, category, onAdd, sort }) => {
   const [apiData, setApiData] = useState([]);
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const [hoverCardDetail, setHoverCardDetail] = useState({});
@@ -69,20 +67,36 @@ const TitleCards = ({ title, category, onAdd }) => {
     setHoverCardDetail({});
   };
 
+  const sortedData = [...apiData];
+  if (sort === "year") {
+    sortedData.sort(
+      (a, b) =>
+        new Date(a.release_date || a.first_air_date) -
+        new Date(b.release_date || b.first_air_date)
+    );
+  } else if (sort === "az") {
+    sortedData.sort((a, b) =>
+      (a.title || a.name).localeCompare(b.title || b.name)
+    );
+  } else if (sort === "za") {
+    sortedData.sort((a, b) =>
+      (b.title || b.name).localeCompare(a.title || a.name)
+    );
+  }
+
   return (
-    <div className="title-cards  mt-[50px]">
+    <div className="title-cards mt-[50px]">
       <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
 
       <div className="wrapper">
         <div className="card-list overflow-x-scroll flex gap-[8px] pb-4">
-          {apiData.map((card) => (
+          {sortedData.map((card) => (
             <div
               key={card.id}
               className="card-wrapper relative"
               onMouseEnter={() => handleMouseEnter(card.id)}
               onMouseLeave={handleMouseLeave}
             >
-              {/* LINK для картинки */}
               <Link
                 to={`/player/${card.id}`}
                 className="card block min-w-[250px] transition-all duration-300 hover:scale-[1.05] relative z-10"
@@ -99,7 +113,6 @@ const TitleCards = ({ title, category, onAdd }) => {
                 </p>
               </Link>
 
-              {/* HoverCard */}
               {hoveredCardId === card.id && hoverCardDetail.id === card.id && (
                 <HoverCardT data={hoverCardDetail} onAdd={onAdd} />
               )}

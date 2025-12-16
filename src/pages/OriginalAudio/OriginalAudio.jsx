@@ -1,19 +1,33 @@
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import TitleCards from "../../components/TitleCards/TitleCards";
 
+const VITE_TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+
 const OriginalAudio = () => {
   const [englishOptions, setEnglishOptions] = useState([]);
-  const [selectedOriginal, setSelectedOriginal] = useState(null);
-  const [selectedEnglish, setSelectedEnglish] = useState(null);
-  const [selectedSort, setSelectedSort] = useState("A-Z");
+  const [selectedOriginal, setSelectedOriginal] = useState({
+    name: "Original Language",
+    value: "original",
+  });
+  const [selectedEnglish, setSelectedEnglish] = useState({
+    name: "English",
+    code: "en",
+  });
+  const [selectedSort, setSelectedSort] = useState({
+    name: "A-Z",
+    value: "az",
+  });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(
-      "https://api.themoviedb.org/3/configuration/languages?api_key=5a2adbd4ccd50daf3380b9ff63d55291"
+      `https://api.themoviedb.org/3/configuration/languages?api_key=${VITE_TMDB_API_KEY}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -26,7 +40,8 @@ const OriginalAudio = () => {
             .sort((a, b) => a.name.localeCompare(b.name, "en"));
           setEnglishOptions(langs);
         }
-      });
+      })
+      .catch((err) => console.error(err));
   }, []);
 
   const [openOriginal, setOpenOriginal] = useState(false);
@@ -81,18 +96,18 @@ const OriginalAudio = () => {
             onClick={() => setOpenOriginal(!openOriginal)}
             className="bg-[#000] cursor-pointer w-[190px] pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px] font-[500] text-white rounded"
           >
-            {selectedOriginal ? selectedOriginal : "Original Language"}
+            {selectedOriginal.name}
             <FontAwesomeIcon icon={faCaretDown} className="text-white" />
           </button>
 
           {openOriginal && (
             <div className="absolute left-0 mt-2 w-[190px] bg-[#000] text-[#fff] shadow-lg rounded z-10">
               <ul className="p-[8px]">
-                {originalLanguages.map((lang, index) => (
-                  <li key={index}>
+                {originalLanguages.map((lang) => (
+                  <li key={lang.value}>
                     <p
                       onClick={() => {
-                        setSelectedOriginal(lang.value);
+                        setSelectedOriginal(lang);
                         setOpenOriginal(false);
                       }}
                       className="block pt-[5px] hover:underline cursor-pointer"
@@ -112,18 +127,18 @@ const OriginalAudio = () => {
             onClick={() => setOpenEnglish(!openEnglish)}
             className="bg-[#000] w-[250px] cursor-pointer pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px] font-[500] text-white rounded"
           >
-            {selectedEnglish ? selectedEnglish : "English"}
+            {selectedEnglish.name}
             <FontAwesomeIcon icon={faCaretDown} className="text-white" />
           </button>
 
           {openEnglish && (
             <div className="absolute left-0 mt-2 bg-[#000] w-[250px] text-[#fff] shadow-lg rounded z-50">
               <ul className="p-[8px] max-h-[400px] overflow-y-auto">
-                {englishOptions.map((opt, index) => (
-                  <li key={index}>
+                {englishOptions.map((opt) => (
+                  <li key={opt.code}>
                     <p
                       onClick={() => {
-                        setSelectedEnglish(opt.code);
+                        setSelectedEnglish(opt);
                         setOpenEnglish(false);
                       }}
                       className="block px-4 py-2 hover:bg-gray-700 hover:underline cursor-pointer"
@@ -144,19 +159,20 @@ const OriginalAudio = () => {
             onClick={() => setOpenSort(!openSort)}
             className="bg-[#000] w-[230px] pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px] font-[500] text-white rounded cursor-pointer"
           >
-            {selectedSort}
+            {selectedSort.name}
             <FontAwesomeIcon icon={faCaretDown} className="text-white" />
           </button>
 
           {openSort && (
             <div className="absolute left-0 mt-2 w-[230px] bg-[#000] text-[#fff] shadow-lg rounded z-10">
               <ul className="p-[8px]">
-                {sortOptions.map((opt, index) => (
-                  <li key={index}>
+                {sortOptions.map((opt) => (
+                  <li key={opt.value}>
                     <p
                       onClick={() => {
-                        setSelectedSort(opt.value);
+                        setSelectedSort(opt);
                         setOpenSort(false);
+                        navigate(`/sort/${opt.value}`);
                       }}
                       className="block px-4 py-2 hover:underline cursor-pointer"
                     >
@@ -170,12 +186,13 @@ const OriginalAudio = () => {
         </div>
       </div>
 
-      {/* Передаём выбранные фильтры в TitleCards */}
-      <TitleCards
-        original={selectedOriginal}
-        english={selectedEnglish}
-        sort={selectedSort}
-      />
+      <div className="pl-[45px] pt-[20px]">
+        <TitleCards
+          original={selectedOriginal.value}
+          english={selectedEnglish.code}
+          sort={selectedSort.value}
+        />
+      </div>
 
       <Footer />
     </div>

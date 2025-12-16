@@ -8,8 +8,7 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
-import HeroPlayer from "./pages/Player/HeroPlayer";
-import Player from "./pages/Player/Player"
+import Player from "./pages/Player/Player";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./fireBase";
 import Shows from "./pages/Shows/Shows";
@@ -20,6 +19,7 @@ import Latest from "./pages/Latest/Latest";
 import MyList from "./pages/MyList/MyList";
 import OriginalAudio from "./pages/OriginalAudio/OriginalAudio";
 import SearchPage from "./pages/Search/SearchPage";
+import SortPage from "./pages/OriginalAudio/SortPage";
 
 function App() {
   const navigate = useNavigate();
@@ -64,7 +64,6 @@ function App() {
       <Route path="/browse" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/player/:id" element={<Player />} />
-      <Route path="/heroPlayer" element={<HeroPlayer />} />
       <Route path="/shows" element={<Shows />} />
       <Route path="/:type/genres/:id" element={<GenrePage />} />
       <Route
@@ -76,6 +75,7 @@ function App() {
           />
         }
       />
+      <Route path="/sort/:sortType" element={<SortPage />} />{" "}
       <Route path="/games" element={<Games />} />
       <Route path="/latest" element={<Latest />} />
       <Route path="/my-list" element={<MyList favorites={favorites} />} />
