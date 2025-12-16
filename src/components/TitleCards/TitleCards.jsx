@@ -70,7 +70,7 @@ const TitleCards = ({ title, category, onAdd }) => {
   };
 
   return (
-    <div className="title-cards pr-[50px] mt-[50px]">
+    <div className="title-cards  mt-[50px]">
       <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
 
       <div className="wrapper">

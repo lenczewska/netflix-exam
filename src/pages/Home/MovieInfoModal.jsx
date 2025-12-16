@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faCircle } from "@fortawesome/free-solid-svg-icons";
 import logo_header from "../../assets/img/logo_header.png";
@@ -8,6 +8,13 @@ import { faThumbsUp, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const MovieInfoModal = ({ show, movie, onClose }) => {
   if (!show || !movie) return null;
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   return (
     <>
@@ -21,7 +28,7 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
           <div className="modal-box relative w-[800px] bg-[#181818] h-screen rounded-[10px] ">
             <button
               onClick={onClose}
-              className="absolute top-4 right-[20px] cursor-pointer bg-[#262626] w-[40px] h-[40px] text-white text-2xl bg-black rounded-full z-30 border-[#fff] border flex items-center justify-center"
+              className="absolute top-[16px] right-[20px] cursor-pointer bg-[#262626] w-[40px] h-[40px] text-white text-2xl bg-black rounded-full z-30 border-[#fff] border flex items-center justify-center"
             >
               <FontAwesomeIcon icon={faTimes} className="text-[23px]" />
             </button>
@@ -31,7 +38,7 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
                 <img
                   src={movie.cover}
                   alt={movie.title}
-                  className="w-[800px] h-[380px] rounded-lg object-cover"
+                  className="w-[800px] h-[400px] rounded-lg object-cover"
                 />
 
                 <div className="play-box flex flex-col gap-[20px] ">
@@ -45,7 +52,7 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
                     {movie.title}
                   </h2>
 
-                  <div className=" flex gap-[10px] absolute bottom-[110px] left-[45px]  ">
+                  <div className=" flex gap-[5px] absolute bottom-[110px] left-[45px]  ">
                     <Link to="/player">
                       <button className="btn-play pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#fff] text-[#000] cursor-pointer rounded-[5px] sm:text-[12px] sm:px-[14px] sm:pt-[6px] sm:pb-[6px] md:text-[14px]">
                         <img
@@ -58,7 +65,7 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
                     </Link>
                     <button
                       onClick={() => onAdd(data)}
-                      className="btn border-[#616161] border-2 bg-[#14141492] hover:bg-[#1414141d] hover:border-[#fff] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
+                      className="btn border-[#616161] border-2 bg-[#1414144c] hover:bg-[#1414141d] hover:border-[#fff] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
                     >
                       <FontAwesomeIcon
                         icon={faPlus}
@@ -66,7 +73,7 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
                       />
                     </button>
 
-                    <button className="btn border-[#616161] hover:border-[#fff] border-2 bg-[#14141492] hover:bg-[#1414141d] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
+                    <button className="btnbg-[#1414144c] hover:border-[#fff] border-2 bg-[#14141492] hover:bg-[#1414141d] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
                       <FontAwesomeIcon
                         icon={faThumbsUp}
                         className="text-[20px] text-[#fff]"
@@ -77,8 +84,8 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
               </div>
             </div>
 
-            <div className="absolute bg-[#0000007b] backdrop-blur-md bottom-[0px] top-[390px] h-auto w-[800px] ">
-              <div className="left flex gap-[10px] pl-[45px] items-center text-[#aaa] ">
+            <div className="absolute  bg-[#0000007b] backdrop-blur-md bottom-[0px] top-[410px] pt-[30px] h-[300px] w-[800px] ">
+              <div className="left flex  gap-[10px] pl-[45px] items-center text-[#aaa] ">
                 <span>{movie.releaseYear}</span>
                 <span className="border border-[#aaa] text-[13px] pl-[5px] pr-[5px]  ">
                   HD
@@ -123,15 +130,18 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
                   </svg>
                 </div>
               </div>
-              
-              <div className="right"></div>
-
-              <div className="flex gap-2 items-center text-gray-400 text-sm">
+              <div className="m-name">
+                <span className="text-[20px] font-[700] pl-[45px] ">
+                  Watch {movie.title} Now
+                </span>
+                <p className="text-[#fff] pl-[45px] text-[15px] ">
+                  {movie.description}
+                </p>
+              </div>
+              <div className="right w-[300px] ">
+                {" "}
                 <span>{movie.genre}</span>
               </div>
-
-              {/* Описание фильма */}
-              <p className="text-white">{movie.description}</p>
 
               {/* Доп. информация */}
               <div className="flex gap-4 text-gray-300 text-sm mt-4">

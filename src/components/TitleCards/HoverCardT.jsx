@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./HoverCard.css";
 
-const HoverCardT = ({ data, onAdd }) => {
+const HoverCardT = ({ data, onAdd, onOpenModal }) => {
   if (!data || Object.keys(data).length === 0) return null;
 
   const releaseYear = data.release_date
@@ -20,16 +20,21 @@ const HoverCardT = ({ data, onAdd }) => {
   return (
     <div
       className="
-      hover-card 
-      bg-[#000] 
-      text-[#fff] 
-      w-[330px] 
-      h-[380px] 
-      p-[9px]
-      shadow-2xl
-      transition-all
-      duration-300
-    "
+        hover-card 
+        absolute 
+        z-9990 
+        bg-[#000] 
+        text-[#fff] 
+        w-[330px] 
+        h-[380px] 
+        p-[9px]
+        top-[-130px] 
+        left-1/2 
+        -translate-x-1/2
+        shadow-2xl
+        transition-all
+        duration-300
+      "
     >
       {data.backdrop_path && (
         <img
@@ -48,7 +53,6 @@ const HoverCardT = ({ data, onAdd }) => {
 
       <div className="mt-3 flex justify-between text-center bg-red-600 text-[#fff] py-2 rounded">
         <div className="flex gap-[6px]">
-          {/* Play ведёт на плеер */}
           <Link
             to={`/player/${data.id}`}
             className="rounded-[50%] w-[40px] h-[40px] bg-[#fff] flex justify-center items-center"
@@ -59,24 +63,13 @@ const HoverCardT = ({ data, onAdd }) => {
             />
           </Link>
 
-          {/* Добавить в My List */}
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              console.log("HoverCard + clicked:", data); // Проверка что фильм приходит
-
-              onAdd?.(data); // правильно передаём объект фильма из props
-            }}
+            onClick={() => onAdd(data)}
             className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
           >
-            <FontAwesomeIcon
-              icon={faPlus}
-              className="text-[20px] text-[#fff]"
-            />
+            <FontAwesomeIcon icon={faPlus} className="text-[20px] text-[#fff]" />
           </button>
 
-          {/* Лайк */}
           <button className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
             <FontAwesomeIcon
               icon={faThumbsUp}
@@ -85,12 +78,11 @@ const HoverCardT = ({ data, onAdd }) => {
           </button>
         </div>
 
-        {/* Chevron Down — тоже добавляет в список */}
         <button
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            onAdd?.(data);
+            onOpenModal(data);   
           }}
           className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
         >
@@ -103,9 +95,7 @@ const HoverCardT = ({ data, onAdd }) => {
 
       <div className="inf flex gap-[10px] pt-[20px] items-center">
         <span className="text-[#fff] hd text-[15px] px-[5px]">HD</span>
-        <span className="text-[#aaa] text-[16px]">
-          {data?.original_language}
-        </span>
+        <span className="text-[#aaa] text-[16px]">{data?.original_language}</span>
         <div className="text-[15px] text-[#aaa]">
           <span className="text-[#aaa] flex gap-[5px] items-center pl-[5px]">
             {data?.genres?.slice(0, 3).map((g, index, array) => (
