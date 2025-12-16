@@ -1,12 +1,39 @@
-.card-list::-webkit-scrollbar {
-    display: none;
+.title-cards {
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+}
 
+.card-list {
+  scroll-behavior: smooth;
+  scroll-padding: 0 50px;
+  overflow-x: scroll;
+  overflow-y: visible;
+  padding-top: 150px;
+  padding-bottom: 200px;
+  margin-top: -150px;
+  margin-bottom: -200px;
+}
+
+.card-list::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper {
+  overflow: visible;
+  position: relative;
 }
 
 .card-wrapper {
   position: relative;
   width: 250px;
   flex-shrink: 0;
+  z-index: 1;
+}
+
+.card-wrapper:hover {
+  z-index: 1000;
+  transform: scale(1);
 }
 
 .card {
