@@ -43,19 +43,35 @@
   background: #141414e9;
 }
 
-/* Mobile */
-@media (max-width: 576px) {
-  .navbar-left{
+ .mob-logo{
     display: none;
   }
+
+
+
+/* Mobile */
+@media (max-width: 576px) {
+  .navbar-left, .navbar-right {
+    display: none;
+  }
+   .mob-logo{
+    display: block !important;
+  }
+
 }
 
 /* Tablet */
 @media (max-width: 768px) {
+ .mob-logo{
+    display: block;
+  }
 }
 
 /* Laptop */
 @media (max-width: 992px) {
+   .mob-logo{
+    display: none;
+  }
 }
 
 /* Desktop */

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { logout } from "../../fireBase";
 import "./Navbar.css";
+import MobileSidebar from "./MobileSidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
@@ -134,7 +135,18 @@ const Navbar = () => {
         </ul>
       </div>
 
-      <div className="navbar-right flex gap-[15px] items-center">
+      <img
+          onClick={() => navigate("/browse")}
+          src={logo_header}
+          alt="logo-header"
+          className=" mob-logo w-[100px] mr-[30px] cursor-pointer"
+        />
+
+      <div className="lg:hidden">
+        <MobileSidebar />
+      </div>
+
+      <div className="navbar-right  flex gap-[15px] items-center">
         <button
           className="bg-black search-btn text-[#aaa] cursor-pointer"
           onClick={() => setSearchOpen(!searchOpen)}
