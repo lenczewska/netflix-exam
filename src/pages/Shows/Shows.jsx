@@ -132,7 +132,7 @@ const Shows = ({ favorites, setFavorites }) => {
               <img
                 src={`https://image.tmdb.org/t/p/w500${randomShow.poster_path}`}
                 alt={randomShow.name}
-                className="rounded shadow-lg w-[500px] h-[700px] object-cover mt-4"
+                className="rounded shadow-lg w-[500px] h-[700px] object-cover "
               />
 
               <div className="about pt-[70px] pl-[50px] bg-[#000] text-[#fff] w-[800px] h-[700px]">
