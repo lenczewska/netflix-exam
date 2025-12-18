@@ -120,7 +120,6 @@ const Home = () => {
         <div className="absolute  inset-0 z-10 bg-black/20"></div>
       </div>
 
-      {/* Модалка */}
       <MovieInfoModal
         show={showModal}
         movie={selectedMovie}
@@ -128,7 +127,6 @@ const Home = () => {
       />
 
 
-      {/* Title Cards */}
       <div className="mt-[10px] relative px-[60px] z-10">
         <TitleCards title="Popular on Netflix" category="popular" handleMoreInfo={handleMoreInfo} />
         <TitleCards title="Top Rated" category="top_rated" handleMoreInfo={handleMoreInfo} />

@@ -193,7 +193,6 @@ const Navbar = () => {
           </div>
         )}
 
-        {/* ИКОНКА УВЕДОМЛЕНИЙ */}
         <svg
           className="cursor-pointer"
           viewBox="0 0 24 24"
@@ -212,7 +211,6 @@ const Navbar = () => {
           ></path>
         </svg>
 
-        {/* ПРОФИЛЬ */}
         <div className="acc-box relative flex items-center cursor-pointer">
           <img
             src={profile_icon}

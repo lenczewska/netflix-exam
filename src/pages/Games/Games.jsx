@@ -9,7 +9,7 @@ import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import "./Game.css";
 
 import games_page from "../../assets/img/games_page.webp";
-import gamesData from "../../../public/games.json"; // твой JSON
+import gamesData from "../../../public/games.json"; 
 
 const Games = () => {
   const [selectedGame, setSelectedGame] = useState(null);

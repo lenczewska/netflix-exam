@@ -42,7 +42,6 @@ const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave, handleMoreInfo, i
 
       <div className=" flex justify-between text-center bg-[#000] text-[#fff] py-2 rounded">
         <div className="flex gap-[6px]">
-          {/* Play ведёт на плеер */}
           <Link
             to={`/player/${data.id}`}
             className="rounded-[50%] w-[40px] h-[40px] bg-[#fff] flex justify-center items-center"
@@ -53,7 +52,6 @@ const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave, handleMoreInfo, i
             />
           </Link>
 
-          {/* Добавить в My List */}
           <button
             onClick={(e) => {
               e.preventDefault();
@@ -69,7 +67,6 @@ const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave, handleMoreInfo, i
             />
           </button>
 
-          {/* Лайк */}
           <button className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
             <FontAwesomeIcon
               icon={faThumbsUp}

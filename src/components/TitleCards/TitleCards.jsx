@@ -8,7 +8,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
 
-const TitleCards = ({ title, category, onAdd, handleMoreInfo }) => {
+const TitleCards = ({ title, category, onAdd, handleMoreInfo, original, language, alpha }) => {
   const [apiData, setApiData] = useState([]);
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const [hoverCardDetail, setHoverCardDetail] = useState({});
@@ -72,13 +72,34 @@ const TitleCards = ({ title, category, onAdd, handleMoreInfo }) => {
     }
   };
 
+  let filtered = [...apiData];
+  if (original === "original") {
+    if (language && language !== "all") {
+      filtered = filtered.filter(card => card.original_language === language);
+    }
+  } else if (original === "dubbing") {
+    if (language && language !== "all") {
+      filtered = filtered.filter(card => card.original_language !== language && card.spoken_languages?.some(l => l.iso_639_1 === language));
+    } else {
+      filtered = filtered.filter(card => card.original_language !== "en"); 
+    }
+  }
+  if ((!original || original === "") && language && language !== "all") {
+    filtered = filtered.filter(card => card.original_language === language);
+  }
+  if (alpha === "az") {
+    filtered.sort((a, b) => (a.title || a.name || "").localeCompare(b.title || b.name || ""));
+  } else if (alpha === "za") {
+    filtered.sort((a, b) => (b.title || b.name || "").localeCompare(a.title || a.name || ""));
+  }
+
   return (
     <div className="title-cards pr-[50px] mt-[50px]">
       <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
 
       <div className="wrapper  ">
         <div className="card-list overflow-x-scroll flex gap-[8px] pb-4">
-          {apiData.map((card) => (
+          {filtered.map((card) => (
             <div
               key={card.id}
               className="card-wrapper  relative"
@@ -109,8 +130,6 @@ const TitleCards = ({ title, category, onAdd, handleMoreInfo }) => {
                   onMouseEnter={() => handleMouseEnter(card.id)}
                   onMouseLeave={handleMouseLeave}
                   handleMoreInfo={(movie) => {
-                    // Преобразуем данные TMDB в формат MovieInfoModal
-                    // Оставляем только первое предложение в описании
                     let description = movie.overview || '';
                     if (description.includes('.')) {
                       description = description.split('.').shift().trim() + '.';

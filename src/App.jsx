@@ -75,7 +75,7 @@ function App() {
           />
         }
       />
-      <Route path="/sort/:sortType" element={<SortPage />} />{" "}
+      <Route path="/sort" element={<SortPage />} />
       <Route path="/games" element={<Games />} />
       <Route path="/latest" element={<Latest />} />
       <Route path="/my-list" element={<MyList favorites={favorites} setFavorites={setFavorites} />} />

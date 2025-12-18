@@ -80,7 +80,6 @@ const Shows = ({ favorites, setFavorites }) => {
     fetchShows();
   }, []);
 
-  // затемнение навбара
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {

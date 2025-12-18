@@ -72,7 +72,7 @@ const SearchPage = () => {
 
         <div className="grid grid-cols-4 gap-6">
           {items
-            .filter((item) => item.poster_path) // ✅ фильтруем только с фото
+            .filter((item) => item.poster_path) 
             .map((item) => (
               <div
                 key={item.id}

@@ -7,12 +7,10 @@ class ErrorBoundary extends React.Component {
   }
 
   static getDerivedStateFromError(error) {
-    // Обновляем состояние, чтобы показать запасной UI
     return { hasError: true };
   }
 
   componentDidCatch(error, errorInfo) {
-    // Можно отправить лог на сервер или в консоль
     console.error("Error caught by ErrorBoundary:", error, errorInfo);
   }
 

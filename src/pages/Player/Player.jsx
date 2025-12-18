@@ -7,7 +7,7 @@ const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
 const VITE_TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const Player = () => {
-  const { id } = useParams(); // берём id из URL
+  const { id } = useParams(); 
   const navigate = useNavigate();
 
   const [apiData, setApiData] = useState(null);

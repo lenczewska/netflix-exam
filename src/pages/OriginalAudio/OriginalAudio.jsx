@@ -10,18 +10,57 @@ const VITE_TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const OriginalAudio = () => {
   const [englishOptions, setEnglishOptions] = useState([]);
+  // 1. Сортировка по оригиналу/дубляжу
   const [selectedOriginal, setSelectedOriginal] = useState({
-    name: "Original Language",
+    name: "Original Audio",
     value: "original",
   });
-  const [selectedEnglish, setSelectedEnglish] = useState({
-    name: "English",
-    code: "en",
+  // Track if navigation should be skipped on first render and only after user interaction
+  const didMount = useRef(false);
+  const userInteracted = useRef(false);
+  // 2. Сортировка по языкам (TMDB)
+  const [selectedLanguage, setSelectedLanguage] = useState({
+    name: "All Languages",
+    code: "all",
   });
-  const [selectedSort, setSelectedSort] = useState({
+  // 3. Сортировка по алфавиту
+  const [selectedAlpha, setSelectedAlpha] = useState({
     name: "A-Z",
     value: "az",
   });
+  // Auto-navigate to SortPage on any select change, but only after user interaction
+  useEffect(() => {
+    if (!didMount.current) {
+      didMount.current = true;
+      return;
+    }
+    if (!userInteracted.current) return;
+    navigate("/sort", {
+      state: {
+        original: selectedOriginal.value,
+        language: selectedLanguage.code,
+        alpha: selectedAlpha.value,
+      },
+      replace: true,
+    });
+  }, [selectedOriginal, selectedLanguage, selectedAlpha]);
+
+  // Mark user interaction on select change
+  const handleOriginalChange = (opt) => {
+    userInteracted.current = true;
+    setSelectedOriginal(opt);
+    setOpenOriginal(false);
+  };
+  const handleLanguageChange = (opt) => {
+    userInteracted.current = true;
+    setSelectedLanguage(opt);
+    setOpenEnglish(false);
+  };
+  const handleAlphaChange = (opt) => {
+    userInteracted.current = true;
+    setSelectedAlpha(opt);
+    setOpenSort(false);
+  };
 
   const navigate = useNavigate();
 
@@ -54,13 +93,16 @@ const OriginalAudio = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (originalRef.current && !originalRef.current.contains(event.target)) {
+      if (
+        originalRef.current &&
+        !originalRef.current.contains(event.target) &&
+        englishRef.current &&
+        !englishRef.current.contains(event.target) &&
+        sortRef.current &&
+        !sortRef.current.contains(event.target)
+      ) {
         setOpenOriginal(false);
-      }
-      if (englishRef.current && !englishRef.current.contains(event.target)) {
         setOpenEnglish(false);
-      }
-      if (sortRef.current && !sortRef.current.contains(event.target)) {
         setOpenSort(false);
       }
     };
@@ -68,15 +110,11 @@ const OriginalAudio = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const originalLanguages = [
-    { name: "Original Language", value: "original" },
+  const originalOptions = [
+    { name: "Original Audio", value: "original" },
     { name: "Dubbing", value: "dubbing" },
-    { name: "Subtitles", value: "subtitles" },
   ];
-
-  const sortOptions = [
-    { name: "Suggestions for you", value: "suggestions" },
-    { name: "Year Released", value: "year" },
+  const alphaOptions = [
     { name: "A-Z", value: "az" },
     { name: "Z-A", value: "za" },
   ];
@@ -90,29 +128,24 @@ const OriginalAudio = () => {
       <div className="sorting-box flex items-center gap-[15px] pl-[45px] pt-[10px]">
         <p className="text-[14px]">Select Your Preferences</p>
 
-        {/* Original Language */}
-        <div ref={originalRef} className="relative inline-block">
+        <div ref={originalRef} className="relative inline-block cursor-pointer">
           <button
-            onClick={() => setOpenOriginal(!openOriginal)}
-            className="bg-[#000] cursor-pointer w-[190px] pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px] font-[500] text-white rounded"
+            onClick={e => { e.stopPropagation(); setOpenOriginal(!openOriginal); }}
+            className="bg-[#000] cursor-pointer w-[190px] pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px]  font-[500] text-white rounded"
           >
             {selectedOriginal.name}
             <FontAwesomeIcon icon={faCaretDown} className="text-white" />
           </button>
-
           {openOriginal && (
-            <div className="absolute left-0 mt-2 w-[190px] bg-[#000] text-[#fff] shadow-lg rounded z-10">
+            <div className="absolute left-0 mt-2 w-[190px] bg-[#000] text-[#fff] shadow-lg rounded z-10 cursor-pointer" onClick={e => e.stopPropagation()}>
               <ul className="p-[8px]">
-                {originalLanguages.map((lang) => (
-                  <li key={lang.value}>
+                {originalOptions.map((opt) => (
+                  <li key={opt.value}>
                     <p
-                      onClick={() => {
-                        setSelectedOriginal(lang);
-                        setOpenOriginal(false);
-                      }}
+                      onClick={() => handleOriginalChange(opt)}
                       className="block pt-[5px] hover:underline cursor-pointer"
                     >
-                      {lang.name}
+                      {opt.name}
                     </p>
                   </li>
                 ))}
@@ -121,26 +154,29 @@ const OriginalAudio = () => {
           )}
         </div>
 
-        {/* English */}
-        <div ref={englishRef} className="relative inline-block">
+        <div ref={englishRef} className="relative inline-block cursor-pointer">
           <button
-            onClick={() => setOpenEnglish(!openEnglish)}
+            onClick={e => { e.stopPropagation(); setOpenEnglish(!openEnglish); }}
             className="bg-[#000] w-[250px] cursor-pointer pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px] font-[500] text-white rounded"
           >
-            {selectedEnglish.name}
+            {selectedLanguage.name}
             <FontAwesomeIcon icon={faCaretDown} className="text-white" />
           </button>
-
           {openEnglish && (
-            <div className="absolute left-0 mt-2 bg-[#000] w-[250px] text-[#fff] shadow-lg rounded z-50">
+            <div className="absolute left-0 mt-2 bg-[#000] w-[250px] text-[#fff] shadow-lg rounded z-50 cursor-pointer" onClick={e => e.stopPropagation()}>
               <ul className="p-[8px] max-h-[400px] overflow-y-auto">
+                <li key="all">
+                    <p
+                      onClick={() => handleLanguageChange({ name: "All Languages", code: "all" })}
+                      className="block px-4 py-2 hover:bg-gray-700 hover:underline cursor-pointer"
+                    >
+                      All Languages
+                    </p>
+                </li>
                 {englishOptions.map((opt) => (
                   <li key={opt.code}>
                     <p
-                      onClick={() => {
-                        setSelectedEnglish(opt);
-                        setOpenEnglish(false);
-                      }}
+                      onClick={() => handleLanguageChange(opt)}
                       className="block px-4 py-2 hover:bg-gray-700 hover:underline cursor-pointer"
                     >
                       {opt.name}
@@ -152,28 +188,22 @@ const OriginalAudio = () => {
           )}
         </div>
 
-        {/* Sort */}
         <p className="text-[14px]">Sort by</p>
-        <div ref={sortRef} className="relative inline-block">
+        <div ref={sortRef} className="relative inline-block cursor-pointer">
           <button
-            onClick={() => setOpenSort(!openSort)}
-            className="bg-[#000] w-[230px] pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px] font-[500] text-white rounded cursor-pointer"
+            onClick={e => { e.stopPropagation(); setOpenSort(!openSort); }}
+            className="bg-[#000] w-[130px] pt-[5px] pb-[2px] flex justify-between items-center border px-[10px] text-[13px] font-[500] text-white rounded cursor-pointer"
           >
-            {selectedSort.name}
+            {selectedAlpha.name}
             <FontAwesomeIcon icon={faCaretDown} className="text-white" />
           </button>
-
           {openSort && (
-            <div className="absolute left-0 mt-2 w-[230px] bg-[#000] text-[#fff] shadow-lg rounded z-10">
+            <div className="absolute left-0 mt-2 w-[130px] bg-[#000] text-[#fff] shadow-lg rounded z-10 cursor-pointer" onClick={e => e.stopPropagation()}>
               <ul className="p-[8px]">
-                {sortOptions.map((opt) => (
+                {alphaOptions.map((opt) => (
                   <li key={opt.value}>
                     <p
-                      onClick={() => {
-                        setSelectedSort(opt);
-                        setOpenSort(false);
-                        navigate(`/sort/${opt.value}`);
-                      }}
+                      onClick={() => handleAlphaChange(opt)}
                       className="block px-4 py-2 hover:underline cursor-pointer"
                     >
                       {opt.name}
@@ -186,11 +216,12 @@ const OriginalAudio = () => {
         </div>
       </div>
 
-      <div className="pl-[45px] pt-[20px]">
+
+      <div className="pl-[45px] pt-[100px]">
         <TitleCards
           original={selectedOriginal.value}
-          english={selectedEnglish.code}
-          sort={selectedSort.value}
+          language={selectedLanguage.code}
+          alpha={selectedAlpha.value}
         />
       </div>
 

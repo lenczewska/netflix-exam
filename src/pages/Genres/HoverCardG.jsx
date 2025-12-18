@@ -48,7 +48,7 @@ const HoverCardG = ({ data, onAdd, onOpenModal, isFavorite }) => {
         {data.title || data.name}
       </h3>
       <p className="text-sm mb-2">
-        {releaseYear} |{" "}
+        {releaseYear} |
         {data.vote_average ? data.vote_average.toFixed(1) : "N/A"}
       </p>
 
