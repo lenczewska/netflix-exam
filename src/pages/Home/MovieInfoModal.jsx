@@ -5,6 +5,7 @@ import logo_header from "../../assets/img/logo_header.png";
 import { Link } from "react-router-dom";
 import play_icon from "../../assets/img/play_icon.png";
 import { faThumbsUp, faPlus } from "@fortawesome/free-solid-svg-icons";
+import "./MovieInfoModal.css";
 
 const MovieInfoModal = ({ show, movie, onClose }) => {
   if (!show || !movie) return null;
@@ -19,13 +20,14 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
   return (
     <>
       <div
-        className="fixed inset-0 bg-[#17178b62] bg-opacity-100 z-100"
+        className="fixed inset-0 bg-[#17178b62] bg-opacity-100"
+        style={{ zIndex: 9999 }}
         onClick={onClose}
       ></div>
 
-      <div className="bg-[#f31515ad] w-full h-screen absolute top-[0px] flex items-center z-150">
-        <div className="w-max inset-0 absolute top-[60px] overflow-auto right-[0px] left-[240px] flex justify-center items-center z-150">
-          <div className="modal-box z-[300] relative w-[800px] bg-[#181818] h-[550px] rounded-[10px] ">
+      <div className="bg-[#181818ad] w-screen h-screen fixed top-0 left-0 flex items-center justify-center p-4" style={{ zIndex: 10000 }}>
+        <div className="modal-scroll flex justify-center items-center max-h-[90vh] overflow-y-auto overflow-x-hidden" style={{ zIndex: 10001 }}>
+          <div className="modal-box relative w-[800px] bg-[#181818] rounded-[10px] ">
             <button
               onClick={onClose}
               className="absolute top-[16px] right-[20px] cursor-pointer bg-[#262626] w-[40px] h-[40px] text-white text-2xl  rounded-full z-30 border-[#fff] border flex items-center justify-center"
@@ -33,12 +35,12 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
               <FontAwesomeIcon icon={faTimes} className="text-[23px]" />
             </button>
 
-            <div className="aboout-box pb-[15px] flex pt-[10px]">
+            <div className="aboout-box pb-[15px] flex ">
               <div className="w-auto relative gap-[15px] flex flex-col">
                 <img
                   src={movie.cover}
                   alt={movie.title}
-                  className="w-[800px] h-[450px] rounded-lg object-cover"
+                  className="w-[800px] h-[450px] object-cover"
                 />
 
                 <div className="play-box flex flex-col gap-[20px] ">
@@ -84,7 +86,7 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
               </div>
             </div>
 
-            <div className="absolute  bg-[#0000007b] backdrop-blur-md bottom-[0px] top-[460px] pt-[30px] h-[300px] w-[800px] ">
+            <div className="absolute  bg-[#0000007b] backdrop-blur-md bottom-[0px] top-[450px] pt-[30px] h-[300px] w-[800px] ">
               <div className="left flex  gap-[10px] pl-[45px] items-center text-[#aaa] ">
                 <span>{movie.releaseYear}</span>
                 <span className="border border-[#aaa] text-[13px] pl-[5px] pr-[5px]  ">

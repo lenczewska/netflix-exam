@@ -16,7 +16,13 @@ const Home = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
-    document.body.style.overflow = showModal ? "hidden" : "auto";
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    }
   }, [showModal]);
 
   const handleMoreInfo = (movie) => {
@@ -74,10 +80,10 @@ const Home = () => {
         <img
           src={hero_banner2}
           alt=""
-          className="hero-banner-img w-full object-cover h-[500px] "
+          className="hero-banner-img w-full object-cover h-[650px] "
         />
 
-        <div className="hero-content absolute top-[20%] left-[6%]  z-20 max-w-[600px]">
+        <div className="hero-content absolute top-[35%] left-[6%]  z-20 max-w-[600px]">
           <img
             src={hero_title}
             className="w-[90%] max-w-[420px]"
@@ -122,7 +128,7 @@ const Home = () => {
       />
 
       {/* Title Cards */}
-      <div className="mt-[10px] relative px-[60px] z-50 ">
+      <div className="mt-[10px] relative px-[60px] z-10">
         <TitleCards title="Popular on Netflix" category="popular" />
         <TitleCards title="Top Rated" category="top_rated" />
         <TitleCards title="Trending This Week" category="trending/movie/week" />

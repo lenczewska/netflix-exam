@@ -1,6 +1,7 @@
 .hero-banner-img{
     mask-image: linear-gradient(to right, transparent, black 95%);
         -weblit-mask-image: linear-gradient(to right, transparent, black 55%);
+        z-index: 30;
 }
 
 .hero-title{
