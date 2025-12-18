@@ -75,7 +75,6 @@ const Home = () => {
     <div className="home w-full min-h-screen bg-black text-white">
       <Navbar />
 
-      {/* Hero Banner */}
       <div className="relative w-full h-auto">
         <img
           src={hero_banner2}
@@ -96,7 +95,7 @@ const Home = () => {
           </p>
 
           <div className="btns flex gap-[10px] mt-[30px] ">
-            <Link to="/player">
+            <Link to="/player/:id">
               <button className="btn-play pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#fff] text-[#000] cursor-pointer rounded-[5px]  ">
                 <img src={play_icon} className="w-[25px] " alt="" />
                 Play

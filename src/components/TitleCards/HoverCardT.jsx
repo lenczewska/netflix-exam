@@ -11,17 +11,23 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./HoverCard.css";
 
-const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave, handleMoreInfo, isFavorite }) => {
+const HoverCardT = ({
+  data,
+  onAdd,
+  onMouseEnter,
+  onMouseLeave,
+  handleMoreInfo,
+  isFavorite,
+}) => {
   if (!data || Object.keys(data).length === 0) return null;
 
   const releaseYear = data.release_date
     ? new Date(data.release_date).getFullYear()
     : "N/A";
 
- 
   return (
     <div
-      className="hover-card bg-[#000] text-[#fff] w-[330px] h-[380px] p-[9px] duration-300 flex flex-col justify-between cursor-pointer"
+      className="hover-card  bg-[#222121] text-[#fff] w-[330px] h-[380px] p-[9px] duration-300 flex flex-col justify-between cursor-pointer"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -32,24 +38,33 @@ const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave, handleMoreInfo, i
           alt={data.title || data.name}
         />
       )}
-      <h3 className="text-xl  font-bold mb-1 line-clamp-1">
+      <h3 className="text-xl px-[10px]  font-bold mb-1 line-clamp-1">
         {data.title || data.name}
       </h3>
-      <p className="text-sm mb-2">
+      <p className="text-sm px-[10px]  mb-2">
         {releaseYear} |{" "}
         {data.vote_average ? data.vote_average.toFixed(1) : "N/A"}
       </p>
 
-      <div className=" flex justify-between text-center bg-[#000] text-[#fff] py-2 rounded">
-        <div className="flex gap-[6px]">
+      <div className=" flex border-[#aaa] justify-between text-center px-[10px]  bg-[#000] text-[#fff] py-2 rounded">
+        <div className="flex hover:bg-[#130f0f11] gap-[6px]">
           <Link
             to={`/player/${data.id}`}
-            className="rounded-[50%] w-[40px] h-[40px] bg-[#fff] flex justify-center items-center"
+            className="rounded-full w-[40px] h-[40px] bg-white border-2 border-transparent flex justify-center items-center transition-all duration-200 group"
           >
             <FontAwesomeIcon
               icon={faPlay}
-              className="text-[#000] text-[25px]"
+              className="text-black text-[19px] group-hover:text-white transition-all duration-200"
             />
+            <style>{`
+              .group:hover {
+                background: transparent !important;
+                border-color: #fff !important;
+              }
+              .group:hover .fa-play {
+                color: #fff !important;
+              }
+            `}</style>
           </Link>
 
           <button
@@ -58,7 +73,7 @@ const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave, handleMoreInfo, i
               e.stopPropagation();
               if (!isFavorite) onAdd?.(data);
             }}
-            className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
+            className="btn hover:border-[#fff]  border-2 border-[#616161] bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
             disabled={isFavorite}
           >
             <FontAwesomeIcon
@@ -67,7 +82,7 @@ const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave, handleMoreInfo, i
             />
           </button>
 
-          <button className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
+          <button className="btn hover:border-[#fff]  border-2 border-[#616161] bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
             <FontAwesomeIcon
               icon={faThumbsUp}
               className="text-[20px] text-[#fff]"
@@ -81,7 +96,7 @@ const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave, handleMoreInfo, i
             e.stopPropagation();
             if (handleMoreInfo) handleMoreInfo(data);
           }}
-          className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
+          className="btn hover:border-[#fff]  border-2 border-[#616161] ml-[120px] bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
         >
           <FontAwesomeIcon
             icon={faChevronDown}
@@ -90,7 +105,7 @@ const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave, handleMoreInfo, i
         </button>
       </div>
 
-      <div className="inf flex gap-[10px] pt-[20px] items-center">
+      <div className="inf flex gap-[10px]  border-b border-b-[#d62929] pb-[10px]  pt-[20px] px-[10px]  items-center">
         <span className="text-[#fff] hd text-[15px] px-[5px]">HD</span>
         <span className="text-[#aaa] text-[16px]">
           {data?.original_language}

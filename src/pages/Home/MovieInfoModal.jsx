@@ -20,7 +20,7 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
   return (
     <>
       <div
-        className="fixed inset-0 bg-[#17178b62] bg-opacity-100"
+        className="fixed inset-0 bg-[#41414262]  bg-opacity-100"
         style={{ zIndex: 9999 }}
         onClick={onClose}
       ></div>
@@ -75,7 +75,7 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
                       />
                     </button>
 
-                    <button className="btn  hover:border-[#fff] border-2 bg-[#14141492] hover:bg-[#1414141d] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
+                    <button className="btn  hover:border-[#fff] border-[#616161] border-2 bg-[#14141492] hover:bg-[#1414141d] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
                       <FontAwesomeIcon
                         icon={faThumbsUp}
                         className="text-[20px] text-[#fff]"
