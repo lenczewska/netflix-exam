@@ -108,7 +108,8 @@ const Shows = ({ favorites, setFavorites }) => {
               onClick={() => setOpen(!open)}
               className="bg-[#000] border px-[10px] cursor-pointer text-white rounded"
             >
-              Genres <FontAwesomeIcon icon={faCaretDown} className="text-white" />
+              Genres{" "}
+              <FontAwesomeIcon icon={faCaretDown} className="text-white" />
             </button>
 
             {open && (
@@ -137,7 +138,9 @@ const Shows = ({ favorites, setFavorites }) => {
               <div className="about pt-[70px] pl-[50px] bg-[#000] text-[#fff] w-[800px] h-[700px]">
                 <div className="pb-[10px]">
                   Watch{" "}
-                  <span className="text-[25px] font-[500]">{randomShow.name}</span>{" "}
+                  <span className="text-[25px] font-[500]">
+                    {randomShow.name}
+                  </span>{" "}
                   Now
                 </div>
                 <div className="text-[15px] w-[500px]">
@@ -148,7 +151,9 @@ const Shows = ({ favorites, setFavorites }) => {
                   <div className="text-[#aaa] text-[15px]">
                     {randomShow.first_air_date}
                   </div>
-                  <span className="text-[#fff] hd text-[15px] px-[5px]">HD</span>
+                  <span className="text-[#fff] hd text-[15px] px-[5px]">
+                    HD
+                  </span>
                   <span className="text-[#aaa] text-[16px]">
                     {randomShow?.original_language}
                   </span>
@@ -176,11 +181,17 @@ const Shows = ({ favorites, setFavorites }) => {
                     onClick={handleAddFavorite}
                     className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
                   >
-                    <FontAwesomeIcon icon={faPlus} className="text-[20px] text-[#fff]" />
+                    <FontAwesomeIcon
+                      icon={faPlus}
+                      className="text-[20px] text-[#fff]"
+                    />
                   </button>
 
                   <button className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
-                    <FontAwesomeIcon icon={faThumbsUp} className="text-[20px] text-[#fff]" />
+                    <FontAwesomeIcon
+                      icon={faThumbsUp}
+                      className="text-[20px] text-[#fff]"
+                    />
                   </button>
                 </div>
               </div>
@@ -193,9 +204,8 @@ const Shows = ({ favorites, setFavorites }) => {
 
       <div className="category-cards mt-10">
         <TitleCards title="Top Rated" category="top_rated" type="tv" />
-        <TitleCards title="Trending This Week" category="trending/tv/week" />
         <TitleCards title="Popular" category="popular" type="tv" />
-        <TitleCards title="Trending Today" category="trending/tv/day" />
+        <TitleCards title="Top Rated" category="top_rated" type="tv" />
       </div>
 
       <Footer />

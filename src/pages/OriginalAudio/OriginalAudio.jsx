@@ -10,25 +10,21 @@ const VITE_TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const OriginalAudio = () => {
   const [englishOptions, setEnglishOptions] = useState([]);
-  // 1. Сортировка по оригиналу/дубляжу
   const [selectedOriginal, setSelectedOriginal] = useState({
     name: "Original Audio",
     value: "original",
   });
-  // Track if navigation should be skipped on first render and only after user interaction
+
   const didMount = useRef(false);
   const userInteracted = useRef(false);
-  // 2. Сортировка по языкам (TMDB)
   const [selectedLanguage, setSelectedLanguage] = useState({
     name: "All Languages",
     code: "all",
   });
-  // 3. Сортировка по алфавиту
   const [selectedAlpha, setSelectedAlpha] = useState({
     name: "A-Z",
     value: "az",
   });
-  // Auto-navigate to SortPage on any select change, but only after user interaction
   useEffect(() => {
     if (!didMount.current) {
       didMount.current = true;
@@ -45,7 +41,6 @@ const OriginalAudio = () => {
     });
   }, [selectedOriginal, selectedLanguage, selectedAlpha]);
 
-  // Mark user interaction on select change
   const handleOriginalChange = (opt) => {
     userInteracted.current = true;
     setSelectedOriginal(opt);
@@ -123,7 +118,7 @@ const OriginalAudio = () => {
     <div>
       <Navbar />
 
-      <p className="pl-[45px] text-[27px] pt-[80px]">Browse by Languages</p>
+      <p className="pl-[45px] text-[27px] pt-[100px] pb-[20px] ">Browse by Languages</p>
 
       <div className="sorting-box flex items-center gap-[15px] pl-[45px] pt-[10px]">
         <p className="text-[14px]">Select Your Preferences</p>
@@ -217,7 +212,7 @@ const OriginalAudio = () => {
       </div>
 
 
-      <div className="pl-[45px] pt-[100px]">
+      <div className="pl-[45px] pt-[75px]">
         <TitleCards
           original={selectedOriginal.value}
           language={selectedLanguage.code}

@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import "./TitleCards.css";
 import { Link } from "react-router-dom";
 import HoverCardT from "./HoverCardT";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
@@ -13,6 +13,8 @@ const TitleCards = ({ title, category, onAdd, handleMoreInfo, original, language
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const [hoverCardDetail, setHoverCardDetail] = useState({});
   const [isLoadingDetail, setIsLoadingDetail] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const cardListRef = useRef(null);
 
   const BASE_URL = "https://api.themoviedb.org/3";
 
@@ -93,12 +95,56 @@ const TitleCards = ({ title, category, onAdd, handleMoreInfo, original, language
     filtered.sort((a, b) => (b.title || b.name || "").localeCompare(a.title || a.name || ""));
   }
 
-  return (
-    <div className="title-cards pr-[50px] mt-[50px]">
-      <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
+  // Функции для сдвига
+  const handleScrollRight = () => {
+    if (cardListRef.current) {
+      cardListRef.current.scrollBy({ left: 600, behavior: "smooth" });
+    }
+  };
+  const handleScrollLeft = () => {
+    if (cardListRef.current) {
+      cardListRef.current.scrollBy({ left: -600, behavior: "smooth" });
+    }
+  };
 
-      <div className="wrapper  ">
-        <div className="card-list overflow-x-scroll flex gap-[8px] pb-4">
+ 
+  useEffect(() => {
+    const ref = cardListRef.current;
+    if (!ref) return;
+    const onScroll = () => {
+      setScrolled(ref.scrollLeft > 125); 
+    };
+    ref.addEventListener("scroll", onScroll);
+    onScroll();
+    return () => ref.removeEventListener("scroll", onScroll);
+  }, [cardListRef]);
+
+  return (
+    <div className="title-cards pr-[50px] mt-[40px] relative">
+      <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
+      <div className="wrapper">
+        {scrolled && (
+          <button
+            className="scroll-btn left-[0px] absolute top-[220px] z-20 bg-[#000000c7] bg-opacity-60 text-white  w-[50px] h-[141px] flex items-center justify-center"
+            style={{ transform: "translateY(-50%)" }}
+            onClick={handleScrollLeft}
+            aria-label="Scroll Left"
+          >
+            <FontAwesomeIcon icon={faChevronLeft} size="lg" />
+          </button>
+        )}
+        <button
+          className="scroll-btn right-[-0px] absolute top-[220px] z-20 bg-[#000000c7] bg-opacity-60 text-white  w-[50px] h-[141px] flex items-center justify-center"
+          style={{ transform: "translateY(-50%)" }}
+          onClick={handleScrollRight}
+          aria-label="Scroll Right"
+        >
+          <FontAwesomeIcon icon={faChevronRight} size="lg" />
+        </button>
+        <div
+          className="card-list overflow-x-scroll flex gap-[8px] pb-4"
+          ref={cardListRef}
+        >
           {filtered.map((card) => (
             <div
               key={card.id}
@@ -119,7 +165,6 @@ const TitleCards = ({ title, category, onAdd, handleMoreInfo, original, language
                 )}
                 <p className="absolute right-[10px] bottom-[10px] text-white bg-black bg-opacity-50 px-2 py-1 rounded text-xs pointer-events-none">
                   {card.original_title || card.name}
-                  
                 </p>
               </Link>
 

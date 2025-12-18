@@ -1,0 +1,42 @@
+/* HoverCardL.css - Стили для HoverCardL (Latest)
+   Адаптировано на основе HoverCardG.css */
+
+.hover-card-latest {
+  position: relative;
+  width: 220px;
+  height: 320px;
+  background: #181818;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.hover-card-latest:hover {
+  transform: scale(1.05);
+}
+
+.hover-card-latest-img {
+  width: 100%;
+  height: 65%;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.hover-card-latest-info {
+  padding: 16px;
+  color: #fff;
+}
+
+.hover-card-latest-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.hover-card-latest-desc {
+  font-size: 0.95rem;
+  color: #b3b3b3;
+}

@@ -3,13 +3,17 @@ import "./Latest.css";
 import Navbar from "../../components/Navbar/Navbar";
 import TitleCards from "../../components/TitleCards/TitleCards";
 import Footer from "../../components/Footer/Footer";
+import HoverCardL from "./HoverCardL";
+import { useState } from "react";
 
 const Latest = () => {
+  const [hoveredCard, setHoveredCard] = useState(null);
+
   return (
     <div>
       <Navbar  />
 
-      <div className="category-cards pt-[50px]">
+      <div className="category-cards pt-[120px]">
         <TitleCards title="Top Rated" category="top_rated" />
         <TitleCards title="Trending This Week" category="trending/movie/week" />
         <TitleCards title="Upcoming" category="upcoming" />

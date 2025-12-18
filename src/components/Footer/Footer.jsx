@@ -8,9 +8,35 @@ function Footer() {
   return (
     <div className="footer  p-[30px_4%] max-w-[1000px] m-auto">
       <div className="footer-icons flex gap-[20px] ml-[10px] mb-[10px]  mt-[60px] pl-[10px]">
-        <img className="cursor-pointer w-[25px]" src={facebook_icon} alt="" />
-        <img className="cursor-pointer w-[25px]" src={instagram_icon} alt="" />
-        <img className="cursor-pointer w-[25px]" src={youtube_icon} alt="" />
+        <a
+          href="https://www.facebook.com/netflix/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            className="cursor-pointer w-[25px]"
+            src={facebook_icon}
+            alt="Facebook"
+          />
+        </a>
+        <a
+          href="https://www.instagram.com/netflix/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            className="cursor-pointer w-[25px]"
+            src={instagram_icon}
+            alt="Instagram"
+          />
+        </a>
+        <a href="https://www.youtube.com/channel/UCWOA1ZGywLbqmigxE4Qlvuw" target="_blank" rel="noopener noreferrer">
+          <img
+            className="cursor-pointer w-[25px]"
+            src={youtube_icon}
+            alt="YouTube"
+          />
+        </a>
       </div>
 
       <ul className="grid grid-cols-[auto_auto_auto_auto] mt-[20px]  text-[14px] gap-[15px] text-[#787878] mb-[30px]">
