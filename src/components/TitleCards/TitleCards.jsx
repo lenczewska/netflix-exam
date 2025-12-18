@@ -8,7 +8,7 @@ import { faPlus, faChevronRight, faChevronLeft } from "@fortawesome/free-solid-s
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
 
-const TitleCards = ({ title, category, onAdd, handleMoreInfo, original, language, alpha }) => {
+const TitleCards = ({ title, category, onAdd, handleMoreInfo, original, language, alpha, onOpenModal }) => {
   const [apiData, setApiData] = useState([]);
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const [hoverCardDetail, setHoverCardDetail] = useState({});
@@ -95,7 +95,6 @@ const TitleCards = ({ title, category, onAdd, handleMoreInfo, original, language
     filtered.sort((a, b) => (b.title || b.name || "").localeCompare(a.title || a.name || ""));
   }
 
-  // Функции для сдвига
   const handleScrollRight = () => {
     if (cardListRef.current) {
       cardListRef.current.scrollBy({ left: 600, behavior: "smooth" });
@@ -125,7 +124,7 @@ const TitleCards = ({ title, category, onAdd, handleMoreInfo, original, language
       <div className="wrapper">
         {scrolled && (
           <button
-            className="scroll-btn left-[0px] absolute top-[220px] z-20 bg-[#000000c7] bg-opacity-60 text-white  w-[50px] h-[141px] flex items-center justify-center"
+            className="scroll-btn left-[0px] mr-[50px] absolute top-[220px] z-20 bg-[#000000c7] bg-opacity-60 text-white  w-[50px] h-[141px] flex items-center justify-center"
             style={{ transform: "translateY(-50%)" }}
             onClick={handleScrollLeft}
             aria-label="Scroll Left"
@@ -193,6 +192,25 @@ const TitleCards = ({ title, category, onAdd, handleMoreInfo, original, language
                     };
                     handleMoreInfo && handleMoreInfo(mapped);
                   }}
+                  onOpenModal={onOpenModal ? (movie) => {
+                    let description = movie.overview || '';
+                    if (description.includes('.')) {
+                      description = description.split('.').shift().trim() + '.';
+                    }
+                    const mapped = {
+                      id: movie.id,
+                      title: movie.title || movie.name,
+                      description,
+                      genre: movie.genres?.map((g) => g.name).join(', '),
+                      releaseYear: movie.release_date ? new Date(movie.release_date).getFullYear() : '',
+                      cover: movie.backdrop_path ? `https://image.tmdb.org/t/p/w780${movie.backdrop_path}` : '',
+                      duration: movie.runtime ? `${Math.floor(movie.runtime / 60)}h ${movie.runtime % 60}m` : '',
+                      maturityRating: movie.adult ? '18+' : 'PG-13',
+                      language: movie.original_language,
+                      cast: movie.credits?.cast?.slice(0, 5).map((a) => ({ name: a.name })) || [],
+                    };
+                    onOpenModal(mapped);
+                  } : undefined}
                 />
               )}
             </div>

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +11,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "../../pages/Latest/Latest.css";
 
-const HoverCardL = ({ data, onAdd, onOpenModal, isFavorite }) => {
+const HoverCardL = ({
+  data,
+  onAdd,
+  onMouseEnter,
+  onMouseLeave,
+  handleMoreInfo,
+  isFavorite,
+}) => {
   if (!data || Object.keys(data).length === 0) return null;
 
   const releaseYear = data.release_date
@@ -20,9 +26,7 @@ const HoverCardL = ({ data, onAdd, onOpenModal, isFavorite }) => {
     : "N/A";
 
   return (
-    <div
-      className="hover-card-latest absolute z-9990 bg-[#111] text-[#fff] w-[330px] h-[380px] p-[9px] top-[560px]  -translate-x-1/2 shadow-2xl transition-all duration-300"
-    >
+    <div className="hover-card-latest absolute z-9990 bg-[#111] text-[#fff] w-[330px] h-[380px] p-[9px] top-[500px]  -translate-x-1/2 shadow-2xl transition-all duration-300">
       {data.backdrop_path && (
         <img
           src={`https://image.tmdb.org/t/p/w500${data.backdrop_path}`}
@@ -70,14 +74,13 @@ const HoverCardL = ({ data, onAdd, onOpenModal, isFavorite }) => {
             />
           </button>
         </div>
-
         <button
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            onOpenModal(data);
+            if (typeof onOpenModal === 'function') onOpenModal(data);
           }}
-          className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
+          className="btn hover:border-[#fff]  border-2 border-[#616161] ml-[120px] bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
         >
           <FontAwesomeIcon
             icon={faChevronDown}

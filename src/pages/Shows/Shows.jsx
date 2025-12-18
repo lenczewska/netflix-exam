@@ -15,7 +15,6 @@ const Shows = ({ favorites, setFavorites }) => {
   const [genres, setGenres] = useState([]);
   const headerRef = useRef(null);
 
-  // ограничение описания
   const limitOverview = (text, maxSentences = 3) => {
     if (!text) return "";
     const sentences = text.split(/(?<=[.!?])\s+/);
@@ -37,7 +36,6 @@ const Shows = ({ favorites, setFavorites }) => {
     });
   };
 
-  // ✅ жанры для сериалов
   useEffect(() => {
     const fetchGenres = async () => {
       const res = await fetch(
@@ -54,7 +52,6 @@ const Shows = ({ favorites, setFavorites }) => {
     fetchGenres();
   }, []);
 
-  // ✅ случайный сериал
   useEffect(() => {
     const fetchShows = async () => {
       const res = await fetch(
@@ -132,7 +129,7 @@ const Shows = ({ favorites, setFavorites }) => {
               <img
                 src={`https://image.tmdb.org/t/p/w500${randomShow.poster_path}`}
                 alt={randomShow.name}
-                className="rounded shadow-lg w-[500px] h-[700px] object-cover mt-4"
+                className="rounded shadow-lg w-[500px] h-[700px] object-cover "
               />
 
               <div className="about pt-[70px] pl-[50px] bg-[#000] text-[#fff] w-[800px] h-[700px]">
