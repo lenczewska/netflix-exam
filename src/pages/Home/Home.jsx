@@ -41,6 +41,11 @@ const Home = () => {
       duration: "2h 15m",
       maturityRating: "PG-13",
       language: "English",
+      cast: [
+        { name: "Tom Hanks" },
+        { name: "Emma Stone" },
+        { name: "Benedict Cumberbatch" },
+      ],
     },
     {
       id: 2,
@@ -52,6 +57,11 @@ const Home = () => {
       duration: "2h 40m",
       maturityRating: "PG-13",
       language: "English",
+      cast: [
+        { name: "Matthew McConaughey" },
+        { name: "Anne Hathaway" },
+        { name: "Michael B. Jordan" },
+      ],
     },
   ];
 
@@ -64,36 +74,36 @@ const Home = () => {
         <img
           src={hero_banner2}
           alt=""
-          className="hero-banner-img w-full object-cover h-[500px] sm:h-[260px] md:h-[380px] lg:h-[560px]"
+          className="hero-banner-img w-full object-cover h-[500px] "
         />
 
-        <div className="hero-content absolute top-[20%] left-[6%] sm:top-[18%] sm:left-[4%] md:top-[22%] z-20 max-w-[600px]">
+        <div className="hero-content absolute top-[20%] left-[6%]  z-20 max-w-[600px]">
           <img
             src={hero_title}
-            className="w-[90%] max-w-[420px] sm:max-w-[260px] md:max-w-[330px] lg:max-w-[480px]"
+            className="w-[90%] max-w-[420px]"
             alt=""
           />
 
-          <p className="mt-[30px] mb-5 text-[17px] max-w-[700px] sm:text-[13px] sm:max-w-[90%] sm:mt-2 md:text-[15px] lg:text-[18px]">
+          <p className="mt-[30px] mb-5 text-[17px] max-w-[700px] ">
             Discovering his ties to an ancient order, he embarks on a
             treacherous quest that takes him back to Ottoman Istanbul.
           </p>
 
-          <div className="btns flex gap-[10px] mt-[30px] sm:mt-[15px] sm:gap-[6px]">
+          <div className="btns flex gap-[10px] mt-[30px] ">
             <Link to="/player">
-              <button className="btn-play pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#fff] text-[#000] cursor-pointer rounded-[5px] sm:text-[12px] sm:px-[14px] sm:pt-[6px] sm:pb-[6px] md:text-[14px] lg:text-[16px] lg:px-[24px]">
-                <img src={play_icon} className="w-[25px] sm:w-[18px]" alt="" />
+              <button className="btn-play pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#fff] text-[#000] cursor-pointer rounded-[5px]  ">
+                <img src={play_icon} className="w-[25px] " alt="" />
                 Play
               </button>
             </Link>
 
             <button
               onClick={() => handleMoreInfo(movies[0])}
-              className="btn-inf pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#79797986] text-[#000] cursor-pointer rounded-[5px] sm:text-[12px] sm:px-[14px] sm:pt-[6px] sm:pb-[6px] md:text-[14px] lg:text-[16px] lg:px-[24px]"
+              className="btn-inf pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#79797986] text-[#000] cursor-pointer rounded-[5px]  "
             >
               <img
                 src={info_icon}
-                className="btn-dark w-[25px] sm:w-[18px]"
+                className="btn-dark w-[25px] "
                 alt=""
               />
               More Info
@@ -101,7 +111,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="absolute inset-0 z-10 bg-black/60"></div>
+        <div className="absolute inset-0 z-10 bg-black/20"></div>
       </div>
 
       {/* Модалка */}
@@ -112,7 +122,7 @@ const Home = () => {
       />
 
       {/* Title Cards */}
-      <div className="mt-[-50px] relative px-[6%] sm:mt-[-40px] sm:px-[4%]">
+      <div className="mt-[10px] relative px-[60px] z-50 ">
         <TitleCards title="Popular on Netflix" category="popular" />
         <TitleCards title="Top Rated" category="top_rated" />
         <TitleCards title="Trending This Week" category="trending/movie/week" />

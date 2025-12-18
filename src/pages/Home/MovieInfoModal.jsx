@@ -1,4 +1,4 @@
-import {React, useEffect} from "react";
+import { React, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faCircle } from "@fortawesome/free-solid-svg-icons";
 import logo_header from "../../assets/img/logo_header.png";
@@ -23,12 +23,12 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
         onClick={onClose}
       ></div>
 
-      <div className="bg-[#f31515ad] w-full h-screen absolute top-[0px] flex items-center z-100">
+      <div className="bg-[#f31515ad] w-full h-screen absolute top-[0px] flex items-center z-150">
         <div className="w-max inset-0 absolute top-[60px] overflow-auto right-[0px] left-[240px] flex justify-center items-center z-150">
-          <div className="modal-box relative w-[800px] bg-[#181818] h-screen rounded-[10px] ">
+          <div className="modal-box z-[300] relative w-[800px] bg-[#181818] h-[550px] rounded-[10px] ">
             <button
               onClick={onClose}
-              className="absolute top-[16px] right-[20px] cursor-pointer bg-[#262626] w-[40px] h-[40px] text-white text-2xl bg-black rounded-full z-30 border-[#fff] border flex items-center justify-center"
+              className="absolute top-[16px] right-[20px] cursor-pointer bg-[#262626] w-[40px] h-[40px] text-white text-2xl  rounded-full z-30 border-[#fff] border flex items-center justify-center"
             >
               <FontAwesomeIcon icon={faTimes} className="text-[23px]" />
             </button>
@@ -38,7 +38,7 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
                 <img
                   src={movie.cover}
                   alt={movie.title}
-                  className="w-[800px] h-[400px] rounded-lg object-cover"
+                  className="w-[800px] h-[450px] rounded-lg object-cover"
                 />
 
                 <div className="play-box flex flex-col gap-[20px] ">
@@ -54,7 +54,7 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
 
                   <div className=" flex gap-[5px] absolute bottom-[110px] left-[45px]  ">
                     <Link to="/player">
-                      <button className="btn-play pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#fff] text-[#000] cursor-pointer rounded-[5px] sm:text-[12px] sm:px-[14px] sm:pt-[6px] sm:pb-[6px] md:text-[14px]">
+                      <button className="btn-play pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#fff] text-[#000] cursor-pointer rounded-[5px] sm:text-[12px] ">
                         <img
                           src={play_icon}
                           className="w-[25px] sm:w-[18px]"
@@ -73,7 +73,7 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
                       />
                     </button>
 
-                    <button className="btnbg-[#1414144c] hover:border-[#fff] border-2 bg-[#14141492] hover:bg-[#1414141d] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
+                    <button className="btn  hover:border-[#fff] border-2 bg-[#14141492] hover:bg-[#1414141d] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
                       <FontAwesomeIcon
                         icon={faThumbsUp}
                         className="text-[20px] text-[#fff]"
@@ -84,7 +84,7 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
               </div>
             </div>
 
-            <div className="absolute  bg-[#0000007b] backdrop-blur-md bottom-[0px] top-[410px] pt-[30px] h-[300px] w-[800px] ">
+            <div className="absolute  bg-[#0000007b] backdrop-blur-md bottom-[0px] top-[460px] pt-[30px] h-[300px] w-[800px] ">
               <div className="left flex  gap-[10px] pl-[45px] items-center text-[#aaa] ">
                 <span>{movie.releaseYear}</span>
                 <span className="border border-[#aaa] text-[13px] pl-[5px] pr-[5px]  ">
@@ -130,24 +130,50 @@ const MovieInfoModal = ({ show, movie, onClose }) => {
                   </svg>
                 </div>
               </div>
-              <div className="m-name">
-                <span className="text-[20px] font-[700] pl-[45px] ">
-                  Watch {movie.title} Now
-                </span>
-                <p className="text-[#fff] pl-[45px] text-[15px] ">
-                  {movie.description}
-                </p>
-              </div>
-              <div className="right w-[300px] ">
-                {" "}
-                <span>{movie.genre}</span>
-              </div>
+              <div className="flex gap-[20px] justify-between mt-[15px] ">
+                <div className="m-name flex-1  ">
+                  <span className="text-[20px] font-[700] pl-[45px] ">
+                    Watch {movie.title} Now
+                  </span>
+                  <p className="text-[#fff] pl-[45px] pt-[20px] text-[15px] ">
+                    {movie.description}
+                  </p>
+                </div>
 
-              {/* Доп. информация */}
-              <div className="flex gap-4 text-gray-300 text-sm mt-4">
-                <p>Duration: {movie.duration}</p>
-                <p>Rating: {movie.maturityRating}</p>
-                <p>Language: {movie.language}</p>
+                <div className="flex-1 pr-[45px]">
+                  <div className="right text-[#aaa] mb-4">
+                    Genres:{" "}
+                    <span className="text-[#fff]">
+                      {movie.genre?.replace(/\//g, ", ")}
+                    </span>
+                  </div>
+                  <div className="text-[#aaa]">
+                    Cast:{" "}
+                    <span className="text-[#fff] text-[14px] ">
+                      {movie.cast
+                        ?.slice(0, 5)
+                        .map((actor) => actor.name)
+                        .join(", ") || "N/A"}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col gap-4 text-[#aaa] text-sm">
+                    <p>
+                      Duration:{" "}
+                      <span className="text-[#fff]">{movie.duration}</span>
+                    </p>
+                    <p>
+                      Rating:{" "}
+                      <span className="text-[#fff]">
+                        {movie.maturityRating}
+                      </span>
+                    </p>
+                    <p>
+                      Language:{" "}
+                      <span className="text-[#fff]">{movie.language}</span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
