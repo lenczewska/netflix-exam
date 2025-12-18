@@ -1,16 +1,13 @@
+
 .hover-card {
   position: absolute;
-  top: -130px;
-  z-index: 10001;
-  width: 330px;
-  height: 380px;
-  background: #000;
-  color: #fff;
-  padding: 9px;
+  top: -190px !important ;
+  z-index: 10050 !important;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
   left: 50%;
   transform: translateX(-50%);
+  pointer-events: auto;
 }
 
 .hover-card * {

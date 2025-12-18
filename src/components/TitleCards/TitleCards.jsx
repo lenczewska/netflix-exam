@@ -59,30 +59,33 @@ const TitleCards = ({ title, category, onAdd }) => {
     [hoverCardDetail.id, isLoadingDetail]
   );
 
+
+  // Показываем HoverCardT только если мышь над карточкой или над HoverCardT
   const handleMouseEnter = (cardId) => {
     setHoveredCardId(cardId);
     fetchMovieDetail(cardId);
   };
 
-  const handleMouseLeave = () => {
-    setHoveredCardId(null);
-    setHoverCardDetail({});
+  const handleMouseLeave = (e) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setHoveredCardId(null);
+      setHoverCardDetail({});
+    }
   };
 
   return (
     <div className="title-cards pr-[50px] mt-[50px]">
       <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
 
-      <div className="wrapper">
+      <div className="wrapper  ">
         <div className="card-list overflow-x-scroll flex gap-[8px] pb-4">
           {apiData.map((card) => (
             <div
               key={card.id}
-              className="card-wrapper relative"
+              className="card-wrapper  relative"
               onMouseEnter={() => handleMouseEnter(card.id)}
               onMouseLeave={handleMouseLeave}
             >
-              {/* LINK для картинки */}
               <Link
                 to={`/player/${card.id}`}
                 className="card block min-w-[250px] transition-all duration-300 hover:scale-[1.05] relative z-10"
@@ -100,9 +103,13 @@ const TitleCards = ({ title, category, onAdd }) => {
                 </p>
               </Link>
 
-              {/* HoverCard */}
               {hoveredCardId === card.id && hoverCardDetail.id === card.id && (
-                <HoverCardT data={hoverCardDetail} onAdd={onAdd} />
+                <HoverCardT
+                  data={hoverCardDetail}
+                  onAdd={onAdd}
+                  onMouseEnter={() => handleMouseEnter(card.id)}
+                  onMouseLeave={handleMouseLeave}
+                />
               )}
             </div>
           ))}

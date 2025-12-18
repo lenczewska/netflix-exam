@@ -11,8 +11,8 @@
   overflow-y: visible;
   padding-top: 150px;
   padding-bottom: 200px;
-  margin-top: -150px;
-  margin-bottom: -200px;
+  margin-top: -130px;
+  margin-bottom: -140px;
 }
 
 .card-list::-webkit-scrollbar {
@@ -24,11 +24,26 @@
   position: relative;
 }
 
+
+
 .card-wrapper {
   position: relative;
   width: 250px;
   flex-shrink: 0;
   z-index: 1;
+}
+
+.card-wrapper:has(.hover-card) {
+  z-index: 10010 !important;
+}
+
+.card-wrapper .card {
+  position: relative;
+  z-index: 2;
+}
+
+.card-wrapper:has(.hover-card) {
+  z-index: 1002;
 }
 
 .card-wrapper:hover {

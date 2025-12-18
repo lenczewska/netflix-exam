@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./HoverCard.css";
 
-const HoverCardT = ({ data, onAdd }) => {
+const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave }) => {
   if (!data || Object.keys(data).length === 0) return null;
 
   const releaseYear = data.release_date
@@ -26,24 +26,23 @@ const HoverCardT = ({ data, onAdd }) => {
       w-[330px] 
       h-[380px] 
       p-[9px]
-      shadow-2xl
-      transition-all
       duration-300
-      hover:z-50
       flex
       flex-col
       justify-between
       cursor-pointer
     "
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {data.backdrop_path && (
         <img
           src={`https://image.tmdb.org/t/p/w500${data.backdrop_path}`}
-          className="rounded mb-2"
+          className="rounded w-full h-[300px] rounded-t-[10px] object-contain "
           alt={data.title || data.name}
         />
       )}
-      <h3 className="text-xl font-bold mb-1 line-clamp-1">
+      <h3 className="text-xl  font-bold mb-1 line-clamp-1">
         {data.title || data.name}
       </h3>
       <p className="text-sm mb-2">
@@ -51,7 +50,7 @@ const HoverCardT = ({ data, onAdd }) => {
         {data.vote_average ? data.vote_average.toFixed(1) : "N/A"}
       </p>
 
-      <div className="mt-3 flex justify-between text-center bg-[#000] text-[#fff] py-2 rounded">
+      <div className=" flex justify-between text-center bg-[#000] text-[#fff] py-2 rounded">
         <div className="flex gap-[6px]">
           {/* Play ведёт на плеер */}
           <Link
@@ -113,7 +112,7 @@ const HoverCardT = ({ data, onAdd }) => {
         </span>
         <div className="text-[15px] text-[#aaa]">
           <span className="text-[#aaa] flex gap-[5px] items-center pl-[5px]">
-            {data?.genres?.slice(0, 3).map((g, index, array) => (
+            {data?.genres?.slice(0, 2).map((g, index, array) => (
               <React.Fragment key={g.id || index}>
                 {g.name}
                 {index < array.length - 1 && (

@@ -10,6 +10,7 @@
 .modal-scroll::-webkit-scrollbar-thumb {
   background: #666;
   border-radius: 4px;
+  
 }
 
 .modal-scroll::-webkit-scrollbar-thumb:hover {
@@ -20,4 +21,5 @@
 .modal-scroll {
   scrollbar-color: #666 transparent;
   scrollbar-width: thin;
+
 }

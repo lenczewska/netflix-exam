@@ -117,7 +117,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="absolute inset-0 z-10 bg-black/20"></div>
+        <div className="absolute  inset-0 z-10 bg-black/20"></div>
       </div>
 
       {/* Модалка */}
@@ -126,6 +126,7 @@ const Home = () => {
         movie={selectedMovie}
         onClose={closeModal}
       />
+
 
       {/* Title Cards */}
       <div className="mt-[10px] relative px-[60px] z-10">
