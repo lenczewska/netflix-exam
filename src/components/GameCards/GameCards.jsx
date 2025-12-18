@@ -30,7 +30,7 @@ function GameCards({ title, genres, onGameClick }) {
             <div key={game.id} className="flex flex-col items-center">
               <div
                 className="w-[160px] h-[160px] bg-white rounded-[20px] shadow-md overflow-hidden border border-gray-200 cursor-pointer"
-                onClick={() => onGameClick(game)} // <<< здесь
+                onClick={() => onGameClick(game)} 
               >
                 <img
                   src={game.images.cover}
@@ -39,7 +39,7 @@ function GameCards({ title, genres, onGameClick }) {
                 />
               </div>
 
-              <h3 className="w-[100px] break-words whitespace-normal mt-[2px] font-semibold text-gray-800 text-center">
+              <h3 className="w-[100px] break-words whitespace-normal mt-[2px] font-semibold text-[#fff] text-center">
                 {game.title}
               </h3>
             </div>

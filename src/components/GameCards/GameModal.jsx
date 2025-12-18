@@ -38,11 +38,11 @@ function GameModal({ game, onClose }) {
         </button>
         <div className="flex flex-col">
           <div className="about-box pb-[15px] pt-[10px]">
-            <div className="w-auto gap-[15px] flex items-center">
+            <div className="w-auto  gap-[15px] flex items-center">
               <img
                 src={game?.images?.cover}
                 alt={game?.title}
-                className="w-[110px] h-[100px] rounded-[15px] object-cover"
+                className="w-[110px] h-[100px]  rounded-[15px] object-cover"
               />
               <div>
                 <img src={logo_header} alt="logo" className="w-[60px]" />
@@ -60,24 +60,24 @@ function GameModal({ game, onClose }) {
                 </div>
               </div>
             </div>
-              <div className="download-box flex justify-between items-center w-full h-[150px] p-[20px] rounded-[10px] bg-[#222] mt-[20px]">
-                <div className="left-box mt-[10px] flex gap-[10px] ml-[20px]">
+              <div className="download-box flex justify-between items-center w-full h-[170px] p-[20px] rounded-[10px] bg-[#222] mt-[20px]">
+                <div className="left-box mt-[10px] flex justify-center items-center  gap-[40px] ml-[20px]">
                   <div className="qr-box">
                     <img
                       src={qr_code}
                       alt="qr-netflix"
-                      className="w-[120px] rounded-[4px]"
+                      className="w-[120px]  rounded-[4px]"
                     />
                   </div>
                   <div className="text-box flex flex-col gap-[3px] w-[350px]">
-                    <h2 className="text-[#fff] font-[700] text-[19px]">
+                    <h2 className="text-[#fff] font-[700] mt-[-10px] text-[19px]">
                       Scan to download on mobile
                     </h2>
                     <p className="text-[#fff] text-[14px]">
                       Included with your membership. No ads, extra fees or
                       in-app purchases.
                     </p>
-                    <div className="a-img flex gap-[10px]">
+                    <div className="a-img mt-[10px] flex gap-[10px]">
                       <a
                         href="https://apps.apple.com/us/app/netflix/id363590051"
                         target="_blank"
