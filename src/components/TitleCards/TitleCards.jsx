@@ -60,7 +60,6 @@ const TitleCards = ({ title, category, onAdd, handleMoreInfo }) => {
   );
 
 
-  // Показываем HoverCardT только если мышь над карточкой или над HoverCardT
   const handleMouseEnter = (cardId) => {
     setHoveredCardId(cardId);
     fetchMovieDetail(cardId);

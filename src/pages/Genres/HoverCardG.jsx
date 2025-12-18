@@ -5,12 +5,13 @@ import {
   faPlay,
   faThumbsUp,
   faPlus,
+  faCheck,
   faChevronDown,
   faCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import "./HoverCard.css";
 
-const HoverCardG = ({ data, onAdd, onOpenModal }) => {
+const HoverCardG = ({ data, onAdd, onOpenModal, isFavorite }) => {
   if (!data || Object.keys(data).length === 0) return null;
 
   const releaseYear = data.release_date
@@ -64,10 +65,16 @@ const HoverCardG = ({ data, onAdd, onOpenModal }) => {
           </Link>
 
           <button
-            onClick={() => onAdd(data)}
+            onClick={() => {
+              if (!isFavorite) onAdd(data);
+            }}
             className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
+            disabled={isFavorite}
           >
-            <FontAwesomeIcon icon={faPlus} className="text-[20px] text-[#fff]" />
+            <FontAwesomeIcon
+              icon={isFavorite ? faCheck : faPlus}
+              className="text-[20px] text-[#fff]"
+            />
           </button>
 
           <button className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
@@ -82,7 +89,7 @@ const HoverCardG = ({ data, onAdd, onOpenModal }) => {
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            onOpenModal(data);   
+            onOpenModal(data);
           }}
           className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
         >
@@ -95,7 +102,9 @@ const HoverCardG = ({ data, onAdd, onOpenModal }) => {
 
       <div className="inf flex gap-[10px] pt-[20px] items-center">
         <span className="text-[#fff] hd text-[15px] px-[5px]">HD</span>
-        <span className="text-[#aaa] text-[16px]">{data?.original_language}</span>
+        <span className="text-[#aaa] text-[16px]">
+          {data?.original_language}
+        </span>
         <div className="text-[15px] text-[#aaa]">
           <span className="text-[#aaa] flex gap-[5px] items-center pl-[5px]">
             {data?.genres?.slice(0, 3).map((g, index, array) => (

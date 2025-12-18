@@ -5,33 +5,23 @@ import {
   faPlay,
   faThumbsUp,
   faPlus,
+  faCheck,
   faChevronDown,
   faCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import "./HoverCard.css";
 
-const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave, handleMoreInfo }) => {
+const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave, handleMoreInfo, isFavorite }) => {
   if (!data || Object.keys(data).length === 0) return null;
 
   const releaseYear = data.release_date
     ? new Date(data.release_date).getFullYear()
     : "N/A";
 
+ 
   return (
     <div
-      className="
-      hover-card 
-      bg-[#000] 
-      text-[#fff] 
-      w-[330px] 
-      h-[380px] 
-      p-[9px]
-      duration-300
-      flex
-      flex-col
-      justify-between
-      cursor-pointer
-    "
+      className="hover-card bg-[#000] text-[#fff] w-[330px] h-[380px] p-[9px] duration-300 flex flex-col justify-between cursor-pointer"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -68,14 +58,13 @@ const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave, handleMoreInfo })
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              console.log("HoverCard + clicked:", data); // Проверка что фильм приходит
-
-              onAdd?.(data); // правильно передаём объект фильма из props
+              if (!isFavorite) onAdd?.(data);
             }}
             className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
+            disabled={isFavorite}
           >
             <FontAwesomeIcon
-              icon={faPlus}
+              icon={isFavorite ? faCheck : faPlus}
               className="text-[20px] text-[#fff]"
             />
           </button>
