@@ -12,12 +12,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "../../pages/Latest/Latest.css";
 
-const HoverCardL = ({ data, onAdd, onOpenModal, isFavorite }) => {
+
+const HoverCardL = ({ data, onAdd, onRemove, onOpenModal, favorites = [] }) => {
   if (!data || Object.keys(data).length === 0) return null;
 
   const releaseYear = data.release_date
     ? new Date(data.release_date).getFullYear()
     : "N/A";
+
+  const isFavorite = favorites.some((item) => item.id === data.id);
 
   return (
     <div
@@ -52,10 +55,13 @@ const HoverCardL = ({ data, onAdd, onOpenModal, isFavorite }) => {
 
           <button
             onClick={() => {
-              if (!isFavorite) onAdd(data);
+              if (isFavorite) {
+                onRemove?.(data);
+              } else {
+                onAdd?.(data);
+              }
             }}
-            className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
-            disabled={isFavorite}
+            className={`btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center`}
           >
             <FontAwesomeIcon
               icon={isFavorite ? faCheck : faPlus}

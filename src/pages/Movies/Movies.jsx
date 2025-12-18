@@ -223,18 +223,27 @@ const Movies = ({ favorites, setFavorites }) => {
           overflow-x-scroll
           title="Trending This Week"
           category="trending/movie/week"
+          favorites={favorites}
+          onAdd={(movie) => setFavorites((prev) => prev.some((m) => m.id === movie.id) ? prev : [...prev, movie])}
+          onRemove={(movie) => setFavorites((prev) => prev.filter((m) => m.id !== movie.id))}
         />
-        <TitleCards overflow-x-scroll title="Upcoming" category="upcoming" />
-        <TitleCards overflow-x-scroll title="Popular" category="popular" />
+        <TitleCards overflow-x-scroll title="Upcoming" category="upcoming" favorites={favorites} onAdd={(movie) => setFavorites((prev) => prev.some((m) => m.id === movie.id) ? prev : [...prev, movie])} onRemove={(movie) => setFavorites((prev) => prev.filter((m) => m.id !== movie.id))} />
+        <TitleCards overflow-x-scroll title="Popular" category="popular" favorites={favorites} onAdd={(movie) => setFavorites((prev) => prev.some((m) => m.id === movie.id) ? prev : [...prev, movie])} onRemove={(movie) => setFavorites((prev) => prev.filter((m) => m.id !== movie.id))} />
         <TitleCards
           overflow-x-scroll
           title="Now Playing"
           category="now_playing"
+          favorites={favorites}
+          onAdd={(movie) => setFavorites((prev) => prev.some((m) => m.id === movie.id) ? prev : [...prev, movie])}
+          onRemove={(movie) => setFavorites((prev) => prev.filter((m) => m.id !== movie.id))}
         />
         <TitleCards
           overflow-x-scroll
           title="Trending Today"
           category="trending/movie/day"
+          favorites={favorites}
+          onAdd={(movie) => setFavorites((prev) => prev.some((m) => m.id === movie.id) ? prev : [...prev, movie])}
+          onRemove={(movie) => setFavorites((prev) => prev.filter((m) => m.id !== movie.id))}
         />
       </div>
 

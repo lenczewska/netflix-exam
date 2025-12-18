@@ -14,10 +14,12 @@ import "./HoverCard.css";
 const HoverCardT = ({
   data,
   onAdd,
+  onRemove,
   onMouseEnter,
   onMouseLeave,
   handleMoreInfo,
   isFavorite,
+  favorites = [],
 }) => {
   if (!data || Object.keys(data).length === 0) return null;
 
@@ -71,10 +73,13 @@ const HoverCardT = ({
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              if (!isFavorite) onAdd?.(data);
+              if (isFavorite) {
+                onRemove?.(data);
+              } else {
+                onAdd?.(data);
+              }
             }}
-            className="btn hover:border-[#fff]  border-2 border-[#616161] bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
-            disabled={isFavorite}
+            className={`btn hover:border-[#fff]  border-2 border-[#616161] bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center`}
           >
             <FontAwesomeIcon
               icon={isFavorite ? faCheck : faPlus}

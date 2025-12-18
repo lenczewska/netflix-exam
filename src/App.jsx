@@ -33,13 +33,16 @@ function App() {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
-  const handleAddToFavorites = (movie) => {
-    console.log("ADD TO FAVORITES:", movie);
 
+  const handleAddToFavorites = (movie) => {
     setFavorites((prev) => {
       if (prev.some((m) => m.id === movie.id)) return prev;
       return [...prev, movie];
     });
+  };
+
+  const handleRemoveFromFavorites = (movie) => {
+    setFavorites((prev) => prev.filter((m) => m.id !== movie.id));
   };
 
   useEffect(() => {
@@ -77,7 +80,7 @@ function App() {
       />
       <Route path="/sort" element={<SortPage />} />
       <Route path="/games" element={<Games />} />
-      <Route path="/latest" element={<Latest />} />
+      <Route path="/latest" element={<Latest favorites={favorites} onAddToFavorites={handleAddToFavorites} onRemoveFromFavorites={handleRemoveFromFavorites} />} />
       <Route path="/my-list" element={<MyList favorites={favorites} setFavorites={setFavorites} />} />
       <Route path="/original-audio" element={<OriginalAudio />} />
       <Route path="/search" element={<SearchPage />} />
