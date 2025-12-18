@@ -130,12 +130,12 @@ const Home = () => {
 
       {/* Title Cards */}
       <div className="mt-[10px] relative px-[60px] z-10">
-        <TitleCards title="Popular on Netflix" category="popular" />
-        <TitleCards title="Top Rated" category="top_rated" />
-        <TitleCards title="Trending This Week" category="trending/movie/week" />
-        <TitleCards title="Upcoming" category="upcoming" />
-        <TitleCards title="Now Playing" category="now_playing" />
-        <TitleCards title="Trending Today" category="trending/movie/day" />
+        <TitleCards title="Popular on Netflix" category="popular" handleMoreInfo={handleMoreInfo} />
+        <TitleCards title="Top Rated" category="top_rated" handleMoreInfo={handleMoreInfo} />
+        <TitleCards title="Trending This Week" category="trending/movie/week" handleMoreInfo={handleMoreInfo} />
+        <TitleCards title="Upcoming" category="upcoming" handleMoreInfo={handleMoreInfo} />
+        <TitleCards title="Now Playing" category="now_playing" handleMoreInfo={handleMoreInfo} />
+        <TitleCards title="Trending Today" category="trending/movie/day" handleMoreInfo={handleMoreInfo} />
       </div>
 
       <Footer />
