@@ -2,7 +2,11 @@ import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 
-const MyList = ({ favorites }) => {
+const MyList = ({ favorites, setFavorites }) => {
+  const handleRemove = (id) => {
+    setFavorites((prev) => prev.filter((item) => item.id !== id));
+  };
+
   return (
     <div className="min-h-screen">
       <Navbar className="fixed top-0 left-0 w-full z-50" />
@@ -20,14 +24,32 @@ const MyList = ({ favorites }) => {
             {favorites.map((item) => (
               <div
                 key={item.id}
-                className="bg-gray-100 p-4 rounded shadow text-center"
+                className="relative bg-[#000] p-4 rounded shadow text-center overflow-hidden group"
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
                   alt={item.original_title || item.name}
                   className="w-full rounded mb-2"
                 />
-                <p>{item.original_title || item.name}</p>
+                <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 gap-4">
+                  <div className="flex gap-4">
+                    <a
+                      href={`/player/${item.id}`}
+                      className="flex items-center justify-center"
+                    >
+                      <button className="bg-white text-black rounded-full w-14 h-14 flex items-center justify-center shadow-lg text-2xl hover:scale-110 transition-transform">
+                        ▶
+                      </button>
+                    </a>
+                    <button
+                      className="bg-red-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg text-2xl hover:scale-110 transition-transform"
+                      onClick={() => handleRemove(item.id)}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+                <p className="relative z-10">{item.original_title || item.name}</p>
               </div>
             ))}
           </div>
