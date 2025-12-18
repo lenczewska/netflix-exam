@@ -8,7 +8,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
 
-const TitleCards = ({ title, category, onAdd }) => {
+const TitleCards = ({ title, category, onAdd, handleMoreInfo }) => {
   const [apiData, setApiData] = useState([]);
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const [hoverCardDetail, setHoverCardDetail] = useState({});
@@ -109,6 +109,27 @@ const TitleCards = ({ title, category, onAdd }) => {
                   onAdd={onAdd}
                   onMouseEnter={() => handleMouseEnter(card.id)}
                   onMouseLeave={handleMouseLeave}
+                  handleMoreInfo={(movie) => {
+                    // Преобразуем данные TMDB в формат MovieInfoModal
+                    // Оставляем только первое предложение в описании
+                    let description = movie.overview || '';
+                    if (description.includes('.')) {
+                      description = description.split('.').shift().trim() + '.';
+                    }
+                    const mapped = {
+                      id: movie.id,
+                      title: movie.title || movie.name,
+                      description,
+                      genre: movie.genres?.map((g) => g.name).join(', '),
+                      releaseYear: movie.release_date ? new Date(movie.release_date).getFullYear() : '',
+                      cover: movie.backdrop_path ? `https://image.tmdb.org/t/p/w780${movie.backdrop_path}` : '',
+                      duration: movie.runtime ? `${Math.floor(movie.runtime / 60)}h ${movie.runtime % 60}m` : '',
+                      maturityRating: movie.adult ? '18+' : 'PG-13',
+                      language: movie.original_language,
+                      cast: movie.credits?.cast?.slice(0, 5).map((a) => ({ name: a.name })) || [],
+                    };
+                    handleMoreInfo && handleMoreInfo(mapped);
+                  }}
                 />
               )}
             </div>

@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./HoverCard.css";
 
-const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave }) => {
+const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave, handleMoreInfo }) => {
   if (!data || Object.keys(data).length === 0) return null;
 
   const releaseYear = data.release_date
@@ -89,12 +89,11 @@ const HoverCardT = ({ data, onAdd, onMouseEnter, onMouseLeave }) => {
           </button>
         </div>
 
-        {/* Chevron Down — тоже добавляет в список */}
         <button
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            onAdd?.(data);
+            if (handleMoreInfo) handleMoreInfo(data);
           }}
           className="btn border-[#616161] border-2 bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
         >
