@@ -7,8 +7,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
-import { Swiper, SwiperSlide } from "swiper/react";
-
+import MovieInfoModal from "../../components/Modal/MovieInfoModal";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const Movies = ({ favorites, setFavorites }) => {
@@ -16,6 +15,8 @@ const Movies = ({ favorites, setFavorites }) => {
   const [randomMovie, setRandomMovie] = useState(null);
   const [genres, setGenres] = useState([]);
   const headerRef = useRef(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
   const limitOverview = (text, maxSentences = 3) => {
     if (!text) return "";
@@ -24,6 +25,16 @@ const Movies = ({ favorites, setFavorites }) => {
       return text;
     }
     return sentences.slice(0, maxSentences).join(" ") + "...";
+  };
+
+  const openModal = (movie) => {
+    setSelectedMovie(movie);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedMovie(null);
   };
 
   const sortedGenres = [...genres].sort((a, b) =>
@@ -55,6 +66,21 @@ const Movies = ({ favorites, setFavorites }) => {
 
     fetchGenres();
   }, []);
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    };
+  }, [showModal]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -217,32 +243,87 @@ const Movies = ({ favorites, setFavorites }) => {
         </div>
       </div>
 
+      <MovieInfoModal
+        show={showModal}
+        movie={selectedMovie}
+        onClose={closeModal}
+      />
+
       <div className="category-cards  mt-10 ">
         <TitleCards
           overflow-x-scroll
           title="Trending This Week"
           category="trending/movie/week"
           favorites={favorites}
-          onAdd={(movie) => setFavorites((prev) => prev.some((m) => m.id === movie.id) ? prev : [...prev, movie])}
-          onRemove={(movie) => setFavorites((prev) => prev.filter((m) => m.id !== movie.id))}
+          onAdd={(movie) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+            )
+          }
+          onRemove={(movie) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== movie.id))
+          }
+          onOpenModal={openModal}
         />
-        <TitleCards overflow-x-scroll title="Upcoming" category="upcoming" favorites={favorites} onAdd={(movie) => setFavorites((prev) => prev.some((m) => m.id === movie.id) ? prev : [...prev, movie])} onRemove={(movie) => setFavorites((prev) => prev.filter((m) => m.id !== movie.id))} />
-        <TitleCards overflow-x-scroll title="Popular" category="popular" favorites={favorites} onAdd={(movie) => setFavorites((prev) => prev.some((m) => m.id === movie.id) ? prev : [...prev, movie])} onRemove={(movie) => setFavorites((prev) => prev.filter((m) => m.id !== movie.id))} />
+        <TitleCards
+          overflow-x-scroll
+          title="Upcoming"
+          category="upcoming"
+          favorites={favorites}
+          onAdd={(movie) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+            )
+          }
+          onRemove={(movie) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== movie.id))
+          }
+          onOpenModal={openModal}
+        />
+        <TitleCards
+          overflow-x-scroll
+          title="Popular"
+          category="popular"
+          favorites={favorites}
+          onAdd={(movie) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+            )
+          }
+          onRemove={(movie) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== movie.id))
+          }
+          onOpenModal={openModal}
+        />
         <TitleCards
           overflow-x-scroll
           title="Now Playing"
           category="now_playing"
           favorites={favorites}
-          onAdd={(movie) => setFavorites((prev) => prev.some((m) => m.id === movie.id) ? prev : [...prev, movie])}
-          onRemove={(movie) => setFavorites((prev) => prev.filter((m) => m.id !== movie.id))}
+          onAdd={(movie) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+            )
+          }
+          onRemove={(movie) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== movie.id))
+          }
+          onOpenModal={openModal}
         />
         <TitleCards
           overflow-x-scroll
           title="Trending Today"
           category="trending/movie/day"
           favorites={favorites}
-          onAdd={(movie) => setFavorites((prev) => prev.some((m) => m.id === movie.id) ? prev : [...prev, movie])}
-          onRemove={(movie) => setFavorites((prev) => prev.filter((m) => m.id !== movie.id))}
+          onAdd={(movie) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+            )
+          }
+          onRemove={(movie) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== movie.id))
+          }
+          onOpenModal={openModal}
         />
       </div>
 

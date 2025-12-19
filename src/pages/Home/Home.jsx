@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import TitleCards from "../../components/TitleCards/TitleCards";
 import Player from "../Player/Player";
-import MovieInfoModal from "./MovieInfoModal";
+import MovieInfoModal from "../../components/Modal/MovieInfoModal";
 import hero_banner2 from "../../assets/img/hero_banner2.jpg";
 import hero_title from "../../assets/img/hero_title.png";
 import play_icon from "../../assets/img/play_icon.png";

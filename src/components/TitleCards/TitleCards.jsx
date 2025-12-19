@@ -8,7 +8,18 @@ import { faPlus, faChevronRight, faChevronLeft } from "@fortawesome/free-solid-s
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
 
-const TitleCards = ({ title, category, onAdd, onRemove, onOpenModal, favorites, handleMoreInfo, original, language, alpha }) => {
+const TitleCards = ({
+  title,
+  category,
+  onAdd,
+  onRemove,
+  onOpenModal, // обязательно передаем из родителя
+  favorites,
+  handleMoreInfo,
+  original,
+  language,
+  alpha,
+}) => {
   const [apiData, setApiData] = useState([]);
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const [hoverCardDetail, setHoverCardDetail] = useState({});
@@ -17,7 +28,6 @@ const TitleCards = ({ title, category, onAdd, onRemove, onOpenModal, favorites, 
   const cardListRef = useRef(null);
 
   const BASE_URL = "https://api.themoviedb.org/3";
-
   const options = {
     method: "GET",
     headers: {
@@ -26,14 +36,13 @@ const TitleCards = ({ title, category, onAdd, onRemove, onOpenModal, favorites, 
     },
   };
 
+  // Загрузка списка фильмов
   useEffect(() => {
     let url;
     if (category?.startsWith("trending")) {
       url = `${BASE_URL}/${category}?api_key=${API_KEY}`;
     } else {
-      url = `${BASE_URL}/movie/${
-        category || "now_playing"
-      }?api_key=${API_KEY}&language=en-US&page=1`;
+      url = `${BASE_URL}/movie/${category || "now_playing"}?api_key=${API_KEY}&language=en-US&page=1`;
     }
 
     fetch(url, options)
@@ -42,13 +51,13 @@ const TitleCards = ({ title, category, onAdd, onRemove, onOpenModal, favorites, 
       .catch((err) => console.error("Error fetching list:", err));
   }, [category]);
 
+  // Подгрузка деталей фильма
   const fetchMovieDetail = useCallback(
     async (id) => {
       if (hoverCardDetail.id === id || isLoadingDetail) return;
-
       setIsLoadingDetail(true);
       try {
-        const detailUrl = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`;
+        const detailUrl = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US&append_to_response=credits`;
         const response = await fetch(detailUrl, options);
         const data = await response.json();
         setHoverCardDetail(data);
@@ -61,33 +70,32 @@ const TitleCards = ({ title, category, onAdd, onRemove, onOpenModal, favorites, 
     [hoverCardDetail.id, isLoadingDetail]
   );
 
-
   const handleMouseEnter = (cardId) => {
     setHoveredCardId(cardId);
     fetchMovieDetail(cardId);
   };
 
   const handleMouseLeave = (e) => {
-    if (!e.currentTarget.contains(e.relatedTarget)) {
+    const related = e.relatedTarget;
+    if (!related || !(related instanceof Node) || !e.currentTarget.contains(related)) {
       setHoveredCardId(null);
       setHoverCardDetail({});
     }
   };
 
+  // Фильтры и сортировка
   let filtered = [...apiData];
-  if (original === "original") {
-    if (language && language !== "all") {
-      filtered = filtered.filter(card => card.original_language === language);
-    }
+  if (original === "original" && language && language !== "all") {
+    filtered = filtered.filter((card) => card.original_language === language);
   } else if (original === "dubbing") {
-    if (language && language !== "all") {
-      filtered = filtered.filter(card => card.original_language !== language && card.spoken_languages?.some(l => l.iso_639_1 === language));
-    } else {
-      filtered = filtered.filter(card => card.original_language !== "en"); 
-    }
+    filtered = filtered.filter((card) =>
+      language && language !== "all"
+        ? card.original_language !== language && card.spoken_languages?.some((l) => l.iso_639_1 === language)
+        : card.original_language !== "en"
+    );
   }
   if ((!original || original === "") && language && language !== "all") {
-    filtered = filtered.filter(card => card.original_language === language);
+    filtered = filtered.filter((card) => card.original_language === language);
   }
   if (alpha === "az") {
     filtered.sort((a, b) => (a.title || a.name || "").localeCompare(b.title || b.name || ""));
@@ -95,26 +103,19 @@ const TitleCards = ({ title, category, onAdd, onRemove, onOpenModal, favorites, 
     filtered.sort((a, b) => (b.title || b.name || "").localeCompare(a.title || a.name || ""));
   }
 
+  // Скролл
   const handleScrollRight = () => {
-    if (cardListRef.current) {
-      cardListRef.current.scrollBy({ left: 600, behavior: "smooth" });
-    }
+    if (cardListRef.current) cardListRef.current.scrollBy({ left: 600, behavior: "smooth" });
   };
   const handleScrollLeft = () => {
-    if (cardListRef.current) {
-      cardListRef.current.scrollBy({ left: -600, behavior: "smooth" });
-    }
+    if (cardListRef.current) cardListRef.current.scrollBy({ left: -600, behavior: "smooth" });
   };
 
- 
   useEffect(() => {
     const ref = cardListRef.current;
     if (!ref) return;
-    const onScroll = () => {
-      setScrolled(ref.scrollLeft > 125); 
-    };
+    const onScroll = () => setScrolled(ref.scrollLeft > 125);
     ref.addEventListener("scroll", onScroll);
-    onScroll();
     return () => ref.removeEventListener("scroll", onScroll);
   }, [cardListRef]);
 
@@ -124,7 +125,7 @@ const TitleCards = ({ title, category, onAdd, onRemove, onOpenModal, favorites, 
       <div className="wrapper">
         {scrolled && (
           <button
-            className="scroll-btn left-[0px] mr-[50px] absolute top-[220px] z-20 bg-[#000000c7] bg-opacity-60 text-white  w-[50px] h-[141px] flex items-center justify-center"
+            className="scroll-btn left-[0px] mr-[50px] absolute top-[220px] z-20 bg-[#000000c7] bg-opacity-60 text-white w-[50px] h-[141px] flex items-center justify-center"
             style={{ transform: "translateY(-50%)" }}
             onClick={handleScrollLeft}
             aria-label="Scroll Left"
@@ -133,21 +134,18 @@ const TitleCards = ({ title, category, onAdd, onRemove, onOpenModal, favorites, 
           </button>
         )}
         <button
-          className="scroll-btn right-[-0px] absolute top-[220px] z-20 bg-[#000000c7] bg-opacity-60 text-white  w-[50px] h-[141px] flex items-center justify-center"
+          className="scroll-btn right-[-0px] absolute top-[220px] z-20 bg-[#000000c7] bg-opacity-60 text-white w-[50px] h-[141px] flex items-center justify-center"
           style={{ transform: "translateY(-50%)" }}
           onClick={handleScrollRight}
           aria-label="Scroll Right"
         >
           <FontAwesomeIcon icon={faChevronRight} size="lg" />
         </button>
-        <div
-          className="card-list overflow-x-scroll flex gap-[8px] pb-4"
-          ref={cardListRef}
-        >
+        <div className="card-list overflow-x-scroll flex gap-[8px] pb-4" ref={cardListRef}>
           {filtered.map((card) => (
             <div
               key={card.id}
-              className="card-wrapper  relative"
+              className="card-wrapper relative"
               onMouseEnter={() => handleMouseEnter(card.id)}
               onMouseLeave={handleMouseLeave}
             >
@@ -177,43 +175,37 @@ const TitleCards = ({ title, category, onAdd, onRemove, onOpenModal, favorites, 
                   onMouseEnter={() => handleMouseEnter(card.id)}
                   onMouseLeave={handleMouseLeave}
                   handleMoreInfo={(movie) => {
-                    let description = movie.overview || '';
-                    if (description.includes('.')) {
-                      description = description.split('.').shift().trim() + '.';
-                    }
                     const mapped = {
                       id: movie.id,
                       title: movie.title || movie.name,
-                      description,
-                      genre: movie.genres?.map((g) => g.name).join(', '),
-                      releaseYear: movie.release_date ? new Date(movie.release_date).getFullYear() : '',
-                      cover: movie.backdrop_path ? `https://image.tmdb.org/t/p/w780${movie.backdrop_path}` : '',
-                      duration: movie.runtime ? `${Math.floor(movie.runtime / 60)}h ${movie.runtime % 60}m` : '',
-                      maturityRating: movie.adult ? '18+' : 'PG-13',
+                      description: movie.overview?.split(".").shift()?.trim() + "." || "",
+                      genre: movie.genres?.map((g) => g.name).join(", "),
+                      releaseYear: movie.release_date ? new Date(movie.release_date).getFullYear() : "",
+                      cover: movie.backdrop_path ? `https://image.tmdb.org/t/p/w780${movie.backdrop_path}` : "",
+                      duration: movie.runtime ? `${Math.floor(movie.runtime / 60)}h ${movie.runtime % 60}m` : "",
+                      maturityRating: movie.adult ? "18+" : "PG-13",
                       language: movie.original_language,
                       cast: movie.credits?.cast?.slice(0, 5).map((a) => ({ name: a.name })) || [],
                     };
-                    handleMoreInfo && handleMoreInfo(mapped);
+                    handleMoreInfo?.(mapped);
                   }}
-                  onOpenModal={onOpenModal ? (movie) => {
-                    let description = movie.overview || '';
-                    if (description.includes('.')) {
-                      description = description.split('.').shift().trim() + '.';
+                  onOpenModal={(movie) => {
+                    if (onOpenModal) {
+                      const mapped = {
+                        id: movie.id,
+                        title: movie.title || movie.name,
+                        description: movie.overview?.split(".").shift()?.trim() + "." || "",
+                        genre: movie.genres?.map((g) => g.name).join(", "),
+                        releaseYear: movie.release_date ? new Date(movie.release_date).getFullYear() : "",
+                        cover: movie.backdrop_path ? `https://image.tmdb.org/t/p/w780${movie.backdrop_path}` : "",
+                        duration: movie.runtime ? `${Math.floor(movie.runtime / 60)}h ${movie.runtime % 60}m` : "",
+                        maturityRating: movie.adult ? "18+" : "PG-13",
+                        language: movie.original_language,
+                        cast: movie.credits?.cast?.slice(0, 5).map((a) => ({ name: a.name })) || [],
+                      };
+                      onOpenModal(mapped);
                     }
-                    const mapped = {
-                      id: movie.id,
-                      title: movie.title || movie.name,
-                      description,
-                      genre: movie.genres?.map((g) => g.name).join(', '),
-                      releaseYear: movie.release_date ? new Date(movie.release_date).getFullYear() : '',
-                      cover: movie.backdrop_path ? `https://image.tmdb.org/t/p/w780${movie.backdrop_path}` : '',
-                      duration: movie.runtime ? `${Math.floor(movie.runtime / 60)}h ${movie.runtime % 60}m` : '',
-                      maturityRating: movie.adult ? '18+' : 'PG-13',
-                      language: movie.original_language,
-                      cast: movie.credits?.cast?.slice(0, 5).map((a) => ({ name: a.name })) || [],
-                    };
-                    onOpenModal(mapped);
-                  } : undefined}
+                  }}
                 />
               )}
             </div>

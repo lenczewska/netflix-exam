@@ -3,7 +3,7 @@ import "./Latest.css";
 import Navbar from "../../components/Navbar/Navbar";
 import TitleCards from "../../components/TitleCards/TitleCards";
 import Footer from "../../components/Footer/Footer";
-import MovieInfoModal from "../Home/MovieInfoModal";
+import MovieInfoModal from "../../components/Modal/MovieInfoModal";
 
 const Latest = () => {
   const [showModal, setShowModal] = useState(false);
