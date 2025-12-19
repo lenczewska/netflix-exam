@@ -138,7 +138,7 @@ const Movies = ({ favorites, setFavorites }) => {
           </div>
         </div>
 
-        <div className="flex w-full pl-[0px] h-auto text-[25px] font-bold top-[70px] z-10">
+        <div className="flex w-full pl-[0px] h-auto text-[25px] font-bold top-[50px] z-10">
           {randomMovie ? (
             <>
               <img
@@ -147,7 +147,7 @@ const Movies = ({ favorites, setFavorites }) => {
                 className="rounded shadow-lg w-[500px] h-[700px] object-cover "
               />
 
-              <div className="about pt-[70px] pl-[50px] bg-[#000000] text-[#fff] w-[800px] h-[700px]">
+              <div className="about pt-[80px] pl-[50px] bg-[#000000] text-[#fff] w-[800px] h-[700px]">
                 <div className="pb-[10px]">
                   Watch{" "}
                   <span className="text-[25px] font-[500]">
@@ -218,7 +218,6 @@ const Movies = ({ favorites, setFavorites }) => {
       </div>
 
       <div className="category-cards  mt-10 ">
-       
         <TitleCards
           overflow-x-scroll
           title="Trending This Week"

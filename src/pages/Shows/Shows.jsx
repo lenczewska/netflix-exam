@@ -15,7 +15,6 @@ const Shows = ({ favorites, setFavorites }) => {
   const [genres, setGenres] = useState([]);
   const headerRef = useRef(null);
 
-  // ограничение описания
   const limitOverview = (text, maxSentences = 3) => {
     if (!text) return "";
     const sentences = text.split(/(?<=[.!?])\s+/);
@@ -37,7 +36,6 @@ const Shows = ({ favorites, setFavorites }) => {
     });
   };
 
-  // ✅ жанры для сериалов
   useEffect(() => {
     const fetchGenres = async () => {
       const res = await fetch(
@@ -54,7 +52,6 @@ const Shows = ({ favorites, setFavorites }) => {
     fetchGenres();
   }, []);
 
-  // ✅ случайный сериал
   useEffect(() => {
     const fetchShows = async () => {
       const res = await fetch(

@@ -19,7 +19,6 @@ const HoverCardT = ({
   onMouseLeave,
   handleMoreInfo,
   isFavorite,
-  favorites = [],
 }) => {
   if (!data || Object.keys(data).length === 0) return null;
 
@@ -99,7 +98,8 @@ const HoverCardT = ({
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            if (handleMoreInfo) handleMoreInfo(data);
+            if (typeof onOpenModal === 'function') onOpenModal(data);
+            else if (handleMoreInfo) handleMoreInfo(data);
           }}
           className="btn hover:border-[#fff]  border-2 border-[#616161] ml-[120px] bg-[#141414] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
         >
