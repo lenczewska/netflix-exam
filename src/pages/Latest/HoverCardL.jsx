@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "../../pages/Latest/Latest.css";
 
-const HoverCardL = ({ data, onAdd, onOpenModal, isFavorite }) => {
+const HoverCardL = ({ data, onAdd, onOpenModal, }) => {
   if (!data || Object.keys(data).length === 0) return null;
 
   const releaseYear = data.release_date
@@ -94,7 +94,7 @@ const HoverCardL = ({ data, onAdd, onOpenModal, isFavorite }) => {
         </span>
         <div className="text-[15px] text-[#aaa]">
           <span className="text-[#aaa] flex gap-[5px] items-center pl-[5px]">
-            {data?.genres?.slice(0, 3).map((g, index, array) => (
+            {data?.genres?.slice(0, 2).map((g, index, array) => (
               <React.Fragment key={g.id || index}>
                 {g.name}
                 {index < array.length - 1 && (
