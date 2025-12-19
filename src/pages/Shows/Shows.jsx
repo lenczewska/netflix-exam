@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
+import MovieInfoModal from "../../components/Modal/MovieInfoModal";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -14,6 +15,33 @@ const Shows = ({ favorites, setFavorites }) => {
   const [randomShow, setRandomShow] = useState(null);
   const [genres, setGenres] = useState([]);
   const headerRef = useRef(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
+  const openModal = (movie) => {
+    setSelectedMovie(movie);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedMovie(null);
+  };
+
+  // Заморозка фона при открытой модалке
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    };
+  }, [showModal]);
 
   const limitOverview = (text, maxSentences = 3) => {
     if (!text) return "";
@@ -36,6 +64,7 @@ const Shows = ({ favorites, setFavorites }) => {
     });
   };
 
+  // Получение жанров
   useEffect(() => {
     const fetchGenres = async () => {
       const res = await fetch(
@@ -52,6 +81,7 @@ const Shows = ({ favorites, setFavorites }) => {
     fetchGenres();
   }, []);
 
+  // Получение случайного шоу
   useEffect(() => {
     const fetchShows = async () => {
       const res = await fetch(
@@ -77,6 +107,7 @@ const Shows = ({ favorites, setFavorites }) => {
     fetchShows();
   }, []);
 
+  // Скролл для шапки
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {
@@ -199,10 +230,60 @@ const Shows = ({ favorites, setFavorites }) => {
         </div>
       </div>
 
+      {/* Модалка */}
+      <MovieInfoModal
+        show={showModal}
+        movie={selectedMovie}
+        onClose={closeModal}
+      />
+
+      {/* Все карточки шоу */}
       <div className="category-cards mt-10">
-        <TitleCards title="Top Rated" category="top_rated" type="tv" />
-        <TitleCards title="Popular" category="popular" type="tv" />
-        <TitleCards title="Top Rated" category="top_rated" type="tv" />
+        <TitleCards
+          title="Top Rated"
+          category="top_rated"
+          type="tv"
+          favorites={favorites}
+          onAdd={(tv) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === tv.id) ? prev : [...prev, tv]
+            )
+          }
+          onRemove={(tv) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== tv.id))
+          }
+          onOpenModal={openModal} // ✅ модалка открывается
+        />
+        <TitleCards
+          title="Popular"
+          category="popular"
+          type="tv"
+          favorites={favorites}
+          onAdd={(tv) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === tv.id) ? prev : [...prev, tv]
+            )
+          }
+          onRemove={(tv) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== tv.id))
+          }
+          onOpenModal={openModal} // ✅ модалка открывается
+        />
+        <TitleCards
+          title="Upcoming"
+          category="upcoming"
+          type="tv"
+          favorites={favorites}
+          onAdd={(tv) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === tv.id) ? prev : [...prev, tv]
+            )
+          }
+          onRemove={(tv) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== tv.id))
+          }
+          onOpenModal={openModal} // ✅ модалка открывается
+        />
       </div>
 
       <Footer />

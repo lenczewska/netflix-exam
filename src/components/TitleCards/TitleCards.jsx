@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import "./TitleCard.css";
+import "./TitleCards.css";
 import { Link } from "react-router-dom";
 import HoverCardT from "./HoverCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

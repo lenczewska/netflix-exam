@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import HoverCardG from "../Genres/HoverCardG";
+import HoverCard from "../../components/TitleCards/HoverCard";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -92,7 +92,7 @@ const GenresPage = () => {
                 {item.title || item.name}
               </p>
               {hoveredCardId === item.id && hoverCardDetail.id === item.id && (
-                <HoverCardG data={hoverCardDetail} />
+                <HoverCard data={hoverCardDetail} />
               )}{" "}
             </div>
           ))}
