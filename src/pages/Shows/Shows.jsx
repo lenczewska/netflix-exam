@@ -282,7 +282,7 @@ const Shows = ({ favorites, setFavorites }) => {
           onRemove={(tv) =>
             setFavorites((prev) => prev.filter((m) => m.id !== tv.id))
           }
-          onOpenModal={openModal} // ✅ модалка открывается
+          onOpenModal={openModal} 
         />
       </div>
 
