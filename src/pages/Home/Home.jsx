@@ -11,9 +11,20 @@ import play_icon from "../../assets/img/play_icon.png";
 import info_icon from "../../assets/img/info_icon.png";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const Home = ({ favorites, setFavorites }) => {
+  const [open, setOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
+
+  const openModal = (movie) => {
+    setSelectedMovie(movie);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedMovie(null);
+  };
 
   useEffect(() => {
     if (showModal) {
@@ -24,16 +35,6 @@ const Home = () => {
       document.documentElement.style.overflow = "auto";
     }
   }, [showModal]);
-
-  const handleMoreInfo = (movie) => {
-    setSelectedMovie(movie);
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-    setSelectedMovie(null);
-  };
 
   const movies = [
     {
@@ -83,11 +84,7 @@ const Home = () => {
         />
 
         <div className="hero-content absolute top-[35%] left-[6%]  z-20 max-w-[600px]">
-          <img
-            src={hero_title}
-            className="w-[90%] max-w-[420px]"
-            alt=""
-          />
+          <img src={hero_title} className="w-[90%] max-w-[420px]" alt="" />
 
           <p className="mt-[30px] mb-5 text-[17px] max-w-[700px] ">
             Discovering his ties to an ancient order, he embarks on a
@@ -103,14 +100,10 @@ const Home = () => {
             </Link>
 
             <button
-              onClick={() => handleMoreInfo(movies[0])}
+              onClick={() => openModal(movies[0])}
               className="btn-inf pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#79797986] text-[#000] cursor-pointer rounded-[5px]  "
             >
-              <img
-                src={info_icon}
-                className="btn-dark w-[25px] "
-                alt=""
-              />
+              <img src={info_icon} className="btn-dark w-[25px] " alt="" />
               More Info
             </button>
           </div>
@@ -125,14 +118,96 @@ const Home = () => {
         onClose={closeModal}
       />
 
-
       <div className="mt-[10px] relative px-[60px] z-10">
-        <TitleCards title="Popular on Netflix" category="popular" handleMoreInfo={handleMoreInfo} />
-        <TitleCards title="Top Rated" category="top_rated" handleMoreInfo={handleMoreInfo} />
-        <TitleCards title="Trending This Week" category="trending/movie/week" handleMoreInfo={handleMoreInfo} />
-        <TitleCards title="Upcoming" category="upcoming" handleMoreInfo={handleMoreInfo} />
-        <TitleCards title="Now Playing" category="now_playing" handleMoreInfo={handleMoreInfo} />
-        <TitleCards title="Trending Today" category="trending/movie/day" handleMoreInfo={handleMoreInfo} />
+        <TitleCards
+          overflow-x-scroll
+          title="Popular"
+          category="popular"
+          favorites={favorites}
+          onAdd={(movie) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+            )
+          }
+          onRemove={(movie) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== movie.id))
+          }
+          onOpenModal={openModal}
+        />
+        <TitleCards
+          title="Top Rated"
+          category="top_rated"
+          favorites={favorites}
+          onAdd={(movie) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+            )
+          }
+          onRemove={(movie) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== movie.id))
+          }
+          onOpenModal={openModal}
+        />
+        <TitleCards
+          overflow-x-scroll
+          title="Trending This Week"
+          category="trending/movie/week"
+          favorites={favorites}
+          onAdd={(movie) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+            )
+          }
+          onRemove={(movie) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== movie.id))
+          }
+          onOpenModal={openModal}
+        />
+        <TitleCards
+          overflow-x-scroll
+          title="Upcoming"
+          category="upcoming"
+          favorites={favorites}
+          onAdd={(movie) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+            )
+          }
+          onRemove={(movie) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== movie.id))
+          }
+          onOpenModal={openModal}
+        />
+        <TitleCards
+          overflow-x-scroll
+          title="Now Playing"
+          category="now_playing"
+          favorites={favorites}
+          onAdd={(movie) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+            )
+          }
+          onRemove={(movie) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== movie.id))
+          }
+          onOpenModal={openModal}
+        />
+        <TitleCards
+          overflow-x-scroll
+          title="Trending Today"
+          category="trending/movie/day"
+          favorites={favorites}
+          onAdd={(movie) =>
+            setFavorites((prev) =>
+              prev.some((m) => m.id === movie.id) ? prev : [...prev, movie]
+            )
+          }
+          onRemove={(movie) =>
+            setFavorites((prev) => prev.filter((m) => m.id !== movie.id))
+          }
+          onOpenModal={openModal}
+        />{" "}
       </div>
 
       <Footer />
