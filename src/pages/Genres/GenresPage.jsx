@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import HoverCard from "../../components/TitleCards/HoverCard";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -11,9 +10,6 @@ const GenresPage = () => {
   const { type, id } = useParams();
   const [items, setItems] = useState([]);
   const [genreName, setGenreName] = useState("");
-  const [hoveredCardId, setHoveredCardId] = useState(null);
-  const [hoverCardDetail, setHoverCardDetail] = useState({});
-  const [isLoadingDetail, setIsLoadingDetail] = useState(false);
 
   useEffect(() => {
     const endpoint = type === "movies" ? "movie" : "tv";
@@ -40,26 +36,6 @@ const GenresPage = () => {
     fetchData();
   }, [type, id]);
 
-  const fetchMovieDetail = useCallback(
-    async (movieId) => {
-      if (hoverCardDetail.id === movieId || isLoadingDetail) return;
-
-      setIsLoadingDetail(true);
-
-      try {
-        const detailUrl = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`;
-        const response = await fetch(detailUrl);
-        const data = await response.json();
-        setHoverCardDetail(data);
-      } catch {
-        setHoverCardDetail({});
-      } finally {
-        setIsLoadingDetail(false);
-      }
-    },
-    [hoverCardDetail.id, isLoadingDetail]
-  );
-
   return (
     <div>
       <Navbar />
@@ -75,25 +51,29 @@ const GenresPage = () => {
           {items.map((item) => (
             <div
               key={item.id}
-              className="relative bg-[#111] w-[240px] h-[310px] rounded  flex flex-col"
-              onMouseEnter={() => {
-                setHoveredCardId(item.id);
-                fetchMovieDetail(item.id);
-              }}
-              onMouseLeave={() => setHoveredCardId(null)}
+              className="relative group bg-[#111] w-[240px] h-[310px] rounded flex flex-col"
             >
-              {" "}
               <img
                 src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
                 alt={item.title || item.name}
-                className="w-full h-[250px] pt-[10px] object-center"
+                className="w-full h-[250px] pt-[10px] object-center rounded"
               />
-              <p className="text-sm text-center pt-[5px] pb-[5px] ">
+
+              <div className="absolute inset-0 bg-black/60 flex items-center justify-center 
+                              opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <Link
+                  to={`/player/${item.id}`}
+                  className="flex items-center justify-center"
+                >
+                  <button className="bg-white text-black rounded-full w-14 h-14 flex items-center justify-center shadow-lg text-2xl hover:scale-110 transition-transform">
+                    ▶
+                  </button>
+                </Link>
+              </div>
+
+              <p className="text-sm text-center pt-[5px] pb-[5px]">
                 {item.title || item.name}
               </p>
-              {hoveredCardId === item.id && hoverCardDetail.id === item.id && (
-                <HoverCard data={hoverCardDetail} />
-              )}{" "}
             </div>
           ))}
         </div>
