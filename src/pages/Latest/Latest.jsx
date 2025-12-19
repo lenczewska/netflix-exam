@@ -7,10 +7,9 @@ import Footer from "../../components/Footer/Footer";
 import HoverCardL from "./HoverCardL";
 import MovieInfoModal from "../Home/MovieInfoModal";
 
-const Latest = () => {
-  const [hoveredCard, setHoveredCard] = useState(null);
 
-const Latest = ({ favorites, onAddToFavorites, onRemoveFromFavorites }) => {
+
+const Latest = ({ hoveredCard, setHoveredCard, favorites, onAddToFavorites, onRemoveFromFavorites }) => {
   return (
     <div>
       <Navbar />
