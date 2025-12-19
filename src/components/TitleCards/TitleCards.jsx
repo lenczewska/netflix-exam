@@ -8,7 +8,7 @@ import { faPlus, faChevronRight, faChevronLeft } from "@fortawesome/free-solid-s
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
 
-const TitleCards = ({ title, category, onAdd, handleMoreInfo, original, language, alpha }) => {
+const TitleCards = ({ title, category, onAdd, onRemove, onOpenModal, favorites, handleMoreInfo, original, language, alpha }) => {
   const [apiData, setApiData] = useState([]);
   const [hoveredCardId, setHoveredCardId] = useState(null);
   const [hoverCardDetail, setHoverCardDetail] = useState({});
@@ -173,7 +173,7 @@ const TitleCards = ({ title, category, onAdd, handleMoreInfo, original, language
                   onAdd={onAdd}
                   onRemove={onRemove}
                   favorites={favorites}
-                  isFavorite={favorites.some((item) => item.id === card.id)}
+                  isFavorite={(favorites || []).some((item) => item.id === card.id)}
                   onMouseEnter={() => handleMouseEnter(card.id)}
                   onMouseLeave={handleMouseLeave}
                   handleMoreInfo={(movie) => {
