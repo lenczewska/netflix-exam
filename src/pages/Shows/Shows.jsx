@@ -3,7 +3,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import TitleCards from "../../components/TitleCards/TitleCards";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import MovieInfoModal from "../../components/Modal/MovieInfoModal";
@@ -28,7 +28,6 @@ const Shows = ({ favorites, setFavorites }) => {
     setSelectedMovie(null);
   };
 
-  // Заморозка фона при открытой модалке
   useEffect(() => {
     if (showModal) {
       document.body.style.overflow = "hidden";
@@ -55,16 +54,19 @@ const Shows = ({ favorites, setFavorites }) => {
     a.name.localeCompare(b.name, "en")
   );
 
-  const handleAddFavorite = () => {
+  // ✅ Тогглер избранного
+  const handleToggleFavorite = () => {
     if (!randomShow) return;
     setFavorites((prev) => {
       const exists = prev.some((item) => item.id === randomShow.id);
-      if (exists) return prev;
-      return [...prev, randomShow];
+      if (exists) {
+        return prev.filter((item) => item.id !== randomShow.id);
+      } else {
+        return [...prev, randomShow];
+      }
     });
   };
 
-  // Получение жанров
   useEffect(() => {
     const fetchGenres = async () => {
       const res = await fetch(
@@ -81,7 +83,6 @@ const Shows = ({ favorites, setFavorites }) => {
     fetchGenres();
   }, []);
 
-  // Получение случайного шоу
   useEffect(() => {
     const fetchShows = async () => {
       const res = await fetch(
@@ -107,7 +108,6 @@ const Shows = ({ favorites, setFavorites }) => {
     fetchShows();
   }, []);
 
-  // Скролл для шапки
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {
@@ -119,6 +119,8 @@ const Shows = ({ favorites, setFavorites }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const isFavorite = favorites.some((item) => item.id === randomShow?.id);
 
   return (
     <div>
@@ -205,12 +207,13 @@ const Shows = ({ favorites, setFavorites }) => {
                 </div>
 
                 <div className="like-btns pt-[20px] pb-[20px] flex gap-[10px]">
+                  {/* ✅ Тогглер избранного */}
                   <button
-                    onClick={handleAddFavorite}
+                    onClick={handleToggleFavorite}
                     className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
                   >
                     <FontAwesomeIcon
-                      icon={faPlus}
+                      icon={isFavorite ? faCheck : faPlus}
                       className="text-[20px] text-[#fff]"
                     />
                   </button>
@@ -236,6 +239,10 @@ const Shows = ({ favorites, setFavorites }) => {
         movie={selectedMovie}
         onClose={closeModal}
       />
+
+      {/* Все карточки шоу */}
+      <div className="category-cards mt-10">
+
 
       {/* Все карточки шоу */}
       <div className="category-cards mt-10">
@@ -288,7 +295,9 @@ const Shows = ({ favorites, setFavorites }) => {
 
       <Footer />
     </div>
-  );
+        </div>
+
+  )
 };
 
 export default Shows;

@@ -33,7 +33,6 @@ function App() {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
-
   const handleAddToFavorites = (movie) => {
     setFavorites((prev) => {
       if (prev.some((m) => m.id === movie.id)) return prev;
@@ -67,7 +66,10 @@ function App() {
       <Route path="/browse" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/player/:id" element={<Player />} />
-      <Route path="/shows" element={<Shows />} />
+      <Route
+        path="/shows"
+        element={<Shows favorites={favorites} setFavorites={setFavorites} />}
+      />
       <Route path="/:type/genres/:id" element={<GenrePage />} />
       <Route
         path="/movies"
@@ -80,8 +82,20 @@ function App() {
       />
       <Route path="/sort" element={<SortPage />} />
       <Route path="/games" element={<Games />} />
-      <Route path="/latest" element={<Latest favorites={favorites} onAddToFavorites={handleAddToFavorites} onRemoveFromFavorites={handleRemoveFromFavorites} />} />
-      <Route path="/my-list" element={<MyList favorites={favorites} setFavorites={setFavorites} />} />
+      <Route
+        path="/latest"
+        element={
+          <Latest
+            favorites={favorites}
+            onAddToFavorites={handleAddToFavorites}
+            onRemoveFromFavorites={handleRemoveFromFavorites}
+          />
+        }
+      />
+      <Route
+        path="/my-list"
+        element={<MyList favorites={favorites} setFavorites={setFavorites} />}
+      />
       <Route path="/original-audio" element={<OriginalAudio />} />
       <Route path="/search" element={<SearchPage />} />
     </Routes>
