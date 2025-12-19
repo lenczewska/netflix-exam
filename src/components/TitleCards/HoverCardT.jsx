@@ -19,6 +19,7 @@ const HoverCardT = ({
   onMouseLeave,
   handleMoreInfo,
   isFavorite,
+  onOpenModal,
 }) => {
   if (!data || Object.keys(data).length === 0) return null;
 
