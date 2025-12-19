@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import "./TitleCards.css";
+import "./TitleCard.css";
 import { Link } from "react-router-dom";
-import HoverCardT from "./HoverCardT";
+import HoverCardT from "./HoverCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
@@ -13,7 +13,7 @@ const TitleCards = ({
   category,
   onAdd,
   onRemove,
-  onOpenModal, // обязательно передаем из родителя
+  onOpenModal, 
   favorites,
   handleMoreInfo,
   original,
@@ -36,8 +36,7 @@ const TitleCards = ({
     },
   };
 
-  // Загрузка списка фильмов
-  useEffect(() => {
+ useEffect(() => {
     let url;
     if (category?.startsWith("trending")) {
       url = `${BASE_URL}/${category}?api_key=${API_KEY}`;
@@ -51,7 +50,6 @@ const TitleCards = ({
       .catch((err) => console.error("Error fetching list:", err));
   }, [category]);
 
-  // Подгрузка деталей фильма
   const fetchMovieDetail = useCallback(
     async (id) => {
       if (hoverCardDetail.id === id || isLoadingDetail) return;
@@ -83,7 +81,6 @@ const TitleCards = ({
     }
   };
 
-  // Фильтры и сортировка
   let filtered = [...apiData];
   if (original === "original" && language && language !== "all") {
     filtered = filtered.filter((card) => card.original_language === language);
@@ -103,7 +100,6 @@ const TitleCards = ({
     filtered.sort((a, b) => (b.title || b.name || "").localeCompare(a.title || a.name || ""));
   }
 
-  // Скролл
   const handleScrollRight = () => {
     if (cardListRef.current) cardListRef.current.scrollBy({ left: 600, behavior: "smooth" });
   };

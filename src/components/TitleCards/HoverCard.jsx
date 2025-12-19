@@ -11,7 +11,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./HoverCard.css";
 
-const HoverCard = ({
+
+const HoverCardT = ({
   data,
   onAdd,
   onRemove,
@@ -136,4 +137,4 @@ const HoverCard = ({
   );
 };
 
-export default HoverCard;
+export default HoverCardT;
