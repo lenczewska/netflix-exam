@@ -14,7 +14,7 @@ const MovieInfoModal = ({ show, movie, onClose, favorites, setFavorites, onLike 
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [show]);
+  }, []);
 
   const isFavorite = favorites?.some(m => m.id === movie.id);
 
@@ -104,7 +104,7 @@ const MovieInfoModal = ({ show, movie, onClose, favorites, setFavorites, onLike 
 
               <div className="movie-inf flex gap-[20px] justify-between mt-[15px]">
                 <div className="m-name flex-1">
-                  <span className="text-[20px] font-[700] pl-[45px]">
+                  <span className="text-[18px] font-[700] pl-[45px]">
                     Watch {movie.title} Now
                   </span>
                   <p className="text-[#fff] pl-[45px] pt-[20px] text-[15px]">{movie.description}</p>
