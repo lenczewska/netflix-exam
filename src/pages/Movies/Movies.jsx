@@ -5,7 +5,11 @@ import Footer from "../../components/Footer/Footer";
 import TitleCards from "../../components/TitleCards/TitleCards";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCaretDown,
+  faPlus,
+  faCheck,
+} from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import MovieInfoModal from "../../components/Modal/MovieInfoModal";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -41,12 +45,15 @@ const Movies = ({ favorites, setFavorites }) => {
     a.name.localeCompare(b.name, "en")
   );
 
-  const handleAddFavorite = () => {
+  const handleToggleFavorite = () => {
     if (!randomMovie) return;
     setFavorites((prev) => {
       const exists = prev.some((item) => item.id === randomMovie.id);
-      if (exists) return prev;
-      return [...prev, randomMovie];
+      if (exists) {
+        return prev.filter((item) => item.id !== randomMovie.id);
+      } else {
+        return [...prev, randomMovie];
+      }
     });
   };
 
@@ -127,6 +134,8 @@ const Movies = ({ favorites, setFavorites }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const isFavorite = favorites.some((item) => item.id === randomMovie?.id);
 
   return (
     <div>
@@ -219,11 +228,12 @@ const Movies = ({ favorites, setFavorites }) => {
 
                 <div className="like-btns pt-[20px] pb-[20px] flex gap-[10px]">
                   <button
-                    onClick={handleAddFavorite}
+                    onClick= 
+                    {handleToggleFavorite}
                     className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
                   >
                     <FontAwesomeIcon
-                      icon={faPlus}
+                      icon={isFavorite ? faCheck : faPlus}
                       className="text-[20px] text-[#fff]"
                     />
                   </button>

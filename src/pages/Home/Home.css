@@ -1,39 +1,77 @@
-.hero-banner-img{
-    mask-image: linear-gradient(to right, transparent, black 95%);
-        -weblit-mask-image: linear-gradient(to right, transparent, black 55%);
-        z-index: 30;
+.hero-banner-img {
+  mask-image: linear-gradient(to right, transparent, black 95%);
+  -weblit-mask-image: linear-gradient(to right, transparent, black 55%);
+  z-index: 30;
 }
 
-.hero-title{
-    position: absolute;
-    width: 100%;
-    padding-left: 6%;
-    bottom: 0;
+.hero-title {
+  position: absolute;
+  width: 100%;
+  padding-left: 6%;
+  bottom: 0;
 }
 
-.hero-title-img{
-    width: 90%;
-    max-width: 420px;
-    margin-bottom:30px ;
+.hero-title-img {
+  width: 90%;
+  max-width: 420px;
+  margin-bottom: 30px;
 }
 
-.btn-play{
-    color: black;
+.btn-play {
+  color: black;
+}
+
+.btn-inf {
+  color: white;
+}
+
+.btn-play:hover {
+  background: #ffffffbf;
+}
+
+.btn-inf:hover {
+  background: #6d6d6e66;
+}
+
+.category-cards {
+  padding-left: 6%;
+}
+
+
+
+@media (max-width: 576px) {
+
+    .hero-content{
+        top: 60% 
+    }
+    .hero-text{
+        display: none;
+    }
+
+    .btns{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .btn-play{
+
+        
+    
+
+
+    }
 
 }
 
-.btn-inf{
-    color: white;
+@media (max-width: 768px) {
 }
 
-.btn-play:hover{
-    background: #ffffffbf;
+@media (max-width: 992px) {
 }
 
-.btn-inf:hover{
-    background: #6d6d6e66;
+@media (max-width: 1200px) {
 }
 
-.category-cards{
-    padding-left: 6%;
+@media (min-width: 1400px) {
 }

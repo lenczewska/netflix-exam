@@ -103,7 +103,7 @@ const MovieInfoModal = ({ show, movie, onClose, onAdd, onLike }) => {
             </div>
 
             {/* нижняя часть с описанием */}
-            <div className="absolute bg-[#0000007b] backdrop-blur-md bottom-[0px] top-[450px] pt-[30px] h-[300px] w-[800px]">
+            <div className=" inf-box absolute bg-[#0000007b] backdrop-blur-md bottom-[0px] top-[450px] pt-[30px] h-[300px] w-[800px]">
               <div className="left flex gap-[10px] pl-[45px] items-center text-[#aaa]">
                 <span>{movie.releaseYear}</span>
                 <span className="border border-[#aaa] text-[13px] pl-[5px] pr-[5px]">
@@ -111,7 +111,7 @@ const MovieInfoModal = ({ show, movie, onClose, onAdd, onLike }) => {
                 </span>
               </div>
 
-              <div className="flex gap-[20px] justify-between mt-[15px]">
+              <div className=" movie-inf  flex gap-[20px] justify-between mt-[15px]">
                 <div className="m-name flex-1">
                   <span className="text-[20px] font-[700] pl-[45px]">
                     Watch {movie.title} Now
@@ -122,13 +122,13 @@ const MovieInfoModal = ({ show, movie, onClose, onAdd, onLike }) => {
                 </div>
 
                 <div className="flex-1 pr-[45px]">
-                  <div className="right text-[#aaa] mb-4">
+                  <div className="genres text-[#aaa] mb-4">
                     Genres:{" "}
                     <span className="text-[#fff]">
                       {movie.genre?.replace(/\//g, ", ")}
                     </span>
                   </div>
-                  <div className="text-[#aaa]">
+                  <div className="cast text-[#aaa]">
                     Cast:{" "}
                     <span className="text-[#fff] text-[14px]">
                       {movie.cast
@@ -138,7 +138,7 @@ const MovieInfoModal = ({ show, movie, onClose, onAdd, onLike }) => {
                     </span>
                   </div>
 
-                  <div className="flex flex-col gap-4 text-[#aaa] text-sm">
+                  <div className=" lang-box flex flex-col gap-4 text-[#aaa] text-sm">
                     <p>
                       Duration:{" "}
                       <span className="text-[#fff]">{movie.duration}</span>

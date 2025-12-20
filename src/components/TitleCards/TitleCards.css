@@ -63,3 +63,26 @@
   object-fit: cover;
   border-radius: 5px;
 }
+
+@media (max-width: 576px) {
+ 
+
+}
+
+@media (max-width: 768px) {
+ .mob-logo{
+    display: block;
+  }
+}
+
+@media (max-width: 992px) {
+   .mob-logo{
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (min-width: 1400px) {
+}

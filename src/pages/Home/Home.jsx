@@ -84,9 +84,9 @@ const Home = ({ favorites, setFavorites }) => {
         />
 
         <div className="hero-content absolute top-[35%] left-[6%]  z-20 max-w-[600px]">
-          <img src={hero_title} className="w-[90%] max-w-[420px]" alt="" />
+          <img src={hero_title} className=" title-img w-[90%] max-w-[420px]" alt="" />
 
-          <p className="mt-[30px] mb-5 text-[17px] max-w-[700px] ">
+          <p className=" hero-text mt-[30px] mb-5 text-[17px] max-w-[700px] ">
             Discovering his ties to an ancient order, he embarks on a
             treacherous quest that takes him back to Ottoman Istanbul.
           </p>
@@ -103,7 +103,7 @@ const Home = ({ favorites, setFavorites }) => {
               onClick={() => openModal(movies[0])}
               className="btn-inf pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#79797986] text-[#000] cursor-pointer rounded-[5px]  "
             >
-              <img src={info_icon} className="btn-dark w-[25px] " alt="" />
+              <img src={info_icon} className="btn-dark w-[30px] " alt="" />
               More Info
             </button>
           </div>

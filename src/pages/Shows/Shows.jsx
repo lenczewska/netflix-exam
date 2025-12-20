@@ -54,7 +54,6 @@ const Shows = ({ favorites, setFavorites }) => {
     a.name.localeCompare(b.name, "en")
   );
 
-  // ✅ Тогглер избранного
   const handleToggleFavorite = () => {
     if (!randomShow) return;
     setFavorites((prev) => {
@@ -207,7 +206,6 @@ const Shows = ({ favorites, setFavorites }) => {
                 </div>
 
                 <div className="like-btns pt-[20px] pb-[20px] flex gap-[10px]">
-                  {/* ✅ Тогглер избранного */}
                   <button
                     onClick={handleToggleFavorite}
                     className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
@@ -233,18 +231,14 @@ const Shows = ({ favorites, setFavorites }) => {
         </div>
       </div>
 
-      {/* Модалка */}
       <MovieInfoModal
         show={showModal}
         movie={selectedMovie}
         onClose={closeModal}
       />
 
-      {/* Все карточки шоу */}
-      <div className="category-cards mt-10">
 
 
-      {/* Все карточки шоу */}
       <div className="category-cards mt-10">
         <TitleCards
           title="Top Rated"
@@ -295,7 +289,6 @@ const Shows = ({ favorites, setFavorites }) => {
 
       <Footer />
     </div>
-        </div>
 
   )
 };
