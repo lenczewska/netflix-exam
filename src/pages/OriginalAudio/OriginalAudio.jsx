@@ -9,7 +9,7 @@ import MovieInfoModal from "../../components/Modal/MovieInfoModal";
 
 const VITE_TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
-const OriginalAudio = ({ favorites, setFavorites }) => {
+const OriginalAudio = () => {
   const [englishOptions, setEnglishOptions] = useState([]);
   const [selectedOriginal, setSelectedOriginal] = useState({
     name: "Original Audio",
@@ -17,6 +17,7 @@ const OriginalAudio = ({ favorites, setFavorites }) => {
   });
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [favorites, setFavorites] = useState([]);
 
   const openModal = (movie) => {
     setSelectedMovie(movie);

@@ -84,7 +84,11 @@ const Home = ({ favorites, setFavorites }) => {
         />
 
         <div className="hero-content absolute top-[35%] left-[6%]  z-20 max-w-[600px]">
-          <img src={hero_title} className=" title-img w-[90%] max-w-[420px]" alt="" />
+          <img
+            src={hero_title}
+            className=" title-img w-[90%] max-w-[420px]"
+            alt=""
+          />
 
           <p className=" hero-text mt-[30px] mb-5 text-[17px] max-w-[700px] ">
             Discovering his ties to an ancient order, he embarks on a
@@ -116,6 +120,8 @@ const Home = ({ favorites, setFavorites }) => {
         show={showModal}
         movie={selectedMovie}
         onClose={closeModal}
+        favorites={favorites}
+        setFavorites={setFavorites}
       />
 
       <div className="mt-[10px] relative px-[60px] z-10">
