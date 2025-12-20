@@ -63,7 +63,10 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/browse" />} />
-      <Route path="/browse" element={<Home />} />
+      <Route
+        path="/browse"
+        element={<Home favorites={favorites} setFavorites={setFavorites} />}
+      />
       <Route path="/login" element={<Login />} />
       <Route path="/player/:id" element={<Player />} />
       <Route
@@ -73,13 +76,9 @@ function App() {
       <Route path="/:type/genres/:id" element={<GenrePage />} />
       <Route
         path="/movies"
-        element={
-          <Movies
-            favorites={favorites}
-            onAddToFavorites={handleAddToFavorites}
-          />
-        }
+        element={<Movies favorites={favorites} setFavorites={setFavorites} />}
       />
+
       <Route path="/sort" element={<SortPage />} />
       <Route path="/games" element={<Games />} />
       <Route

@@ -47,13 +47,15 @@ const Movies = ({ favorites, setFavorites }) => {
 
   const handleToggleFavorite = () => {
     if (!randomMovie) return;
+
     setFavorites((prev) => {
-      const exists = prev.some((item) => item.id === randomMovie.id);
+      const exists = prev.find((item) => item.id === randomMovie.id);
+
       if (exists) {
         return prev.filter((item) => item.id !== randomMovie.id);
-      } else {
-        return [...prev, randomMovie];
       }
+
+      return [...prev, { ...randomMovie }];
     });
   };
 
@@ -228,8 +230,7 @@ const Movies = ({ favorites, setFavorites }) => {
 
                 <div className="like-btns pt-[20px] pb-[20px] flex gap-[10px]">
                   <button
-                    onClick= 
-                    {handleToggleFavorite}
+                    onClick={handleToggleFavorite}
                     className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
                   >
                     <FontAwesomeIcon
