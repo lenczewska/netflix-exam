@@ -31,7 +31,7 @@ const Games = () => {
           <img
             src={randomGame.images?.cover}
             alt={randomGame.title}
-            className="w-[500px] h-[520px] object-cover"
+            className=" game-img w-[500px] h-[520px] object-cover"
           />
 
           <div className="about flex flex-col  text-[#fff] w-full ">

@@ -1,4 +1,3 @@
-
 .hover-card {
   position: absolute;
   top: -190px !important ;
@@ -12,4 +11,28 @@
 
 .hover-card * {
   pointer-events: auto;
+}
+
+@media (max-width: 576px) {
+  .hover-card {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hover-card {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .hover-card {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (min-width: 1400px) {
 }

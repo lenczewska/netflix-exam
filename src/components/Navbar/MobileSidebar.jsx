@@ -6,6 +6,9 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { faFaceLaughWink } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { logout } from "../../fireBase";
+
 
 export default function MobileSidebar() {
   return (
@@ -21,13 +24,13 @@ export default function MobileSidebar() {
           className="profile  w-[40px] pb-[20px] rounded-[5px]"
         />
         <nav className="flex flex-col items-center gap-4 border-b-2 ">
-          <a href="/">Home</a>
-          <a href="/shows">Shows</a>
-          <a href="/movies">Movies</a>
-          <a href="/games">Games</a>
-          <a href="/latest">Latest</a>
-          <a href="/my-list">My List</a>
-          <a href="/original-audio">Browse by Languages</a>
+          <Link to="/">Home</Link>
+          <Link to="/shows">Shows</Link>
+          <Link to="/movies">Movies</Link>
+          <Link to="/games">Games</Link>
+          <Link to="/latest">Latest</Link>
+          <Link to="/my-list">My List</Link>
+          <Link to="/original-audio">Browse by Languages</Link>
         </nav>
 
         <div className="acc-box  ">

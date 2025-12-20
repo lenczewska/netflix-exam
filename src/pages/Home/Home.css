@@ -37,31 +37,19 @@
   padding-left: 6%;
 }
 
-
-
 @media (max-width: 576px) {
+  .hero-content {
+    top: 60%;
+  }
+  .hero-text {
+    display: none;
+  }
 
-    .hero-content{
-        top: 60% 
-    }
-    .hero-text{
-        display: none;
-    }
-
-    .btns{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-    }
-
-    .btn-play{
-
-        
-    
-
-
-    }
-
+  .btns {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
 }
 
 @media (max-width: 768px) {

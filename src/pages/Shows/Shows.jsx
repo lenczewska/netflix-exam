@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import TitleCards from "../../components/TitleCards/TitleCards";
+import "./Shows.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
@@ -155,7 +156,7 @@ const Shows = ({ favorites, setFavorites }) => {
           </div>
         </div>
 
-        <div className="flex w-full pl-[0px] h-auto text-[25px] font-bold top-[70px] z-10">
+        <div className=" random-card flex w-full pl-[0px] h-auto text-[25px] font-bold top-[70px] z-10">
           {randomShow ? (
             <>
               <img
@@ -172,7 +173,7 @@ const Shows = ({ favorites, setFavorites }) => {
                   </span>{" "}
                   Now
                 </div>
-                <div className="text-[15px] w-[500px]">
+                <div className="movie-inf text-[15px] w-[500px]">
                   {limitOverview(randomShow?.overview)}
                 </div>
 
@@ -188,16 +189,16 @@ const Shows = ({ favorites, setFavorites }) => {
                   </span>
                 </div>
 
-                <div className="text-[15px] text-[#aaa]">
+                <div className=" text-[15px] text-[#aaa]">
                   Genres:
                   <span className="text-[#fff] pl-[5px]">
                     {randomShow?.genres?.map((g) => g.name).join(", ")}
                   </span>
                 </div>
 
-                <div className="text-[15px] text-[#aaa] w-[400px] flex">
+                <div className=" cast text-[15px] text-[#aaa] w-[400px] flex">
                   <p>Cast:</p>
-                  <span className="text-[#fff] pl-[5px]">
+                  <span className="text-[#fff]">
                     {randomShow?.cast
                       ?.slice(0, 5)
                       .map((actor) => actor.name)

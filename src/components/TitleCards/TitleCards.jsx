@@ -117,7 +117,7 @@ const TitleCards = ({
 
   return (
     <div className="title-cards pr-[50px] mt-[40px] relative">
-      <h2 className="mb-[8px]">{title || "Popular on Netflix"}</h2>
+      <h2 className=" title mb-[8px]">{title || "Popular on Netflix"}</h2>
       <div className="wrapper">
         {scrolled && (
           <button
@@ -130,7 +130,7 @@ const TitleCards = ({
           </button>
         )}
         <button
-          className="scroll-btn right-[-0px] absolute top-[220px] z-20 bg-[#000000c7] bg-opacity-60 text-white w-[50px] h-[141px] flex items-center justify-center"
+          className="scroll-btn right-[-0px] absolute top-[230px] z-20 bg-[#000000c7] bg-opacity-60 text-white w-[50px] h-[138px] flex items-center justify-center"
           style={{ transform: "translateY(-50%)" }}
           onClick={handleScrollRight}
           aria-label="Scroll Right"

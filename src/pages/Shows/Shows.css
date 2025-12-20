@@ -1,0 +1,51 @@
+@media (max-width: 576px) {
+    .random-card{
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .about{
+        width: auto;
+        text-align: center;
+        padding-left: 25px;
+        padding-right: 25px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .movie-inf{
+        width: auto;
+        padding-left: 0px;
+        margin-top: 10px;
+    }
+
+    .inf{
+        justify-content: center;
+    }
+
+    .cast{
+        width: auto;
+        justify-content: center;
+        font-size: 15px;
+    }
+
+    .like-btns{
+        justify-content: center;
+    }
+
+
+
+}
+ 
+@media (max-width: 768px) {
+}
+
+@media (max-width: 992px) {
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (min-width: 1400px) {
+}

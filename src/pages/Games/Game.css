@@ -1,0 +1,18 @@
+@media (max-width: 576px) {
+    .game-img{
+      width: 100%;
+      height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+}
+
+@media (max-width: 992px) {
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (min-width: 1400px) {
+}

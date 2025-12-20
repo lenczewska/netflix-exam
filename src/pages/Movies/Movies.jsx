@@ -175,7 +175,7 @@ const Movies = ({ favorites, setFavorites }) => {
           </div>
         </div>
 
-        <div className="flex w-full pl-[0px] h-auto text-[25px] font-bold top-[50px] z-10">
+        <div className=" random-card flex w-full pl-[0px] h-auto text-[25px] font-bold top-[50px] z-10">
           {randomMovie ? (
             <>
               <img
@@ -192,7 +192,7 @@ const Movies = ({ favorites, setFavorites }) => {
                   </span>{" "}
                   Now
                 </div>
-                <div className="text-[15px] w-[500px]">
+                <div className=" movie-inf text-[15px] w-[500px]">
                   {limitOverview(randomMovie?.overview)}
                 </div>
 
@@ -218,7 +218,7 @@ const Movies = ({ favorites, setFavorites }) => {
                   </span>
                 </div>
 
-                <div className="text-[15px] text-[#aaa] w-[400px] flex">
+                <div className=" cast text-[15px] text-[#aaa] w-[400px] flex">
                   <p>Cast:</p>
                   <span className="text-[#fff] pl-[5px]">
                     {randomMovie?.cast
