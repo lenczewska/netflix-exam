@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import "./Latest.css";
 import Navbar from "../../components/Navbar/Navbar";
 import TitleCards from "../../components/TitleCards/TitleCards";
@@ -19,6 +20,16 @@ const Latest = () => {
     setShowModal(false);
     setSelectedMovie(null);
   };
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    }
+  }, [showModal]);
 
   return (
     <div>

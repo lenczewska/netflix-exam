@@ -14,7 +14,7 @@ const MovieInfoModal = ({ show, movie, onClose, favorites, setFavorites, onLike 
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [show]);
+  }, []);
 
   const isFavorite = favorites?.some(m => m.id === movie.id);
 
@@ -29,14 +29,12 @@ const MovieInfoModal = ({ show, movie, onClose, favorites, setFavorites, onLike 
 
   return (
     <>
-      {/* затемнение фона */}
       <div
         className="fixed inset-0 bg-[#41414262] bg-opacity-100"
         style={{ zIndex: 9999 }}
         onClick={onClose}
       ></div>
 
-      {/* модалка */}
       <div
         className="bg-[#181818ad] w-screen h-screen fixed top-0 left-0 flex items-center justify-center p-4"
         style={{ zIndex: 10000 }}
@@ -44,7 +42,6 @@ const MovieInfoModal = ({ show, movie, onClose, favorites, setFavorites, onLike 
         <div className="modal-scroll flex justify-center items-center max-h-[90vh] overflow-y-auto overflow-x-hidden">
           <div className="modal-box relative w-[800px] bg-[#181818] rounded-[10px]">
             
-            {/* кнопка закрытия */}
             <button
               onClick={onClose}
               className="absolute top-[16px] right-[20px] cursor-pointer bg-[#262626] w-[40px] h-[40px] text-white text-2xl rounded-full z-30 border-[#fff] border flex items-center justify-center"
@@ -52,7 +49,6 @@ const MovieInfoModal = ({ show, movie, onClose, favorites, setFavorites, onLike 
               <FontAwesomeIcon icon={faTimes} className="text-[23px]" />
             </button>
 
-            {/* верхняя часть с постером */}
             <div className="aboout-box pb-[15px] flex">
               <div className="w-auto relative gap-[15px] flex flex-col">
                 <img
@@ -71,7 +67,6 @@ const MovieInfoModal = ({ show, movie, onClose, favorites, setFavorites, onLike 
                     {movie.title}
                   </h2>
 
-                  {/* кнопки действий */}
                   <div className="flex gap-[5px] absolute bottom-[110px] left-[45px]">
                     <Link to={`/player/${movie.id}`}>
                       <button className="btn-play pt-[8px] pb-[8px] px-[20px] inline-flex items-center gap-[10px] text-[15px] font-semibold bg-[#fff] text-[#000] cursor-pointer rounded-[5px] sm:text-[12px]">
@@ -101,7 +96,6 @@ const MovieInfoModal = ({ show, movie, onClose, favorites, setFavorites, onLike 
               </div>
             </div>
 
-            {/* нижняя часть с инфо */}
             <div className="inf-box absolute bg-[#0000007b] backdrop-blur-md bottom-[0px] top-[450px] pt-[30px] h-[300px] w-[800px]">
               <div className="left flex gap-[10px] pl-[45px] items-center text-[#aaa]">
                 <span>{movie.releaseYear}</span>
@@ -110,7 +104,7 @@ const MovieInfoModal = ({ show, movie, onClose, favorites, setFavorites, onLike 
 
               <div className="movie-inf flex gap-[20px] justify-between mt-[15px]">
                 <div className="m-name flex-1">
-                  <span className="text-[20px] font-[700] pl-[45px]">
+                  <span className="text-[18px] font-[700] pl-[45px]">
                     Watch {movie.title} Now
                   </span>
                   <p className="text-[#fff] pl-[45px] pt-[20px] text-[15px]">{movie.description}</p>
