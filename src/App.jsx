@@ -95,7 +95,12 @@ function App() {
         path="/my-list"
         element={<MyList favorites={favorites} setFavorites={setFavorites} />}
       />
-      <Route path="/original-audio" element={<OriginalAudio />} />
+      <Route
+        path="/original-audio"
+        element={
+          <OriginalAudio favorites={favorites} setFavorites={setFavorites} />
+        }
+      />
       <Route path="/search" element={<SearchPage />} />
     </Routes>
   );

@@ -9,7 +9,7 @@ import MovieInfoModal from "../../components/Modal/MovieInfoModal";
 
 const VITE_TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
-const OriginalAudio = () => {
+const OriginalAudio = ({ favorites, setFavorites }) => {
   const [englishOptions, setEnglishOptions] = useState([]);
   const [selectedOriginal, setSelectedOriginal] = useState({
     name: "Original Audio",
@@ -17,7 +17,6 @@ const OriginalAudio = () => {
   });
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [favorites, setFavorites] = useState([]);
 
   const openModal = (movie) => {
     setSelectedMovie(movie);
@@ -43,12 +42,17 @@ const OriginalAudio = () => {
     };
   }, [showModal]);
 
-  const handleAddFavorite = () => {
-    if (!randomShow) return;
+  const handleToggleFavorite = () => {
+    if (!randomMovie) return;
+
     setFavorites((prev) => {
-      const exists = prev.some((item) => item.id === randomShow.id);
-      if (exists) return prev;
-      return [...prev, randomShow];
+      const exists = prev.find((item) => item.id === randomMovie.id);
+
+      if (exists) {
+        return prev.filter((item) => item.id !== randomMovie.id);
+      }
+
+      return [...prev, { ...randomMovie }];
     });
   };
 
@@ -281,9 +285,9 @@ const OriginalAudio = () => {
 
       <div className="pl-[45px] pt-[75px]">
         <TitleCards
-          original={selectedOriginal.value}
-          language={selectedLanguage.code}
-          alpha={selectedAlpha.value}
+          overflow-x-scroll
+          title="Popular"
+          category="popular"
           favorites={favorites}
           onAdd={(movie) =>
             setFavorites((prev) =>
