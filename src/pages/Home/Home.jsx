@@ -3,7 +3,6 @@ import "./Home.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import TitleCards from "../../components/TitleCards/TitleCards";
-import Player from "../Player/Player";
 import MovieInfoModal from "../../components/Modal/MovieInfoModal";
 import hero_banner2 from "../../assets/img/hero_banner2.jpg";
 import hero_title from "../../assets/img/hero_title.png";
@@ -48,32 +47,17 @@ const Home = ({ favorites, setFavorites }) => {
       duration: "2h 15m",
       maturityRating: "PG-13",
       language: "English",
+
       cast: [
         { name: "Tom Hanks" },
         { name: "Emma Stone" },
         { name: "Benedict Cumberbatch" },
       ],
     },
-    {
-      id: 2,
-      title: "Space Odyssey",
-      description: "A journey through the stars and beyond.",
-      genre: "Sci-Fi",
-      releaseYear: 2023,
-      cover: hero_banner2,
-      duration: "2h 40m",
-      maturityRating: "PG-13",
-      language: "English",
-      cast: [
-        { name: "Matthew McConaughey" },
-        { name: "Anne Hathaway" },
-        { name: "Michael B. Jordan" },
-      ],
-    },
   ];
 
   return (
-    <div className="home w-full min-h-screen bg-black text-white">
+    <div className="home w-full min-h-screen bg-[#141414] text-white">
       <Navbar />
 
       <div className="relative w-full h-auto">
@@ -124,7 +108,7 @@ const Home = ({ favorites, setFavorites }) => {
         setFavorites={setFavorites}
       />
 
-      <div className="mt-[10px] relative px-[60px] z-10">
+      <div className="mt-[10px] relative px-[40px] z-10">
         <TitleCards
           overflow-x-scroll
           title="Popular"

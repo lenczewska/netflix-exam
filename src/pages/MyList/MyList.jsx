@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import hero_banner2 from "../../assets/img/hero_banner2.jpg";
 
 const MyList = ({ favorites, setFavorites }) => {
   const handleRemove = (id) => {
@@ -27,7 +28,7 @@ const MyList = ({ favorites, setFavorites }) => {
                 className="relative bg-[#000] p-4 rounded shadow text-center overflow-hidden group"
               >
                 <img
-                  src={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
+                  src={item.backdrop_path ? `https://image.tmdb.org/t/p/w500${item.backdrop_path}` : item.image}
                   alt={item.original_title || item.name}
                   className="w-full rounded mb-2"
                 />

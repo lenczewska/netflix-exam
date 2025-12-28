@@ -160,7 +160,7 @@ const Shows = ({ favorites, setFavorites }) => {
           </div>
         </div>
 
-        <div className=" random-card flex w-full pl-[0px] h-auto text-[25px] font-bold top-[70px] z-10">
+        <div className=" random-card flex w-full pl-[70px] h-auto text-[25px] font-bold top-[70px] z-10">
           {randomShow ? (
             <>
               <img
@@ -243,6 +243,8 @@ const Shows = ({ favorites, setFavorites }) => {
         show={showModal}
         movie={selectedMovie}
         onClose={closeModal}
+        favorites={favorites}
+        setFavorites={setFavorites}
       />
 
       <div className="category-cards mt-10">
@@ -259,7 +261,7 @@ const Shows = ({ favorites, setFavorites }) => {
           onRemove={(tv) =>
             setFavorites((prev) => prev.filter((m) => m.id !== tv.id))
           }
-          onOpenModal={openModal} // ✅ модалка открывается
+          onOpenModal={openModal} 
         />
         <TitleCards
           title="Popular"
@@ -274,7 +276,7 @@ const Shows = ({ favorites, setFavorites }) => {
           onRemove={(tv) =>
             setFavorites((prev) => prev.filter((m) => m.id !== tv.id))
           }
-          onOpenModal={openModal} // ✅ модалка открывается
+          onOpenModal={openModal} 
         />
         <TitleCards
           title="Upcoming"

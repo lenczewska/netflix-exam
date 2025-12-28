@@ -36,7 +36,7 @@ const HoverCardT = ({
       {data.backdrop_path && (
         <img
           src={`https://image.tmdb.org/t/p/w500${data.backdrop_path}`}
-          className=" w-full h-[300px] rounded-t-[20px] object-contain "
+          className=" w-full h-[350px] rounded-t-[20px] object-contain"
           alt={data.title || data.name}
         />
       )}
@@ -105,11 +105,7 @@ const HoverCardT = ({
           {data.vote_average ? data.vote_average.toFixed(1) : "N/A"}
         </p>
       </div>
-      {/* 
-      <h3 className="text-xl px-[10px]  font-bold mb-1 line-clamp-1">
-        {data.title || data.name}
-      </h3> */}
-
+     
       <span className="text-[#fff]  flex gap-[5px] items-center pl-[10px] pb-[10px] ">
         {data?.genres?.slice(0, 2).map((g, index, array) => (
           <React.Fragment key={g.id || index}>

@@ -32,10 +32,19 @@ const MovieInfoModal = ({
 
   const handleToggleFavorite = () => {
     if (!setFavorites) return;
+
     if (isFavorite) {
       setFavorites((prev) => prev.filter((m) => m.id !== movie.id));
     } else {
-      setFavorites((prev) => [...prev, movie]);
+      const normalizedMovie = {
+        id: movie.id,
+        title: movie.title || movie.original_title || movie.name,
+        image: movie.backdrop_path
+          ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+          : movie.cover,
+      };
+
+      setFavorites((prev) => [...prev, normalizedMovie]);
     }
   };
 

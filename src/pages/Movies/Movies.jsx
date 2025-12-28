@@ -146,7 +146,7 @@ const Movies = ({ favorites, setFavorites }) => {
       <div className="pt-[60px] w-full">
         <div
           ref={headerRef}
-          className="flex fixed nav-dark pb-[10px] items-baseline gap-[40px] w-full bg-transparent transition-colors duration-300 z-50"
+          className="flex fixed nav-dark pb-[10px]  items-baseline gap-[40px] w-full bg-transparent transition-colors duration-300 z-50"
         >
           <p className="pl-[45px] text-[35px] font-black pt-[20px]">Movies</p>
 
@@ -175,7 +175,7 @@ const Movies = ({ favorites, setFavorites }) => {
           </div>
         </div>
 
-        <div className=" random-card flex w-full pl-[0px] h-auto text-[25px] font-bold top-[50px] z-10">
+        <div className=" random-card flex w-full pl-[70px] h-auto text-[25px] font-bold top-[50px] z-10">
           {randomMovie ? (
             <>
               <img
@@ -261,6 +261,8 @@ const Movies = ({ favorites, setFavorites }) => {
         show={showModal}
         movie={selectedMovie}
         onClose={closeModal}
+        favorites={favorites}
+        setFavorites={setFavorites}
       />
 
       <div className="category-cards  mt-10 ">
