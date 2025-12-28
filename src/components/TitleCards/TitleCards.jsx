@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import "./TitleCards.css";
 import { Link } from "react-router-dom";
-import HoverCardT from "./HoverCard";
+import HoverCard from "./HoverCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
@@ -162,7 +162,7 @@ const TitleCards = ({
               </Link>
 
               {hoveredCardId === card.id && hoverCardDetail.id === card.id && (
-                <HoverCardT
+                <HoverCard
                   data={hoverCardDetail}
                   onAdd={onAdd}
                   onRemove={onRemove}

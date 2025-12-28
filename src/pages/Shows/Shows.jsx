@@ -4,7 +4,11 @@ import Footer from "../../components/Footer/Footer";
 import TitleCards from "../../components/TitleCards/TitleCards";
 import "./Shows.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCaretDown,
+  faPlus,
+  faCheck,
+} from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import MovieInfoModal from "../../components/Modal/MovieInfoModal";
@@ -133,7 +137,7 @@ const Shows = ({ favorites, setFavorites }) => {
         >
           <p className="pl-[45px] text-[35px] font-black pt-[20px]">Shows</p>
 
-          <div className="relative inline-block mt-4">
+          <div className="relative inline-block z-10 mt-4">
             <button
               onClick={() => setOpen(!open)}
               className="bg-[#000] border px-[10px] cursor-pointer text-white rounded"
@@ -227,7 +231,10 @@ const Shows = ({ favorites, setFavorites }) => {
               </div>
             </>
           ) : (
-            "Загрузка..."
+            <div className="skeleton">
+              <div className="skeleton-poster"></div>
+              <div className="skeleton-info"></div>
+            </div>
           )}
         </div>
       </div>
@@ -237,8 +244,6 @@ const Shows = ({ favorites, setFavorites }) => {
         movie={selectedMovie}
         onClose={closeModal}
       />
-
-
 
       <div className="category-cards mt-10">
         <TitleCards
@@ -284,14 +289,13 @@ const Shows = ({ favorites, setFavorites }) => {
           onRemove={(tv) =>
             setFavorites((prev) => prev.filter((m) => m.id !== tv.id))
           }
-          onOpenModal={openModal} 
+          onOpenModal={openModal}
         />
       </div>
 
       <Footer />
     </div>
-
-  )
+  );
 };
 
 export default Shows;

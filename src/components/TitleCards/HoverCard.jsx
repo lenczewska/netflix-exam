@@ -29,14 +29,14 @@ const HoverCardT = ({
 
   return (
     <div
-      className="hover-card rounded-t-[10px] bg-[#222121] text-[#fff] w-[330px] h-[390px] duration-300 flex flex-col justify-between cursor-pointer"
+      className="hover-card rounded-[20px] bg-[#222121] text-[#fff] w-[330px] h-[390px] duration-300 flex flex-col justify-between cursor-pointer"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       {data.backdrop_path && (
         <img
           src={`https://image.tmdb.org/t/p/w500${data.backdrop_path}`}
-          className=" w-full h-[300px]  object-cover "
+          className=" w-full h-[300px] rounded-t-[20px] object-contain "
           alt={data.title || data.name}
         />
       )}

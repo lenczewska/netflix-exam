@@ -52,7 +52,7 @@ const SheetContent = React.forwardRef(
         ref={ref}
         className={cn(
           sheetVariants({ side }),
-          "flex flex-col max-h-full overflow-y-auto", // добавляем прокрутку
+          "flex flex-col max-h-full overflow-y-auto", 
           className
         )}
         {...props}

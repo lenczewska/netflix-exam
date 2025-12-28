@@ -44,33 +44,41 @@
   background: #141414e9;
 }
 
- .mob-logo{
-    display: none;
-  }
+.mob-logo {
+  display: none;
+}
 
-
+.dropdownMenu::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: 0;
+  right: 0;
+  height: 200px;
+}
 
 @media (max-width: 576px) {
-  .navbar-left, .navbar-right {
+  .navbar-left,
+  .navbar-right {
     display: none;
   }
-   .mob-logo{
+  .mob-logo {
     display: block !important;
   }
-
 }
 
 @media (max-width: 768px) {
- .mob-logo{
+  .mob-logo {
     display: block;
   }
 }
 
 @media (max-width: 992px) {
-   .navbar-left, .navbar-right {
+  .navbar-left,
+  .navbar-right {
     display: none;
   }
-   .mob-logo{
+  .mob-logo {
     display: block !important;
   }
 }

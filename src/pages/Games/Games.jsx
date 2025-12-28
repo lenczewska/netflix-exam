@@ -26,7 +26,7 @@ const Games = () => {
     <div>
       <Navbar />
 
-      {randomGame && (
+      {randomGame ? (
         <div className="flex pt-[70px] w-100vh gap-[30px] pl-[70px] pb-[50px] justify-center bg-[#141414]  overflow-hidden">
           <img
             src={randomGame.images?.cover}
@@ -80,6 +80,11 @@ const Games = () => {
             </div>
           </div>
         </div>
+      ):(
+         <div className="skeleton">
+              <div className="skeleton-poster"></div>
+              <div className="skeleton-info"></div>
+            </div>
       )}
 
       <div className="category-cards relative  ">

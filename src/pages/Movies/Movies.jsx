@@ -249,7 +249,10 @@ const Movies = ({ favorites, setFavorites }) => {
               </div>
             </>
           ) : (
-            "Загрузка..."
+            <div className="skeleton">
+              <div className="skeleton-poster"></div>
+              <div className="skeleton-info"></div>
+            </div>
           )}
         </div>
       </div>
