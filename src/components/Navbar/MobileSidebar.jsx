@@ -17,7 +17,7 @@ export default function MobileSidebar() {
         <Menu />
       </SheetTrigger>
 
-      <SheetContent side="left" className="w-[300px] bg-[#000] flex items-center flex-col ">
+      <SheetContent side="left" className="w-[300px] bg-[#000] fixed top-0 left-0 z-[10000] flex items-center  flex-col ">
         <img
           src={profile_icon}
           alt=""

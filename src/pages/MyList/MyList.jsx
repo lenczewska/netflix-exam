@@ -21,14 +21,18 @@ const MyList = ({ favorites, setFavorites }) => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-3 gap-4 p-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 p-6">
             {favorites.map((item) => (
               <div
                 key={item.id}
                 className="relative bg-[#000] p-4 rounded shadow text-center overflow-hidden group"
               >
                 <img
-                  src={item.backdrop_path ? `https://image.tmdb.org/t/p/w500${item.backdrop_path}` : item.image}
+                  src={
+                    item.backdrop_path
+                      ? `https://image.tmdb.org/t/p/w500${item.backdrop_path}`
+                      : item.image
+                  }
                   alt={item.original_title || item.name}
                   className="w-full rounded mb-2"
                 />
@@ -50,7 +54,9 @@ const MyList = ({ favorites, setFavorites }) => {
                     </button>
                   </div>
                 </div>
-                <p className="relative z-10">{item.original_title || item.name}</p>
+                <p className="relative z-10">
+                  {item.original_title || item.name}
+                </p>
               </div>
             ))}
           </div>

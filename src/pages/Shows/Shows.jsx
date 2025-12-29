@@ -164,7 +164,7 @@ const Shows = ({ favorites, setFavorites }) => {
               className="rounded shadow-lg w-[500px] h-[700px] object-cover"
             />
 
-            <div className="about pt-[70px] pl-[50px] bg-black text-white w-[800px] h-[700px]">
+            <div className="about pt-[70px] pl-[50px]  bg-black text-white w-[800px] h-[700px]">
               <div className=" movie-inf pb-[10px] text-[25px] font-bold">
                 Watch {randomShow.name} Now
               </div>
@@ -223,7 +223,7 @@ const Shows = ({ favorites, setFavorites }) => {
       />
 
       {/* CATEGORIES */}
-      <div className="mt-10">
+      <div className="mt-10 pl-[50px] ">
         <TitleCards
           title="Top Rated"
           category="top_rated"

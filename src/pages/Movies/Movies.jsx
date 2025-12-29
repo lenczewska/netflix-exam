@@ -33,7 +33,6 @@ const Movies = ({ favorites, setFavorites }) => {
     setSelectedMovie(null);
   };
 
-  // блокировка скролла при модалке
   useEffect(() => {
     document.body.style.overflow = showModal ? "hidden" : "auto";
     document.documentElement.style.overflow = showModal ? "hidden" : "auto";
@@ -43,7 +42,6 @@ const Movies = ({ favorites, setFavorites }) => {
     };
   }, [showModal]);
 
-  // жанры
   useEffect(() => {
     const fetchGenres = async () => {
       const res = await fetch(
@@ -55,7 +53,6 @@ const Movies = ({ favorites, setFavorites }) => {
     fetchGenres();
   }, []);
 
-  // рандомный фильм
   useEffect(() => {
     const fetchMovies = async () => {
       const res = await fetch(
@@ -83,7 +80,6 @@ const Movies = ({ favorites, setFavorites }) => {
     fetchMovies();
   }, []);
 
-  // прозрачный / тёмный хедер
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY === 0) {
@@ -164,7 +160,7 @@ const Movies = ({ favorites, setFavorites }) => {
       </div>
 
       {/* RANDOM MOVIE */}
-      <div className="relative z-0 flex w-full pl-[70px] pt-[70px]">
+      <div className=" random-card relative z-0 flex w-full pl-[70px] pt-[70px]">
         {randomMovie && (
           <>
             <img
@@ -173,30 +169,30 @@ const Movies = ({ favorites, setFavorites }) => {
               className="rounded shadow-lg w-[500px] h-[700px] object-cover"
             />
 
-            <div className="pt-[70px] pl-[50px] bg-black text-white w-[800px] h-[700px]">
+            <div className="about pt-[70px] pl-[50px] bg-black text-white w-[800px] h-[700px]">
               <div className="pb-[10px] text-[25px] font-bold">
                 Watch {randomMovie.title} Now
               </div>
 
-              <div className="text-[15px] w-[500px]">
+              <div className=" movie-inf text-[15px] w-[500px]">
                 {limitOverview(randomMovie.overview)}
               </div>
 
-              <div className="flex gap-[10px] pt-[20px] text-[15px] text-[#aaa]">
+              <div className=" inf flex gap-[10px] pt-[20px] text-[15px] text-[#aaa]">
                 <span>{randomMovie.release_date}</span>
                 <span className="text-white px-[5px]">HD</span>
                 <span>{randomMovie.runtime} min</span>
                 <span>{randomMovie.original_language}</span>
               </div>
 
-              <div className="text-[15px] text-[#aaa]">
+              <div className="inf text-[15px] text-[#aaa]">
                 Genres:{" "}
                 <span className="text-white">
                   {randomMovie.genres?.map((g) => g.name).join(", ")}
                 </span>
               </div>
 
-              <div className="text-[15px] text-[#aaa] w-[400px]">
+              <div className="cast text-[15px] text-[#aaa] w-[400px]">
                 Cast:{" "}
                 <span className="text-white">
                   {randomMovie.cast
@@ -206,7 +202,7 @@ const Movies = ({ favorites, setFavorites }) => {
                 </span>
               </div>
 
-              <div className="pt-[20px] flex gap-[10px]">
+              <div className=" like-btns pt-[20px] flex gap-[10px]">
                 <button
                   onClick={handleToggleFavorite}
                   className="border rounded-full w-[40px] h-[40px] flex items-center justify-center"
@@ -233,7 +229,7 @@ const Movies = ({ favorites, setFavorites }) => {
       />
 
       {/* CATEGORIES */}
-      <div className="mt-10">
+      <div className="mt-10 pl-[50px]">
         <MovieCards
           title="Trending This Week"
           category="trending/movie/week"

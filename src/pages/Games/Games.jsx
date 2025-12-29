@@ -28,11 +28,11 @@ const Games = () => {
       <Navbar />
 
       {randomGame ? (
-        <div className="flex pt-[70px] w-100vh gap-[30px] pl-[70px] pb-[50px] justify-center bg-[#141414]  overflow-hidden">
+        <div className=" random-box flex pt-[70px] w-100vh gap-[30px] pl-[70px] pb-[50px] justify-center bg-[#141414]  overflow-hidden">
           <img
             src={randomGame.images?.cover}
             alt={randomGame.title}
-            className=" game-img w-[500px] h-[520px] object-cover"
+            className="  game-img w-[500px] h-[520px] object-cover"
           />
 
           <div className="about flex flex-col  text-[#fff] w-full ">
@@ -101,7 +101,7 @@ const Games = () => {
         <GameModal game={selectedGame} onClose={() => setSelectedGame(null)} />
       )}
 
-      <div className="h-[320px] mt-[30px] bg-[#000]  flex justify-between">
+      <div className=" mob-box h-[320px] mt-[30px] bg-[#000]  flex justify-between">
         <div className="txt-box ml-[30px] flex flex-col justify-center">
           <h2 className="font-[600] text-[32px] font-unset">
             Find more games in the mobile app
