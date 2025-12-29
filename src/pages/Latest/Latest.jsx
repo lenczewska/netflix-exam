@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import "./Latest.css";
 import Navbar from "../../components/Navbar/Navbar";
-import TitleCards from "../../components/TitleCards/TitleCards";
+import TitleCards from "../../components/Cards/MovieCards";
 import Footer from "../../components/Footer/Footer";
 import MovieInfoModal from "../../components/Modal/MovieInfoModal";
 

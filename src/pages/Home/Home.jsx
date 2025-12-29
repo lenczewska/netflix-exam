@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Home.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import TitleCards from "../../components/TitleCards/TitleCards";
+import TitleCards from "../../components/Cards/MovieCards";
 import MovieInfoModal from "../../components/Modal/MovieInfoModal";
 import hero_banner2 from "../../assets/img/hero_banner2.jpg";
 import hero_title from "../../assets/img/hero_title.png";

@@ -136,11 +136,11 @@ const Navbar = () => {
       </div>
 
       <img
-          onClick={() => navigate("/browse")}
-          src={logo_header}
-          alt="logo-header"
-          className=" mob-logo w-[100px] mr-[30px] cursor-pointer"
-        />
+        onClick={() => navigate("/browse")}
+        src={logo_header}
+        alt="logo-header"
+        className=" mob-logo w-[100px] mr-[30px] cursor-pointer"
+      />
 
       <div className="lg:hidden">
         <MobileSidebar />
@@ -223,32 +223,48 @@ const Navbar = () => {
           />
 
           <div className="acc-box relative z-50">
-            <div className="dropdownMenu border flex flex-col gap-[25px] z-200 rounded-[2px] pb-[18px] pl-[22px] pt-[18px] mt-[30px] pr-[22px] bg-[#191919]">
-              <p className="hover:underline">
-                <FontAwesomeIcon className="mr-[10px]" icon={faPen} /> Manage
-                Profiles
+            <div className="dropdownMenu border flex flex-col gap-[25px] relative z-[10200] rounded-[2px] pb-[18px] pl-[22px] pt-[18px] mt-[30px] pr-[22px] bg-[#191919]">
+              <p className="flex items-center">
+                <FontAwesomeIcon className="mr-[10px]" icon={faPen} />
+                <span className="hover:underline inline-block cursor-pointer">
+                  Manage Profiles
+                </span>
               </p>
-              <p className="hover:underline">
-                <FontAwesomeIcon className="mr-[10px]" icon={faFaceLaughWink} />{" "}
-                Transfer Profile
+
+              <p className="flex items-center">
+                <FontAwesomeIcon className="mr-[10px]" icon={faFaceLaughWink} />
+                <span className="hover:underline cursor-pointer">
+                  Transfer Profile
+                </span>
               </p>
-              <p className="hover:underline">
-                <FontAwesomeIcon className="mr-[10px]" icon={faUser} /> Account
+
+              <p className="flex items-center">
+                <FontAwesomeIcon className="mr-[10px]" icon={faUser} />
+                <span className=" hover:underline inline-block cursor-pointer">
+                  Account
+                </span>
               </p>
-              <p className="hover:underline">
+
+              <p className="flex items-center">
                 <FontAwesomeIcon
                   className="mr-[10px]"
                   icon={faCircleQuestion}
-                />{" "}
-                Help center
+                />
+                <span className=" hover:underline inline-block cursor-pointer">
+                  Help center
+                </span>
               </p>
+
               <p
                 onClick={() => logout()}
-                className="mt-[20px] p-[15px] text-[13px] hover:underline border-t"
+                className="mt-[20px] p-[15px] text-[13px] border-t cursor-pointer"
               >
-                Sign Out of Netflix
+                <span className="hover:underline inline-block">
+                  Sign Out of Netflix
+                </span>
               </p>
             </div>
+
             <FontAwesomeIcon
               icon={faCaretUp}
               className="up absolute text-white text-[20px] -left-[32px] -translate-x-[18px] top-[18px]"

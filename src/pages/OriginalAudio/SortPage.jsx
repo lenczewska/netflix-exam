@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import TitleCards from "../../components/TitleCards/TitleCards";
+import TitleCards from "../../components/Cards/MovieCards";
 import MovieInfoModal from "../../components/Modal/MovieInfoModal";
 import { useState } from "react";
 import { useEffect } from "react";

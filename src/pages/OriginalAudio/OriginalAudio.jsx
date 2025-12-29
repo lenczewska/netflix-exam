@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import TitleCards from "../../components/TitleCards/TitleCards";
+import MovieCards from "../../components/Cards/MovieCards";
 import MovieInfoModal from "../../components/Modal/MovieInfoModal";
 
 const VITE_TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -284,7 +284,7 @@ const OriginalAudio = ({ favorites, setFavorites }) => {
       />
 
       <div className="pl-[45px] pt-[75px]">
-        <TitleCards
+        <MovieCards
           overflow-x-scroll
           title="Popular"
           category="popular"

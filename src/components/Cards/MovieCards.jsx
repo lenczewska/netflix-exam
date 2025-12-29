@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import "./TitleCards.css";
+import "./MovieCards.css";
 import { Link } from "react-router-dom";
 import HoverCard from "./HoverCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,7 +8,7 @@ import { faPlus, faChevronRight, faChevronLeft } from "@fortawesome/free-solid-s
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BEARER_TOKEN = import.meta.env.VITE_TMDB_BEARER;
 
-const TitleCards = ({
+const MovieCards = ({
   title,
   category,
   onAdd,
@@ -212,4 +212,4 @@ const TitleCards = ({
   );
 };
 
-export default TitleCards;
+export default MovieCards;

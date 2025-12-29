@@ -57,6 +57,11 @@
   height: 200px;
 }
 
+.items :hover{
+  text-decoration: underline;
+  
+}
+
 @media (max-width: 576px) {
   .navbar-left,
   .navbar-right {

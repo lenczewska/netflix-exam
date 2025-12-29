@@ -47,7 +47,7 @@ const GenresPage = () => {
           {">"} <span className="text-[40px] text-[#fff]">{genreName}</span>
         </h2>
 
-        <div className="grid grid-cols-4 gap-6">
+        <div className="cards grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {items.map((item) => (
             <div
               key={item.id}
@@ -56,11 +56,13 @@ const GenresPage = () => {
               <img
                 src={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
                 alt={item.title || item.name}
-                className="w-full h-[250px] pt-[10px] object-center rounded"
+                className="w-full h-[250px] pt-[10px] object-center rounded  "
               />
 
-              <div className="absolute inset-0 bg-black/60 flex items-center justify-center 
-                              opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              <div
+                className="absolute inset-0 bg-black/60 flex items-center justify-center 
+                              opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              >
                 <Link
                   to={`/player/${item.id}`}
                   className="flex items-center justify-center"
