@@ -10,6 +10,7 @@ import "./Game.css";
 
 import games_page from "../../assets/img/games_page.webp";
 import gamesData from "../../../public/games.json"; 
+import LikeButton from "@/components/LikeButton/LikeButton";
 
 const Games = () => {
   const [selectedGame, setSelectedGame] = useState(null);
@@ -71,12 +72,7 @@ const Games = () => {
                   className="text-[20px] text-[#fff]"
                 />
               </button>
-              <button className="btn border cursor-pointer text-[#aaa] rounded-full w-[40px] h-[40px] flex items-center justify-center">
-                <FontAwesomeIcon
-                  icon={faThumbsUp}
-                  className="text-[20px] text-[#fff]"
-                />
-              </button>
+             <LikeButton/>
             </div>
           </div>
         </div>

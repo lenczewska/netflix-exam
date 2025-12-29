@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import MovieInfoModal from "../../components/Modal/MovieInfoModal";
+import LikeButton from "@/components/LikeButton/LikeButton";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 const Movies = ({ favorites, setFavorites }) => {
@@ -239,12 +240,7 @@ const Movies = ({ favorites, setFavorites }) => {
                     />
                   </button>
 
-                  <button className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
-                    <FontAwesomeIcon
-                      icon={faThumbsUp}
-                      className="text-[20px] text-[#fff]"
-                    />
-                  </button>
+                  <LikeButton/>
                 </div>
               </div>
             </>

@@ -12,6 +12,7 @@ import {
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import MovieInfoModal from "../../components/Modal/MovieInfoModal";
+import LikeButton from "@/components/LikeButton/LikeButton";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -221,12 +222,7 @@ const Shows = ({ favorites, setFavorites }) => {
                     />
                   </button>
 
-                  <button className="btn border cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
-                    <FontAwesomeIcon
-                      icon={faThumbsUp}
-                      className="text-[20px] text-[#fff]"
-                    />
-                  </button>
+                 <LikeButton/>
                 </div>
               </div>
             </>

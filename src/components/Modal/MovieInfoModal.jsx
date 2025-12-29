@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import logo_header from "../../assets/img/logo_header.png";
 import play_icon from "../../assets/img/play_icon.png";
 import "./MovieInfoModal.css";
+import LikeButton from "../LikeButton/LikeButton";
 
 const MovieInfoModal = ({
   show,
@@ -109,15 +110,7 @@ const MovieInfoModal = ({
                       />
                     </button>
 
-                    <button
-                      onClick={() => onLike?.(movie)}
-                      className="btn hover:border-[#fff] border-[#616161] border-2 bg-[#14141492] hover:bg-[#1414141d] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
-                    >
-                      <FontAwesomeIcon
-                        icon={faThumbsUp}
-                        className="text-[20px] text-[#fff]"
-                      />
-                    </button>
+                   <LikeButton/>
                   </div>
                 </div>
               </div>
