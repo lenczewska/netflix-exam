@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 import MovieInfoModal from "../../components/Modal/MovieInfoModal";
-import LikeButton from "@/components/LikeButton/LikeButton";
+import LikeButton from "../../components/LikeButton/LikeButton";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -206,7 +206,7 @@ const Movies = ({ favorites, setFavorites }) => {
                   />
                 </button>
 
-                <LikeButton />
+          <LikeButton uniqueId={randomMovie.id} />
               </div>
             </div>
           </>

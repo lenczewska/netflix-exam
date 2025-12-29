@@ -20,10 +20,13 @@ import MyList from "./pages/MyList/MyList";
 import OriginalAudio from "./pages/OriginalAudio/OriginalAudio";
 import SearchPage from "./pages/Search/SearchPage";
 import SortPage from "./pages/OriginalAudio/SortPage";
+import ProfileSelect from "./components/ProfileSelect/ProfileSelect";
 
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Состояние для избранного
   const [favorites, setFavorites] = useState(() => {
     const saved = localStorage.getItem("favorites");
     return saved ? JSON.parse(saved) : [];
@@ -44,30 +47,47 @@ function App() {
     setFavorites((prev) => prev.filter((m) => m.id !== movie.id));
   };
 
+  // Состояние пользователя и проверка авторизации
+  const [user, setUser] = useState(null);
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        if (location.pathname === "/login" || location.pathname === "/") {
-          navigate("/browse");
-        }
-      } else {
-        if (location.pathname !== "/login") {
-          navigate("/login");
-        }
-      }
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      setUser(firebaseUser);
+      setCheckingAuth(false);
     });
 
     return () => unsubscribe();
-  }, [location.pathname, navigate]);
+  }, []);
+
+  // Навигация после проверки авторизации
+  useEffect(() => {
+    if (!checkingAuth) {
+      if (!user && location.pathname !== "/login") {
+        navigate("/login");
+      } else if (
+        user &&
+        (location.pathname === "/" || location.pathname === "/login")
+      ) {
+        navigate("/select-profile");
+      }
+    }
+  }, [checkingAuth, user, location.pathname, navigate]);
+
+  if (checkingAuth) {
+    // Пока проверяем пользователя — показываем пустой экран или спиннер
+    return <div className="flex items-center justify-center h-screen">Loading...</div>;
+  }
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/browse" />} />
+      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/select-profile" element={<ProfileSelect />} />
       <Route
         path="/browse"
         element={<Home favorites={favorites} setFavorites={setFavorites} />}
       />
-      <Route path="/login" element={<Login />} />
       <Route path="/player/:id" element={<Player />} />
       <Route
         path="/shows"
@@ -78,7 +98,6 @@ function App() {
         path="/movies"
         element={<Movies favorites={favorites} setFavorites={setFavorites} />}
       />
-
       <Route path="/sort" element={<SortPage />} />
       <Route path="/games" element={<Games />} />
       <Route
