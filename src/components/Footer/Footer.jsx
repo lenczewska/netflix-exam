@@ -6,8 +6,8 @@ import facebook_icon from "../../assets/img/facebook_icon.png";
 
 function Footer() {
   return (
-    <div className="footer  p-[30px_4%] max-w-[1000px] m-auto">
-      <div className="footer-icons flex gap-[20px] ml-[10px] mb-[10px]  mt-[60px] pl-[10px]">
+    <div className="footer  p-[30px] max-w-[1000px] m-auto">
+      <div className="footer-icons flex gap-[20px] ml-[10px] mb-[10px]  mt-[100px] pl-[10px]">
         <a
           href="https://www.facebook.com/netflix/"
           target="_blank"

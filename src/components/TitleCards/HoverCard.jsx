@@ -10,6 +10,7 @@ import {
   faCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import "./HoverCard.css";
+import LikeButton from "../LikeButton/LikeButton";
 
 const HoverCardT = ({
   data,
@@ -29,19 +30,19 @@ const HoverCardT = ({
 
   return (
     <div
-      className="hover-card rounded-[20px] bg-[#222121] text-[#fff] w-[330px] h-[390px] duration-300 flex flex-col justify-between cursor-pointer"
+      className="hover-card  bg-[#222121] text-[#fff] w-[330px] h-[430px] duration-300 flex flex-col  justify-between cursor-pointer"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       {data.backdrop_path && (
         <img
           src={`https://image.tmdb.org/t/p/w500${data.backdrop_path}`}
-          className=" w-full h-[350px] rounded-t-[20px] object-contain"
+          className=" w-full h-[360px]  object-contain "
           alt={data.title || data.name}
         />
       )}
 
-      <div className=" flex border-[#aaa] justify-between text-center px-[10px]  text-[#fff] py-4 rounded">
+      <div className=" flex border-[#aaa]  text-center px-[10px] pb-[10px]  text-[#fff]  rounded">
         <div className="flex hover:bg-[#130f0f11] gap-[6px]">
           <Link
             to={`/player/${data.id}`}
@@ -71,15 +72,8 @@ const HoverCardT = ({
             />
           </button>
 
-          <button className="btn hover:border-[#fff]  border-2 border-[#616161] bg-[#222121] cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center">
-            <FontAwesomeIcon
-              icon={faThumbsUp}
-              className="text-[20px] text-[#fff]"
-            />
-          </button>
-        </div>
-
-        <button
+          <LikeButton />
+          <button
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -93,6 +87,8 @@ const HoverCardT = ({
             className="text-[20px] text-[#fff]"
           />
         </button>
+        </div>
+        
       </div>
 
       <div className="inf flex gap-[10px]   pb-[5px]  px-[10px]  items-center">
@@ -105,7 +101,7 @@ const HoverCardT = ({
           {data.vote_average ? data.vote_average.toFixed(1) : "N/A"}
         </p>
       </div>
-     
+
       <span className="text-[#fff]  flex gap-[5px] items-center pl-[10px] pb-[10px] ">
         {data?.genres?.slice(0, 2).map((g, index, array) => (
           <React.Fragment key={g.id || index}>

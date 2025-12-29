@@ -31,6 +31,20 @@ const Latest = () => {
     }
   }, [showModal]);
 
+  const handleToggleFavorite = () => {
+    if (!randomMovie) return;
+
+    setFavorites((prev) => {
+      const exists = prev.find((item) => item.id === randomMovie.id);
+
+      if (exists) {
+        return prev.filter((item) => item.id !== randomMovie.id);
+      }
+
+      return [...prev, { ...randomMovie }];
+    });
+  };
+
   return (
     <div>
       <Navbar />
