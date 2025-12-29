@@ -12,7 +12,7 @@ import {
 import "./HoverCard.css";
 import LikeButton from "../LikeButton/LikeButton";
 
-const HoverCardT = ({
+const HoverCard = ({
   data,
   onAdd,
   onRemove,
@@ -72,23 +72,22 @@ const HoverCardT = ({
             />
           </button>
 
-          <LikeButton />
+          <LikeButton uniqueId={data.id} />
           <button
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            if (typeof onOpenModal === "function") onOpenModal(data);
-            else if (handleMoreInfo) handleMoreInfo(data);
-          }}
-          className="btn hover:border-[#fff]  border-2 border-[#616161] ml-[120px] bg-[#222121]cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
-        >
-          <FontAwesomeIcon
-            icon={faChevronDown}
-            className="text-[20px] text-[#fff]"
-          />
-        </button>
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (typeof onOpenModal === "function") onOpenModal(data);
+              else if (handleMoreInfo) handleMoreInfo(data);
+            }}
+            className="btn hover:border-[#fff]  border-2 border-[#616161] ml-[120px] bg-[#222121]cursor-pointer text-[#aaa] rounded-[50%] w-[40px] h-[40px] flex items-center justify-center"
+          >
+            <FontAwesomeIcon
+              icon={faChevronDown}
+              className="text-[20px] text-[#fff]"
+            />
+          </button>
         </div>
-        
       </div>
 
       <div className="inf flex gap-[10px]   pb-[5px]  px-[10px]  items-center">
@@ -119,4 +118,4 @@ const HoverCardT = ({
   );
 };
 
-export default HoverCardT;
+export default HoverCard;

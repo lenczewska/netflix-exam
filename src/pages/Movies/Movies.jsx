@@ -5,13 +5,11 @@ import Footer from "../../components/Footer/Footer";
 import MovieCards from "../../components/Cards/MovieCards";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCaretDown,
-  faPlus,
-  faCheck,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faPlus, faCheck } from "@fortawesome/free-solid-svg-icons";
 import MovieInfoModal from "../../components/Modal/MovieInfoModal";
 import LikeButton from "@/components/LikeButton/LikeButton";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -121,13 +119,11 @@ const Movies = ({ favorites, setFavorites }) => {
     <div>
       <Navbar />
 
+      {/* HEADER */}
       <div
         ref={headerRef}
-        className="
-          fixed top-[60px] left-0 w-full flex items-baseline gap-[40px]
-          pb-[10px] bg-transparent transition-colors duration-300
-          z-[9999]
-        "
+        className="fixed top-[60px] left-0 w-full flex items-baseline gap-[40px]
+          pb-[10px] bg-transparent transition-colors duration-300 z-[9999]"
       >
         <p className="pl-[80px] text-[35px] font-black pt-[20px]">Movies</p>
 
@@ -160,25 +156,25 @@ const Movies = ({ favorites, setFavorites }) => {
       </div>
 
       {/* RANDOM MOVIE */}
-      <div className=" random-card relative z-0 flex w-full pl-[70px] pt-[70px]">
-        {randomMovie && (
+      <div className="random-card relative z-0 flex flex-col md:flex-row w-full pl-[20px] md:pl-[70px] pt-[20px] md:pt-[70px] gap-6">
+        {randomMovie ? (
           <>
             <img
               src={`https://image.tmdb.org/t/p/w500${randomMovie.poster_path}`}
               alt={randomMovie.title}
-              className="rounded shadow-lg w-[500px] h-[700px] object-cover"
+              className="rounded shadow-lg w-full md:w-[500px] h-[400px] md:h-[700px] object-cover"
             />
 
-            <div className="about pt-[70px] pl-[50px] bg-black text-white w-[800px] h-[700px]">
+            <div className="about pt-4 md:pt-[70px] pl-0 md:pl-[50px] bg-black text-white w-full md:w-[800px] h-auto md:h-[700px]">
               <div className="pb-[10px] text-[25px] font-bold">
                 Watch {randomMovie.title} Now
               </div>
 
-              <div className=" movie-inf text-[15px] w-[500px]">
+              <div className="movie-inf text-[15px] w-full md:w-[500px]">
                 {limitOverview(randomMovie.overview)}
               </div>
 
-              <div className=" inf flex gap-[10px] pt-[20px] text-[15px] text-[#aaa]">
+              <div className="inf flex flex-wrap gap-[10px] pt-[20px] text-[15px] text-[#aaa]">
                 <span>{randomMovie.release_date}</span>
                 <span className="text-white px-[5px]">HD</span>
                 <span>{randomMovie.runtime} min</span>
@@ -192,17 +188,14 @@ const Movies = ({ favorites, setFavorites }) => {
                 </span>
               </div>
 
-              <div className="cast text-[15px] text-[#aaa] w-[400px]">
+              <div className="cast text-[15px] text-[#aaa] w-full md:w-[400px]">
                 Cast:{" "}
                 <span className="text-white">
-                  {randomMovie.cast
-                    ?.slice(0, 5)
-                    .map((a) => a.name)
-                    .join(", ")}
+                  {randomMovie.cast?.slice(0, 5).map((a) => a.name).join(", ")}
                 </span>
               </div>
 
-              <div className=" like-btns pt-[20px] flex gap-[10px]">
+              <div className="like-btns pt-[20px] flex gap-[10px]">
                 <button
                   onClick={handleToggleFavorite}
                   className="border rounded-full w-[40px] h-[40px] flex items-center justify-center"
@@ -214,6 +207,28 @@ const Movies = ({ favorites, setFavorites }) => {
                 </button>
 
                 <LikeButton />
+              </div>
+            </div>
+          </>
+        ) : (
+          // Skeleton Loader
+          <>
+            <Skeleton
+              height={700}
+              width={500}
+              className="rounded shadow-lg"
+              baseColor="#2d2d2d"
+              highlightColor="#444444"
+            />
+
+            <div className="flex-1 flex flex-col gap-4 pt-4 md:pt-[70px]">
+              <Skeleton height={30} width="70%" baseColor="#2d2d2d" highlightColor="#444444" />
+              <Skeleton height={20} width="100%" baseColor="#2d2d2d" highlightColor="#444444" />
+              <Skeleton height={20} width="50%" baseColor="#2d2d2d" highlightColor="#444444" />
+              <Skeleton height={20} width="65%" baseColor="#2d2d2d" highlightColor="#444444" />
+              <div className="flex gap-4 mt-4">
+                <Skeleton circle height={40} width={40} baseColor="#2d2d2d" highlightColor="#444444" />
+                <Skeleton circle height={40} width={40} baseColor="#2d2d2d" highlightColor="#444444" />
               </div>
             </div>
           </>

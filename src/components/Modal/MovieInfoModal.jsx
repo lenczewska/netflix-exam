@@ -110,7 +110,7 @@ const MovieInfoModal = ({
                       />
                     </button>
 
-                   <LikeButton/>
+    <LikeButton uniqueId={movie.id} />
                   </div>
                 </div>
               </div>

@@ -33,8 +33,8 @@ const DislikeSVG = () => (
   </svg>
 );
 
-const LikeButton = ({ item }) => {
-  const STORAGE_KEY = "movie-reactions";
+const LikeButton = ({ uniqueId }) => {
+  const STORAGE_KEY = "card-reactions";
   const [active, setActive] = useState(null);
 
   const reactions = [
@@ -43,24 +43,24 @@ const LikeButton = ({ item }) => {
     { id: "dislike", icon: <DislikeSVG />, color: "text-white" },
   ];
 
-  // Загружаем реакцию для конкретного фильма
+  // Загружаем реакцию для конкретной карточки
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-    if (saved[item]) {
-      setActive(saved[item]);
+    if (saved[uniqueId]) {
+      setActive(saved[uniqueId]);
     }
-  }, [item]);
+  }, [uniqueId]);
 
-  // Сохраняем реакцию для конкретного фильма
+  // Сохраняем реакцию для конкретной карточки
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
     if (active) {
-      saved[item] = active;
+      saved[uniqueId] = active;
     } else {
-      delete saved[item];
+      delete saved[uniqueId];
     }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
-  }, [active, item]);
+  }, [active, uniqueId]);
 
   const handleClick = (id) => {
     setActive((prev) => (prev === id ? null : id));
