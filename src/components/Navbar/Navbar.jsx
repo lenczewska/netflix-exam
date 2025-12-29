@@ -22,9 +22,8 @@ const Navbar = () => {
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [profile, setProfile] = useState(null); // выбранный профиль
+  const [profile, setProfile] = useState(null); 
 
-  // Скролл
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {
@@ -37,14 +36,12 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Поиск
   useEffect(() => {
     if (query.trim().length > 0) {
       navigate(`/search?query=${encodeURIComponent(query)}`);
     }
   }, [query, navigate]);
 
-  // Клик вне поиска / Escape
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -62,7 +59,6 @@ const Navbar = () => {
     };
   }, []);
 
-  // Загружаем профиль из localStorage
   useEffect(() => {
     const storedProfile = localStorage.getItem("selectedProfile");
     if (storedProfile) setProfile(JSON.parse(storedProfile));
@@ -73,7 +69,6 @@ const Navbar = () => {
       ref={navRef}
       className="w-screen pt-[20px] pb-[10px] fixed flex items-center justify-between pl-[40px] text-[13px] pr-[40px] text-[#e5e5e5] z-30"
     >
-      {/* Левый блок */}
       <div className="navbar-left flex gap-[5px] items-center justify-center">
         <img
           onClick={() => navigate("/browse")}
@@ -104,7 +99,6 @@ const Navbar = () => {
         </ul>
       </div>
 
-      {/* Логотип для моб */}
       <img
         onClick={() => navigate("/browse")}
         src={logo_header}
@@ -112,16 +106,13 @@ const Navbar = () => {
         className="mob-logo w-[100px] mr-[30px] cursor-pointer"
       />
 
-      {/* Мобильное меню */}
       <div className="lg:hidden">
-        <MobileSidebar />
+        <MobileSidebar profile={profile} />
       </div>
 
-      {/* Правый блок */}
       <div className="navbar-right flex gap-[15px] items-center">
-        {/* Кнопка поиска */}
         <button
-          className="bg-black search-btn text-[#aaa] cursor-pointer"
+          className=" search-btn text-[#aaa] cursor-pointer"
           onClick={() => setSearchOpen(!searchOpen)}
         >
           <svg
@@ -166,8 +157,7 @@ const Navbar = () => {
           </div>
         )}
 
-        {/* Иконка уведомлений */}
-        <svg
+  <svg
           className="cursor-pointer"
           viewBox="0 0 24 24"
           width="23"
@@ -185,7 +175,6 @@ const Navbar = () => {
           ></path>
         </svg>
 
-        {/* Профиль */}
         <div className="acc-box z-50 relative flex items-center cursor-pointer">
           <img
             src={profile ? profile.avatar : profile_icon}

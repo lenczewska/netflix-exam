@@ -9,19 +9,21 @@ import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { logout } from "../../fireBase";
 
-
-export default function MobileSidebar() {
+export default function MobileSidebar({ profile }) {
   return (
     <Sheet>
       <SheetTrigger className="p-2">
         <Menu />
       </SheetTrigger>
 
-      <SheetContent side="left" className="w-[300px] bg-[#000] fixed top-0 left-0 z-[10000] flex items-center  flex-col ">
+      <SheetContent
+        side="left"
+        className="w-[300px] bg-[#000] fixed top-0 left-0 z-[10000] flex items-center  flex-col "
+      >
         <img
-          src={profile_icon}
-          alt=""
-          className="profile  w-[40px] pb-[20px] rounded-[5px]"
+          src={profile ? profile.avatar : profile_icon}
+          alt={profile ? profile.name : "Profile"}
+          className="profile w-[30px] rounded-[5px]"
         />
         <nav className="flex flex-col items-center gap-4 border-b-2 ">
           <Link to="/">Home</Link>

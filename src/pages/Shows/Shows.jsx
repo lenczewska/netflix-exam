@@ -160,18 +160,15 @@ const Shows = ({ favorites, setFavorites }) => {
         </div>
       </div>
 
-      {/* RANDOM SHOW */}
       <div className="random-card relative z-0 flex flex-col md:flex-row w-full pl-[20px] md:pl-[70px] pt-[20px] md:pt-[70px] gap-6">
         {randomShow ? (
           <>
-            {/* Постер */}
             <img
               src={`https://image.tmdb.org/t/p/w500${randomShow.poster_path}`}
               alt={randomShow.name}
               className="rounded shadow-lg w-full md:w-[500px] h-[400px] md:h-[700px] object-cover"
             />
 
-            {/* Информация */}
             <div className="about pt-4 md:pt-[70px] pl-0 md:pl-[50px] bg-black text-white w-full md:w-[800px] h-auto md:h-[700px]">
               <div className="movie-inf pb-[10px] text-[25px] font-bold">
                 Watch {randomShow.name} Now
