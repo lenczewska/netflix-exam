@@ -4,11 +4,14 @@ import { logout } from "../../fireBase";
 import "./Navbar.css";
 import MobileSidebar from "./MobileSidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { faFaceLaughWink } from "@fortawesome/free-solid-svg-icons";
-import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCaretDown,
+  faCaretUp,
+  faPen,
+  faUser,
+  faFaceLaughWink,
+  faCircleQuestion,
+} from "@fortawesome/free-solid-svg-icons";
 import logo_header from "../../assets/img/logo_header.png";
 import profile_icon from "../../assets/img/profile_icon.jpg";
 
@@ -19,7 +22,9 @@ const Navbar = () => {
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [profile, setProfile] = useState(null); // выбранный профиль
 
+  // Скролл
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= 80) {
@@ -28,37 +33,39 @@ const Navbar = () => {
         navRef.current?.classList.remove("nav-dark");
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Поиск
   useEffect(() => {
     if (query.trim().length > 0) {
       navigate(`/search?query=${encodeURIComponent(query)}`);
     }
   }, [query, navigate]);
 
+  // Клик вне поиска / Escape
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setSearchOpen(false);
       }
     };
-
     const handleEscape = (event) => {
-      if (event.key === "Escape") {
-        setSearchOpen(false);
-      }
+      if (event.key === "Escape") setSearchOpen(false);
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("keydown", handleEscape);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscape);
     };
+  }, []);
+
+  // Загружаем профиль из localStorage
+  useEffect(() => {
+    const storedProfile = localStorage.getItem("selectedProfile");
+    if (storedProfile) setProfile(JSON.parse(storedProfile));
   }, []);
 
   return (
@@ -66,6 +73,7 @@ const Navbar = () => {
       ref={navRef}
       className="w-screen pt-[20px] pb-[10px] fixed flex items-center justify-between pl-[40px] text-[13px] pr-[40px] text-[#e5e5e5] z-30"
     >
+      {/* Левый блок */}
       <div className="navbar-left flex gap-[5px] items-center justify-center">
         <img
           onClick={() => navigate("/browse")}
@@ -74,79 +82,44 @@ const Navbar = () => {
           className="w-[100px] mr-[30px] cursor-pointer"
         />
         <ul className="flex gap-[20px]">
-          <li
-            onClick={() => navigate("/browse")}
-            className={
-              location.pathname === "/browse" ? "font-[650]" : "text-[13px]"
-            }
-          >
-            Home
-          </li>
-          <li
-            onClick={() => navigate("/shows")}
-            className={
-              location.pathname === "/shows" ? "font-[650]" : "text-[13px]"
-            }
-          >
-            Shows
-          </li>
-          <li
-            onClick={() => navigate("/movies")}
-            className={
-              location.pathname === "/movies" ? "font-[650]" : "text-[13px]"
-            }
-          >
-            Movies
-          </li>
-          <li
-            onClick={() => navigate("/games")}
-            className={
-              location.pathname === "/games" ? "font-[650]" : "text-[13px]"
-            }
-          >
-            Games
-          </li>
-          <li
-            onClick={() => navigate("/latest")}
-            className={
-              location.pathname === "/latest" ? "font-[650]" : "text-[13px]"
-            }
-          >
-            Latest
-          </li>
-          <li
-            onClick={() => navigate("/my-list")}
-            className={
-              location.pathname === "/my-list" ? "font-[650]" : "text-[13px]"
-            }
-          >
-            My List
-          </li>
-          <li
-            onClick={() => navigate("/original-audio")}
-            className={
-              location.pathname === "/original-audio"
-                ? "font-[650]"
-                : "text-[13px]"
-            }
-          >
-            Browse by Languages
-          </li>
+          {[
+            { name: "Home", path: "/browse" },
+            { name: "Shows", path: "/shows" },
+            { name: "Movies", path: "/movies" },
+            { name: "Games", path: "/games" },
+            { name: "Latest", path: "/latest" },
+            { name: "My List", path: "/my-list" },
+            { name: "Browse by Languages", path: "/original-audio" },
+          ].map((item) => (
+            <li
+              key={item.path}
+              onClick={() => navigate(item.path)}
+              className={
+                location.pathname === item.path ? "font-[650]" : "text-[13px]"
+              }
+            >
+              {item.name}
+            </li>
+          ))}
         </ul>
       </div>
 
+      {/* Логотип для моб */}
       <img
         onClick={() => navigate("/browse")}
         src={logo_header}
         alt="logo-header"
-        className=" mob-logo w-[100px] mr-[30px] cursor-pointer"
+        className="mob-logo w-[100px] mr-[30px] cursor-pointer"
       />
 
+      {/* Мобильное меню */}
       <div className="lg:hidden">
         <MobileSidebar />
       </div>
 
-      <div className="navbar-right  flex gap-[15px] items-center">
+      {/* Правый блок */}
+      <div className="navbar-right flex gap-[15px] items-center">
+        {/* Кнопка поиска */}
         <button
           className="bg-black search-btn text-[#aaa] cursor-pointer"
           onClick={() => setSearchOpen(!searchOpen)}
@@ -193,6 +166,7 @@ const Navbar = () => {
           </div>
         )}
 
+        {/* Иконка уведомлений */}
         <svg
           className="cursor-pointer"
           viewBox="0 0 24 24"
@@ -211,10 +185,11 @@ const Navbar = () => {
           ></path>
         </svg>
 
+        {/* Профиль */}
         <div className="acc-box z-50 relative flex items-center cursor-pointer">
           <img
-            src={profile_icon}
-            alt=""
+            src={profile ? profile.avatar : profile_icon}
+            alt={profile ? profile.name : "Profile"}
             className="profile w-[30px] rounded-[5px]"
           />
           <FontAwesomeIcon
@@ -232,15 +207,16 @@ const Navbar = () => {
               </p>
 
               <p className="flex items-center">
-                <FontAwesomeIcon className="mr-[10px]" icon={faFaceLaughWink} />
-                <span className="hover:underline cursor-pointer">
-                  Transfer Profile
-                </span>
+                <FontAwesomeIcon
+                  className="mr-[10px]"
+                  icon={faFaceLaughWink}
+                />
+                <span className="hover:underline cursor-pointer">Transfer Profile</span>
               </p>
 
               <p className="flex items-center">
                 <FontAwesomeIcon className="mr-[10px]" icon={faUser} />
-                <span className=" hover:underline inline-block cursor-pointer">
+                <span className="hover:underline inline-block cursor-pointer">
                   Account
                 </span>
               </p>
@@ -250,7 +226,7 @@ const Navbar = () => {
                   className="mr-[10px]"
                   icon={faCircleQuestion}
                 />
-                <span className=" hover:underline inline-block cursor-pointer">
+                <span className="hover:underline inline-block cursor-pointer">
                   Help center
                 </span>
               </p>

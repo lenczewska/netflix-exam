@@ -10,7 +10,6 @@ const profiles = [
   { id: 2, name: "User1", avatar: avatar2 },
   { id: 4, name: "User2", avatar: avatar4 },
   { id: 5, name: "Guest", avatar: avatar5 },
-
 ];
 
 const ProfileSelect = () => {
@@ -18,7 +17,7 @@ const ProfileSelect = () => {
   navigate("/browse");
 
   const handleSelect = (profile) => {
-    console.log("Выбран профиль:", profile);
+    localStorage.setItem("selectedProfile", JSON.stringify(profile));
     navigate("/browse");
   };
 
