@@ -119,10 +119,9 @@ const Movies = ({ favorites, setFavorites }) => {
     <div>
       <Navbar />
 
-      {/* HEADER */}
       <div
         ref={headerRef}
-        className="fixed top-[60px] left-0 w-full flex items-baseline gap-[40px]
+        className="fixed top-[70px] left-0 w-full flex items-baseline gap-[40px]
           pb-[10px] bg-transparent transition-colors duration-300 z-[9999]"
       >
         <p className="pl-[80px] text-[35px] font-black pt-[20px]">Movies</p>
@@ -155,7 +154,6 @@ const Movies = ({ favorites, setFavorites }) => {
         </div>
       </div>
 
-      {/* RANDOM MOVIE */}
       <div className="random-card relative z-0 flex flex-col md:flex-row w-full pl-[20px] md:pl-[70px] pt-[20px] md:pt-[70px] gap-6">
         {randomMovie ? (
           <>
@@ -211,7 +209,6 @@ const Movies = ({ favorites, setFavorites }) => {
             </div>
           </>
         ) : (
-          // Skeleton Loader
           <>
             <Skeleton
               height={700}
@@ -243,7 +240,6 @@ const Movies = ({ favorites, setFavorites }) => {
         setFavorites={setFavorites}
       />
 
-      {/* CATEGORIES */}
       <div className="mt-10 pl-[50px]">
         <MovieCards
           title="Trending This Week"

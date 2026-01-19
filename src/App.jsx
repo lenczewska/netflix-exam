@@ -26,7 +26,6 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Состояние для избранного
   const [favorites, setFavorites] = useState(() => {
     const saved = localStorage.getItem("favorites");
     return saved ? JSON.parse(saved) : [];
@@ -47,7 +46,6 @@ function App() {
     setFavorites((prev) => prev.filter((m) => m.id !== movie.id));
   };
 
-  // Состояние пользователя и проверка авторизации
   const [user, setUser] = useState(null);
   const [checkingAuth, setCheckingAuth] = useState(true);
 
@@ -60,7 +58,6 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  // Навигация после проверки авторизации
   useEffect(() => {
     if (!checkingAuth) {
       if (!user && location.pathname !== "/login") {
@@ -75,7 +72,6 @@ function App() {
   }, [checkingAuth, user, location.pathname, navigate]);
 
   if (checkingAuth) {
-    // Пока проверяем пользователя — показываем пустой экран или спиннер
     return <div className="flex items-center justify-center h-screen">Loading...</div>;
   }
 

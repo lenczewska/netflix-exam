@@ -175,7 +175,7 @@ const Navbar = () => {
           ></path>
         </svg>
 
-        <div className="acc-box z-50 relative flex items-center cursor-pointer">
+        <div className="acc-box z-50 relative  flex items-center cursor-pointer">
           <img
             src={profile ? profile.avatar : profile_icon}
             alt={profile ? profile.name : "Profile"}
@@ -183,10 +183,10 @@ const Navbar = () => {
           />
           <FontAwesomeIcon
             icon={faCaretDown}
-            className="down text-white text-[15px] ml-[5px]"
+            className="down text-white text-[15px]  ml-[5px]"
           />
 
-          <div className="acc-box relative z-50">
+          <div className="acc-box relative z-[5550]  ">
             <div className="dropdownMenu border flex flex-col gap-[25px] relative z-[10200] rounded-[2px] pb-[18px] pl-[22px] pt-[18px] mt-[30px] pr-[22px] bg-[#191919]">
               <p className="flex items-center">
                 <FontAwesomeIcon className="mr-[10px]" icon={faPen} />

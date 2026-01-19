@@ -43,7 +43,6 @@ const LikeButton = ({ uniqueId }) => {
     { id: "dislike", icon: <DislikeSVG />, color: "text-white" },
   ];
 
-  // Загружаем реакцию для конкретной карточки
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
     if (saved[uniqueId]) {
@@ -51,7 +50,6 @@ const LikeButton = ({ uniqueId }) => {
     }
   }, [uniqueId]);
 
-  // Сохраняем реакцию для конкретной карточки
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
     if (active) {
