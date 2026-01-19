@@ -22,7 +22,8 @@ const Navbar = () => {
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [profile, setProfile] = useState(null); 
+  const [profile, setProfile] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +36,20 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      const accBox = document.querySelector('.acc-box');
+      if (dropdownOpen && accBox && !accBox.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownOpen]);
 
   useEffect(() => {
     if (query.trim().length > 0) {
@@ -67,7 +82,7 @@ const Navbar = () => {
   return (
     <div
       ref={navRef}
-      className="w-screen pt-[20px] pb-[10px] fixed flex items-center justify-between pl-[40px] text-[13px] pr-[40px] text-[#e5e5e5] z-30"
+      className="w-screen pt-[20px] pb-[10px] fixed flex items-center justify-between pl-[40px] text-[13px] pr-[40px] text-[#e5e5e5] z-[10000]"
     >
       <div className="navbar-left flex gap-[5px] items-center justify-center">
         <img
@@ -157,7 +172,7 @@ const Navbar = () => {
           </div>
         )}
 
-  <svg
+        <svg
           className="cursor-pointer"
           viewBox="0 0 24 24"
           width="23"
@@ -175,7 +190,12 @@ const Navbar = () => {
           ></path>
         </svg>
 
-        <div className="acc-box z-50 relative  flex items-center cursor-pointer">
+        <div
+          className="acc-box relative  flex items-center cursor-pointer"
+          onMouseEnter={() => setDropdownOpen(true)}
+          onMouseLeave={() => setDropdownOpen(false)}
+          onClick={() => setDropdownOpen((prev) => !prev)}
+        >
           <img
             src={profile ? profile.avatar : profile_icon}
             alt={profile ? profile.name : "Profile"}
@@ -183,58 +203,59 @@ const Navbar = () => {
           />
           <FontAwesomeIcon
             icon={faCaretDown}
-            className="down text-white text-[15px]  ml-[5px]"
+            className="down text-white text-[15px] ml-[5px]"
           />
 
-          <div className="acc-box relative z-[5550]  ">
-            <div className="dropdownMenu border flex flex-col gap-[25px] relative z-[10200] rounded-[2px] pb-[18px] pl-[22px] pt-[18px] mt-[30px] pr-[22px] bg-[#191919]">
-              <p className="flex items-center">
-                <FontAwesomeIcon className="mr-[10px]" icon={faPen} />
-                <span className="hover:underline inline-block cursor-pointer">
-                  Manage Profiles
-                </span>
-              </p>
+       {dropdownOpen && (
+  <div className="acc-block absolute left-[52px] z-[10001]">
+    <div className="dropdownMenu border flex flex-col gap-[25px] relative rounded-[2px] pb-[18px] pl-[22px] pt-[18px] mt-[30px] pr-[22px] bg-[#191919]">
+      <p 
+        className="flex items-center cursor-pointer group"
+        style={{ textDecoration: 'none' }}
+      >
+        <FontAwesomeIcon className="mr-[10px]" icon={faPen} />
+        <span className="group-hover:underline">Manage Profiles</span>
+      </p>
 
-              <p className="flex items-center">
-                <FontAwesomeIcon
-                  className="mr-[10px]"
-                  icon={faFaceLaughWink}
-                />
-                <span className="hover:underline cursor-pointer">Transfer Profile</span>
-              </p>
+      <p 
+        className="flex items-center cursor-pointer group"
+        style={{ textDecoration: 'none' }}
+      >
+        <FontAwesomeIcon className="mr-[10px]" icon={faFaceLaughWink} />
+        <span className="group-hover:underline">Transfer Profile</span>
+      </p>
 
-              <p className="flex items-center">
-                <FontAwesomeIcon className="mr-[10px]" icon={faUser} />
-                <span className="hover:underline inline-block cursor-pointer">
-                  Account
-                </span>
-              </p>
+      <p 
+        className="flex items-center cursor-pointer group"
+        style={{ textDecoration: 'none' }}
+      >
+        <FontAwesomeIcon className="mr-[10px]" icon={faUser} />
+        <span className="group-hover:underline">Account</span>
+      </p>
 
-              <p className="flex items-center">
-                <FontAwesomeIcon
-                  className="mr-[10px]"
-                  icon={faCircleQuestion}
-                />
-                <span className="hover:underline inline-block cursor-pointer">
-                  Help center
-                </span>
-              </p>
+      <p 
+        className="flex items-center cursor-pointer group"
+        style={{ textDecoration: 'none' }}
+      >
+        <FontAwesomeIcon className="mr-[10px]" icon={faCircleQuestion} />
+        <span className="group-hover:underline">Help center</span>
+      </p>
 
-              <p
-                onClick={() => logout()}
-                className="mt-[20px] p-[15px] text-[13px] border-t cursor-pointer"
-              >
-                <span className="hover:underline inline-block">
-                  Sign Out of Netflix
-                </span>
-              </p>
-            </div>
+      <p
+        onClick={() => logout()}
+        className="mt-[20px] pt-[15px] text-[13px] border-t cursor-pointer group"
+        style={{ textDecoration: 'none' }}
+      >
+        <span className="group-hover:underline">Sign Out of Netflix</span>
+      </p>
+    </div>
 
-            <FontAwesomeIcon
-              icon={faCaretUp}
-              className="up absolute text-white text-[20px] -left-[32px] -translate-x-[18px] top-[18px]"
-            />
-          </div>
+    <FontAwesomeIcon
+      icon={faCaretUp}
+      className="up absolute text-white text-[20px] -left-[32px] -translate-x-[18px] top-[18px]"
+    />
+  </div>
+)}
         </div>
       </div>
     </div>

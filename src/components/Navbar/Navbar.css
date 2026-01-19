@@ -11,27 +11,6 @@
   position: relative;
 }
 
-.dropdownMenu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: #191919;
-  width: max-content;
-}
-
-.up {
-  display: none;
-}
-
-.acc-box:hover .dropdownMenu {
-  display: flex;
-}
-
-.acc-box:hover .up {
-  display: block;
-}
-
 .down {
   transition: transform 0.3s ease;
 }
@@ -57,9 +36,13 @@
   height: 200px;
 }
 
-.items :hover{
-  text-decoration: underline;
-  
+/* Добавьте это */
+.dropdownMenu p:hover span {
+  text-decoration: underline !important;
+}
+
+.dropdownMenu span {
+  display: inline-block;
 }
 
 @media (max-width: 576px) {
@@ -86,10 +69,4 @@
   .mob-logo {
     display: block !important;
   }
-}
-
-@media (max-width: 1200px) {
-}
-
-@media (min-width: 1400px) {
 }
